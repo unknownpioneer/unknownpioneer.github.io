@@ -1,0 +1,66 @@
+
+body{
+    background-color:white;
+    margin-left: 20%;
+    margin-right: 20%;
+    
+    padding: 10px 10px 10px 10px;
+    font-family: TF2,'Courier New', Courier, monospace;
+    font-weight: bolder;
+    line-height: 1.6em;
+}
+h4{
+    border-bottom: 1px solid black
+}
+em{
+    font-family:serif;
+    color:red;
+}
+h5{
+    font-weight: bolder;
+    color:darkorange;
+}
+@font-face {
+    font-family:TF2 ;
+    src: url(font/TF2secondary.ttf); 
+}
+.invest01{
+    border-color:black;
+    border-width: 1px;
+    border-style: solid;
+    background-color:firebrick;
+    padding: 25px;
+    margin: 30px;
+}
+.screen{
+    border-color:black;
+    border-width: 1px;
+    border-style: solid;
+    background-color:green;
+    padding: 25px;
+    padding-left: 100px;
+    margin: 30px;
+    background-image: url(image/screenshotneeded.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+}
+#header02{
+    background-color:brown;
+
+}
+#link{
+    border-width: thin;
+    border-style: solid;
+    border-color: #007e7e;
+    width: 200px;
+    background-color:red;
+}
+#title{
+    margin-left:50;
+    margin-right:50;
+}
+#footer{
+    padding: 15px;
+    margin: 10px;
+    font-size:90%
+}
