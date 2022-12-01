@@ -69,3 +69,11 @@ h5{
 #close{ color:blue;
         font-family: "Emblema One";
 }
+html{
+    filter: grayscale(100%); 
+    -webkit-filter: grayscale(100%); 
+    -moz-filter: grayscale(100%); 
+    -ms-filter: grayscale(100%); 
+    -o-filter: grayscale(100%); 
+    -webkit-filter: grayscale(1);
+}
