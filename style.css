@@ -115,7 +115,6 @@ footer {
     background-color: fuchsia;
     color: #333;
     z-index: 1;
-    position: fixed;
     border-color: blue;
     border-width: 1px;
     border-style: dashed;
