@@ -68,11 +68,14 @@ footer{
     background-color: #F1F1F1;
     text-align: center;
     padding: 20px;
+    margin: 15px;
   }
 /* 导航栏容器 */
 .topnav {
     overflow: hidden;
     background-color: #333;
+    margin:auto
+
   }
   
   /* 导航栏链接 */
@@ -83,21 +86,40 @@ footer{
     text-align: center;
     padding: 15px 16px;
     text-decoration: none;
+    margin:auto;
   }
   
   /* 链接 - 悬停时改变颜色 */
 .topnav a:hover {
     background-color: #ddd;
     color: black;
+
   }
 footer {
     background-color: #F1F1F1;
     text-align: center;
     padding: 10px;
+    color: cornflowerblue;
+    margin: 10px;
+    padding: 15px;
+    font-size: 90%;
+    clear: both;
   }
 .noticeboard{
     background-color: gray;
-    display: table;
+    
     padding: auto;
+    float: left;
+    margin: 10px;
+}
+#noscript{
+    background-color: fuchsia;
+    color: #333;
+    z-index: 1;
+    position: fixed;
+    border-color: blue;
+    border-width: 1px;
+    border-style: dashed;
+    align-content: center;
 }
 
