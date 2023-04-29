@@ -9,12 +9,18 @@
     </head>
     <body>
         <script>
-            alert("欢迎！Welcome\n若您点击“确认”这一按键，说明您同意遵守有关规定。")
+            var r=confirm("欢迎！Welcome\n若您点击“确认”这一按键，说明您同意遵守有关规定。");
+            if (r==false)
+            {
+                window.location="https://teamfortress.com";
+            }
             console.log()
             window.location.href="nope.html"
         </script>
         <noscript id="noscript">
-            <p>Please notice that the Javascript seems to be unavailable in your browser.</p>
+            <MARQUEE behavior="slide" direction="left" width="250" bgcolor="white">
+                Please notice that the Javascript seems to be unavailable in your browser.
+            </MARQUEE>
         </noscript>
         <blockquote>
          这个页面将迎接大规模更新。。。等着吧<br>
