@@ -20,7 +20,7 @@
         if (document.cookie.indexOf("username") >= 0) {
             let username = document.cookie.split("=")[1]; //从cookie中获取用户名
             alert("欢迎回来，" + username + "!");
-            document.write("<h2>Greeting," + username + "</h2>")
+            document.write("<h2>Greeting, " + username + "</h2>")
         }
         else {
             let username = ""
@@ -29,7 +29,7 @@
             }//原来javascript也有while啊。。。
             document.cookie = "username=" + username; //将用户名存储到cookie中
             alert("欢迎，" + username + "!");
-            document.write("<h2>Greeting," + username + "</h2>")
+            document.write("<h2>Greeting, " + username + "</h2>")
 
         }
 
