@@ -21,6 +21,16 @@
         //console.log()
         ///window.location.href="nope.html"
     </script>-->
+    <script>//Testing...[Need Testing.]
+        if (document.cookie.indexOf("username") >= 0) {
+            let username = document.cookie.split("=")[1]; //从cookie中获取用户名
+            alert("欢迎回来，" + username + "!");
+        } else {
+            let username = prompt("欢迎访问我们的网站，请输入您的名字："); //提示用户输入名字
+            document.cookie = "username=" + username; //将用户名存储到cookie中
+            alert("欢迎，" + username + "!");
+        }
+    </script>
     <noscript id="noscript">
         <P>no javascript.</P>
     </noscript>
