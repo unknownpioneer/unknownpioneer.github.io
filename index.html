@@ -22,8 +22,10 @@
             alert("欢迎回来，" + username + "!");
             document.write("<h2>Greeting," + username + "</h2>")
         }
-        else if (username == null || "") {
-            let username = prompt("Welcome to access the blog, please provide your name here.");
+        else {
+            while (username === "null" || "") {
+                let username = prompt("Welcome to access the blog, please provide your name here.");
+            }//原来javascript也有while啊。。。
             document.cookie = "username=" + username; //将用户名存储到cookie中
             alert("欢迎，" + username + "!");
             document.write("<h2>Greeting," + username + "</h2>")
@@ -36,7 +38,7 @@
         <P>no javascript.</P>
     </noscript>
     <!--<header>
-        BLOG
+        BLOG （删除原因：不够美观）
     </header>-->
     <div class="topnav" align="left">
         <a href="record.html" title="日常记录" target="_blank">日常记录</a>
@@ -48,7 +50,7 @@
             title="Warning, you're going to another page beyond this server. Users'discretion is advised.">See also</a>
     </div><br>
     <!--<MARQUEE direction="left" bgcolor="darkblue">
-        The website is under construction.
+        The website is under construction. （删除原因：太不美观了）
     </MARQUEE>-->
 
     <!--Begin.-->
