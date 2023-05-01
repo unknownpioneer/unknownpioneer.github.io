@@ -22,13 +22,17 @@
         ///window.location.href="nope.html"
     </script>-->
     <script>//Testing...[Need Testing.]
+        //参考教程：https://www.runoob.com/js/js-cookies.html
+        //https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
         if (document.cookie.indexOf("username") >= 0) {
             let username = document.cookie.split("=")[1]; //从cookie中获取用户名
             alert("欢迎回来，" + username + "!");
+            document.write("<h2>Greeting,"+username+"</h2>")
         } else {
-            let username = prompt("欢迎访问我们的网站，请输入您的名字："); //提示用户输入名字
+            let username = prompt("Welcome to access the blog, please provide your name here."); //提示用户输入名字
             document.cookie = "username=" + username; //将用户名存储到cookie中
             alert("欢迎，" + username + "!");
+            document.write("<h2>Greeting,"+username+"</h2>")
         }
     </script>
     <noscript id="noscript">
@@ -65,7 +69,6 @@
             document.write("<h1>Have a good dream.</h1>");
         }
     </script>
-    <h2>Greeting, unknown guest.</h2>
     <p>I'm here to talk with you, citizen. I'm the commander of this kingdom, and hereby I'm ASKING you to do the
         following:<br>
     </p>
