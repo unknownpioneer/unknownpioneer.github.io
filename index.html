@@ -21,6 +21,19 @@
             //}
             //console.log()
             ///window.location.href="nope.html"
+            var hour = getHours()
+            If (hour<10 && hour>5)
+            {
+                document.write("<h1>Good Morning.</h1>");
+            }
+            elif (hour>=10 && hour<20)
+            {
+                document.write("<h1>Good Afternoon.</h1>");
+            }
+            elif (hour>20 || hour<5)
+            {
+                document.write("<h1>Good Evening.</h1>");
+            }
     </script>
     <noscript id="noscript">
         <P>no javascript.</P>
