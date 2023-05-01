@@ -14,6 +14,9 @@ body {
     background-size: 100% 100%;
 
 }
+h3{
+    color: red;
+}
 
 .index_body p {
     border-left: whitesmoke;
