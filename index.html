@@ -21,13 +21,13 @@
         //console.log()
         ///window.location.href="nope.html"
     </script>-->
-    <script>//Testing...[Need Testing.]
+    <script>//Merge with greeting part.
         //参考教程：https://www.runoob.com/js/js-cookies.html
         //https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
         if (document.cookie.indexOf("username") >= 0) {
             let username = document.cookie.split("=")[1]; //从cookie中获取用户名
             alert("欢迎回来，" + username + "!");
-            document.write("<h2>Greeting,"+username+"</h2>")
+            document.write("<h2>Greeting,"+ username+"</h2>")
         } else {
             let username = prompt("Welcome to access the blog, please provide your name here."); //提示用户输入名字
             document.cookie = "username=" + username; //将用户名存储到cookie中
