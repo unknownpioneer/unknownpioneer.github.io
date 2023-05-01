@@ -24,22 +24,18 @@
     <script>//Merge with greeting part.
         //参考教程：https://www.runoob.com/js/js-cookies.html
         //https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
-        function checkname(username)
-        {
-            if (document.cookie.indexOf("username") >= 0) {
-                let username = document.cookie.split("=")[1]; //从cookie中获取用户名
-                alert("欢迎回来，" + username + "!");
-                document.write("<h2>Greeting," + username + "</h2>")
-            } else {
-                let username = prompt("Welcome to access the blog, please provide your name here."); //提示用户输入名字
-                document.cookie = "username=" + username; //将用户名存储到cookie中
-                alert("欢迎，" + username + "!");
-                document.write("<h2>Greeting," + username + "</h2>")
-            }
+        if (document.cookie.indexOf("username") >= 0) {
+            let username = document.cookie.split("=")[1]; //从cookie中获取用户名
+            alert("欢迎回来，" + username + "!");
+            document.write("<h2>Greeting," + username + "</h2>")
         }
-        if (username==null)
-        {
-            checkname()
+        else {
+            if (username == null) {
+                let username = prompt("Welcome to access the blog, please provide your name here.");
+            } //提示用户输入名字
+            document.cookie = "username=" + username; //将用户名存储到cookie中
+            alert("欢迎，" + username + "!");
+            document.write("<h2>Greeting," + username + "</h2>")
         }
     </script>
     <noscript id="noscript">
@@ -64,7 +60,7 @@
     <!--Begin.-->
 
     <script>
-            var d = new Date();
+        var d = new Date();
         var time = d.getHours();
         if (time < 10) {
             document.write("<h1>Good Morning.</h1>");
