@@ -39,17 +39,20 @@
     <!--<MARQUEE direction="left" bgcolor="darkblue">
         The website is under construction.
     </MARQUEE>-->
+
     <!--Begin.-->
+
     <script>
-        var hour = getHours();
-        if (hour >= 5 && hour < 10) {
+        var d = new Date();
+        var time = d.getHours();
+        if (time < 10) {
             document.write("<h1>Good Morning.</h1>");
         }
-        else if (hour >= 10 && hour < 20) {
+        else if (time >= 10 && time < 20) {
             document.write("<h1>Good Afternoon.</h1>");
         }
-        else if (hour >= 20 || hour < 5) {
-            document.write("<h1>Good Evening.</h1>");
+        else {
+            document.write("<h1>Have a good dream.</h1>");
         }
     </script>
     <h2>Greeting, unknown guest.</h2>
