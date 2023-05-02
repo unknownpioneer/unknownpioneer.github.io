@@ -8,9 +8,9 @@
     <link type="text/css" rel="stylesheet" href="style.css">
     <!--Needed!!!!-->
     <link rel="icon" href="image/ME.png" type="image/x-icon">
-    <noscript> 
-        <meta http-equiv="Refresh" content="0; URL=403.html" /> 
-    </noscript> 
+    <noscript>
+        <meta http-equiv="Refresh" content="0; URL=403.html" />
+    </noscript>
 </head>
 
 <body class="index_body">
@@ -27,11 +27,10 @@
         }
         else {
             let username = ""
-            while (username === "" ) {
-                 username = prompt("Welcome to access the blog, please provide your name here.");
+            while (username === "") {
+                username = prompt("Welcome to access the blog, please provide your name here.");
             }//原来javascript也有while啊。。。
-            if (username === "null")
-            {
+            if (username === "null") {
                 let username = "Guest"
             }
             document.cookie = "username=" + username; //将用户名存储到cookie中
@@ -39,9 +38,17 @@
             document.write("<h2>Greeting, " + username + "</h2>")
 
         }
-
-
-    </script>  
+    </script>
+    <script>
+        function isMobile() {
+            const userAgent = navigator.userAgent;
+            const regex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+            return regex.test(userAgent); //“|”表选择；“/i”表示“不区分大小写”；
+        }
+        if (isMobile()) {
+            alert('We advise you to access the website via PC to get better experience.');
+        }
+    </script>
     <!--<header>
         BLOG （删除原因：不够美观）
     </header>-->
@@ -54,10 +61,6 @@
         <a href="https://q3dlaxpoaq.github.io/" target="_blank"
             title="Warning, you're going to another page beyond this server. Users'discretion is advised.">See also</a>
     </div><br>
-    <!--<MARQUEE direction="left" bgcolor="darkblue">
-        The website is under construction. （删除原因：太不美观了）
-    </MARQUEE>-->
-
     <!--Begin.-->
 
     <script>
