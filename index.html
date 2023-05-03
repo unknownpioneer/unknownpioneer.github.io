@@ -20,10 +20,6 @@
     <script>//Merge with greeting part.
         //参考教程：https://www.runoob.com/js/js-cookies.html
         //https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
-        var time = new Date();
-        var exp = ""
-        date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000))
-        expires = "; expires=" + date.toUTCString();
         if (document.cookie.indexOf("username") >= 0) {
             let username = document.cookie.split("=")[1]; //从cookie中获取用户名
             alert("欢迎回来，" + username + "!");
@@ -34,10 +30,14 @@
             while (username === "") {
                 username = prompt("Welcome to access the blog, please provide your name here.");
             }//原来javascript也有while啊。。。
-            if (username === "null") {
-                let username = "Guest"
+            function writeCookie(cookieName, cookieValue) {
+                var expire = new Date((new Date()).getTime() + 24 * 60 * 60000);//有效期2小时
+                expire = ";expires=" + expire.toGMTString();
+                //用escape()函数进行编码，它能将一些特殊符号使用十六进制表示，例如空格将会编码为“20%”，
+                //从而可以存储于cookie值中，而且使用此种方案还可以避免中文乱码的出现
+                document.cookie = cookieName + "=" + escape(cookieValue) + expire;
             }
-            document.cookie = "username=" + username;+expire //将用户名存储到cookie中
+            writeCookie("username",username)
             alert("欢迎，" + username + "!");
             document.write("<h2>Greeting, " + username + "</h2>")
 
