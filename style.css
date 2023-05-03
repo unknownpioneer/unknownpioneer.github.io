@@ -3,7 +3,6 @@ body {
     color: blue;
     margin-left: 20%;
     margin-right: 20%;
-
     padding: 10px 10px 10px 10px;
     font-family: TF2, 'Courier New', Courier, monospace;
     font-weight: bolder;
@@ -12,7 +11,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-
 }
 h3{
     color: red;
