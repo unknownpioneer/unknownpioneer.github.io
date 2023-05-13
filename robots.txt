@@ -4,4 +4,5 @@ Disallow: /font/
 Disallow: /.vscode/
 Disallow: /.github/workflows/
 Disallow: .css$
+Disallow: .md$
 
