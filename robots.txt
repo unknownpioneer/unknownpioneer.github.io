@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /image/
+Disallow: /font/
+Disallow: /.vscode/
+Disallow: /.github/workflows/
+Disallow: .css$
+
