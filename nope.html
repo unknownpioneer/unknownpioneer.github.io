@@ -8,7 +8,12 @@
 </head>
 
 <body>
-    
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/path/to/resource', true);
+        xhr.status = 503;
+        xhr.send();
+    </script>
     <h1 align="center">503 Server Unavailable</h1>
     <p align="center">The server is currently under maintainence. Please come back later.<br>If you have interest in
         learning about detailed information, you can <a href="mailto:scratchwiki@outlook.com">email the owner</a>.
