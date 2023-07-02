@@ -191,3 +191,9 @@ footer {
     background-color: rgba(0,0,255,0.8);
     cursor: pointer;
 }
+
+#myDialog
+{
+    background-color: blue;
+    position: fixed;
+}
