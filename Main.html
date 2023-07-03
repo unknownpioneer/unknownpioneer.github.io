@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--/////////////////////////////////////////////////////-->
+<!--width=60% height=40% ALWAYS THE TRUTH!!!!!!!!!!-->
+<!--/////////////////////////////////////////////////////-->
+
+<head>
+    <meta charset="utf-8">
+    <title>Main page: The anti-wiki extension.</title>
+    <link type="text/css" rel="stylesheet" href="../style.css">
+    <style>
+    </style>
+    <link rel="icon" href="../image/ME.png" type="../image/x-icon">
+</head>
+
+<body>
+    <h1 align="center">Main page: The anti-wiki extension</h1>
+    <p>This is an extension aimed to prevent those wiki-addict from continuously spending time on it.</p>
+    <script>
+        var count = 0;
+        if (document.referrer.indexOf("wiki.teamfortress.com") != -1) {
+            count++;
+        }
+
+        localStorage.setItem("count", count);
+        document.getElementById("count").innerHTML += "<p>Currently, you have been visit TFwiki for</p>" + count + "<p>times</p>"
+    </script>
+    <div id="count"></div>
+</body>
+
+</html>
