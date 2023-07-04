@@ -151,14 +151,6 @@ footer {
     clear: both;
 }
 
-.noticeboard {
-    background-color: gray;
-
-    padding: auto;
-    float: left;
-    margin: 10px;
-}
-
 /*scrollbar*/
 ::-webkit-scrollbar {
     width: 6px;
