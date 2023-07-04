@@ -173,4 +173,5 @@ footer {
     position: fixed;
     width: max-content;
     height: max-content;
+    z-index: 99999;
 }
