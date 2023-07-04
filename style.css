@@ -12,11 +12,12 @@ body {
     background-attachment: fixed;
     background-size: 100% 100%;
 }
-h3{
+
+h3 {
     color: red;
 }
-.back
-{
+
+.back {
     color: green;
 }
 
@@ -87,6 +88,7 @@ header {
     width: 200px;
     background-color: red;
 }
+
 /*fixed 2023-7-4*/
 #title {
     margin-left: 50px;
@@ -162,12 +164,11 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0,0,255,0.8);
+    background-color: rgba(0, 0, 255, 0.8);
     cursor: pointer;
 }
 
-#myDialog
-{
+#myDialog {
     background-color: blue;
     position: fixed;
     width: max-content;
