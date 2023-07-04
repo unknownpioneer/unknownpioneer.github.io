@@ -159,20 +159,6 @@ footer {
     margin: 10px;
 }
 
-#noscript {
-    background-color: fuchsia;
-    color: #333;
-    z-index: 1;
-    border-color: blue;
-    border-width: 1px;
-    border-style: dashed;
-    align-content: center;
-    top: 50%;
-    left: 50%;
-    right: 50%;
-    bottom: 50%;
-}
-
 /*scrollbar*/
 ::-webkit-scrollbar {
     width: 6px;
