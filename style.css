@@ -91,10 +91,10 @@ header {
     width: 200px;
     background-color: red;
 }
-
+/*fixed 2023-7-4*/
 #title {
-    margin-left: 50;
-    margin-right: 50;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 footer {
