@@ -165,7 +165,7 @@ footer {
     height: max-content;
     z-index: 99999;
     color: blue;
-    text-align: center;
+
 }
 
 h1 {
@@ -185,4 +185,7 @@ iframe {
 
 abbr {
     font-variant: all-small-caps;
+}
+.dialogcontent{
+    text-align: left;
 }
