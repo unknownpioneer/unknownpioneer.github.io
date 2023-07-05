@@ -175,3 +175,7 @@ footer {
     color: black;
     text-align: center;
 }
+iframe{
+    width: auto;
+    height: auto;
+}
