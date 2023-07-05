@@ -20,15 +20,9 @@ h3 {
 .back {
     color: green;
 }
-
-.index_body p {
-    border-left: whitesmoke;
-    font-size: large;
-    margin-bottom: 30px;
-    margin-left: 10%;
-    margin-right: 10%;
+p{
+    text-align: left;
 }
-
 h4 {
     border-bottom: 1px solid blue
 }
