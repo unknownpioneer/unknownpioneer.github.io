@@ -165,6 +165,7 @@ footer {
     height: max-content;
     z-index: 99999;
     color: blue;
+    text-align: center;
 }
 h1{
     text-align: center;
