@@ -159,9 +159,10 @@ footer {
 }
 
 #myDialog {
-    background-color: blue;
+    background-color: black;
     position: fixed;
     width: max-content;
     height: max-content;
     z-index: 99999;
+    color: blue;
 }
