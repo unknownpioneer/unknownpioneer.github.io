@@ -167,15 +167,22 @@ footer {
     color: blue;
     text-align: center;
 }
-h1{
+
+h1 {
     text-align: center;
 }
+
 footer {
     background-color: blue;
     color: black;
     text-align: center;
 }
-iframe{
+
+iframe {
     width: auto;
     height: auto;
+}
+
+abbr {
+    font-variant: all-small-caps;
 }
