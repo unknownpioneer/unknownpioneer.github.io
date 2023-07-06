@@ -164,10 +164,9 @@ footer {
     background-color: blue;
     border: 1px solid black;
     color: black;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
+
 
 abbr {
     font-variant: all-small-caps;
