@@ -171,3 +171,7 @@ footer {
 abbr {
     font-variant: all-small-caps;
 }
+.additionallink
+{
+    text-align: center;
+}
