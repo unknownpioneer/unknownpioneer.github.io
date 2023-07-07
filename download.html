@@ -51,7 +51,7 @@
 
     <button onclick="togglePlayPause()"
         style="background-color: blue; color: white; padding: 8px 16px; border-radius: 4px;">Pause</button>
-
+    <div id="statue"></div>
     <script>
         var myAudio = document.getElementById("myAudio");
         var isPlaying = localStorage.getItem("isPlaying") === "true";
@@ -69,6 +69,15 @@
             isPlaying = !isPlaying;
             localStorage.setItem("isPlaying", isPlaying);
         }
+
+        function checkAudioStatus() {
+            if (audio.paused) {
+                document.getElementById("statue").innerHTML="<p>音频暂停。</p>"
+            } else {
+                document.getElementById("statue").innerHTML="<p>音频播放中。</p>"
+            }
+        }
+
     </script>
 
 
