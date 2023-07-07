@@ -1,5 +1,5 @@
 body {
-    background-color:purple;
+    background-color: purple;
     color: blue;
     margin-left: 20%;
     margin-right: 20%;
@@ -33,6 +33,11 @@ em {
 h5 {
     font-weight: bolder;
     color: darkorange;
+}
+
+a:link,
+a:visited {
+    color: blue;
 }
 
 header {
@@ -169,7 +174,7 @@ footer {
 abbr {
     font-variant: all-small-caps;
 }
-.additionallink
-{
+
+.additionallink {
     text-align: center;
 }
