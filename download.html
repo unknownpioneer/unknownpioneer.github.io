@@ -26,6 +26,7 @@
     <p id="centerneed" translate="no">This page aims to provide the public with a platform to download the
         files.<br>However, <em>due to the the file size limitation</em> , only those small-size files can
         be uploaded.</p>
+    <p id="centerneed">Note: This page is currently using "background music", you may pause it if you don't like it.</p>
     <ul>
         <li>
             <a href="disk/B2%20First%20sample%20paper%201%20RUE%202022.pdf"
@@ -42,12 +43,14 @@
             <a href="disk/slave02.jpg" download="graduate01.jpg">The other *****</a>
         </li>
     </ul>
+    <!--上面才是放下载链接的。-->
     <audio id="myAudio" controls style="display: none;">
         <source src="disk/I See Love (From Hotel Transylvania 3).m4a" type="audio/mp4">
         Your browser does not support the audio element.
     </audio>
 
-    <button onclick="togglePlayPause()">Pause</button>
+    <button onclick="togglePlayPause()"
+        style="background-color: blue; color: white; padding: 8px 16px; border-radius: 4px;">Pause</button>
 
     <script>
         var myAudio = document.getElementById("myAudio");
