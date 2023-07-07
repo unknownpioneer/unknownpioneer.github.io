@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head> <!--空格用%20。-->
     <meta charset="utf-8">
     <title>CloudDisk （Public）</title>
@@ -9,16 +10,17 @@
     </noscript>
     <link type="text/css" rel="stylesheet" href="style.css">
     <style>
-        #centerneed{ 
+        #centerneed {
             text-align: center !important;
         }
-        h1{
+
+        h1 {
             text-align: center;
         }
     </style>
 </head>
 
-<body> 
+<body>
     <script src="maintain.js"></script>
     <h1><span translate="no">BEUFK'S DOWNLOAD DISK</span></h1>
     <p id="centerneed" translate="no">This page aims to provide the public with a platform to download the
@@ -30,7 +32,8 @@
                 download="B2 First sample paper 1 RUE 2022.pdf">2022年B2级英语阅读（样本）</a>
         </li>
         <li>
-            <a href="disk/I%20See%20Love%20(From%20Hotel%20Transylvania%203).m4a" download="I See Love.m4a">I See Love（精灵旅社3） </a>
+            <a href="disk/I%20See%20Love%20(From%20Hotel%20Transylvania%203).m4a" download="I See Love.m4a">I See
+                Love（精灵旅社3） </a>
         </li>
         <li>
             <a href="disk/slave01.jpg" download="graduate.jpg">One of my *****.</a>
@@ -39,6 +42,33 @@
             <a href="disk/slave02.jpg" download="graduate01.jpg">The other *****</a>
         </li>
     </ul>
+    <audio id="myAudio" controls style="display: none;">
+        <source src="your_audio_file.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button onclick="togglePlayPause()">Pause</button>
+
+    <script>
+        var myAudio = document.getElementById("myAudio");
+        var isPlaying = localStorage.getItem("isPlaying") === "true";
+
+        if (isPlaying) {
+            myAudio.play();
+        }
+
+        function togglePlayPause() {
+            if (isPlaying) {
+                myAudio.pause();
+            } else {
+                myAudio.play();
+            }
+            isPlaying = !isPlaying;
+            localStorage.setItem("isPlaying", isPlaying);
+        }
+    </script>
+
+
 </body>
 
 </html>
