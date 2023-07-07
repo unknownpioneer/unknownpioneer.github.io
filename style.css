@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color:purple;
     color: blue;
     margin-left: 20%;
     margin-right: 20%;
@@ -7,9 +7,6 @@ body {
     font-family: TF2, 'Courier New', Courier, monospace;
     font-weight: bolder;
     line-height: 1.6em;
-    background-image: url(image/Spy_Scout_Wallpaper.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: 100% 100%;
 }
 
