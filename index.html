@@ -47,7 +47,7 @@
         else {
             let username = ""
             while (username == "") {
-                username = prompt("Welcome to access the blog, please provide your name here.");
+                username = prompt("Welcome to access the blog, please provide your name here.","Guest");
             }//原来javascript也有while啊。。。
             function writeCookie(cookieName, cookieValue) {
                 var expire = new Date((new Date()).getTime() + 240 * 60 * 60000);//有效期24*10小时
