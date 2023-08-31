@@ -53,7 +53,7 @@
     </audio>
 
     <button onclick="togglePlayPause()"
-        style="background-color: blue; color: white; padding: 8px 16px; border-radius: 4px;">Pause</button>
+        style="background-color: blue; color: white; padding: 8px 16px; border-radius: 4px;" id="audiostatus">Pause</button>
     <div id="statue"></div>
     <script>
         var myAudio = document.getElementById("myAudio");
@@ -77,8 +77,10 @@
         function checkAudioStatus() {
             if (myAudio.paused) {
                 document.getElementById("statue").innerHTML = "<p>音频暂停。</p>"
+                document.getElementById("audiostatus").innerHTML = "Play"
             } else {
                 document.getElementById("statue").innerHTML = "<p>音频播放中。</p>"
+                document.getElementById("audiostatus").innerHTML = "Paused"
             }
         }
 
