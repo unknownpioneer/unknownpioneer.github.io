@@ -17,10 +17,17 @@
     <p>We're keeping track of what we are facing up in new environment.</p>
     <p>Pressure Value:
     <div id="percentage"></div>
+    <div id="status"></div>
     <script>
         var percent = Math.ceil(Math.random() * 100)
         document.getElementById("percentage").innerHTML = "<p><progress value=" + percent + " max='100'>Unsupported component</progress></p>"
         console.log(percent)
+        if (percent>80){
+            document.getElementById("status").innerHTML = "<p>I'm gonna crazy!</p>"
+        }
+        else{
+            document.getElementById("status").innerHTML = "<p>I'm OKay.</p>"
+        }
     </script>
     <p id="centerneed">Main Objectives:</p>
     <ol>
