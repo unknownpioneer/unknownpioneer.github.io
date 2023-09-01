@@ -1,5 +1,9 @@
-.blog{
+#blog {
     text-align: center;
+}
+
+#centerneed {
+    text-align: center !important;
 }
 
 body {
