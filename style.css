@@ -1,3 +1,7 @@
+.blog{
+    text-align: center;
+}
+
 body {
     background-color: purple;
     color: blue;
@@ -194,7 +198,4 @@ figure {
     padding: 5px;
     max-width: 220px;
     margin: auto;
-}
-.blog{
-    text-align: center;
 }
