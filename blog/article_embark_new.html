@@ -18,7 +18,7 @@
     <p>Pressure Value:
     <div id="percentage"></div>
     <script>
-        var percent = Math.ceil(Math.random * 100)
+        var percent = Math.ceil(Math.random() * 100)
         document.getElementById("percentage").innerHTML = "<p><progress value=" + percent + " max='100'>Unsupported component</progress></p>"
         console.log(percent)
     </script>
