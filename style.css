@@ -6,6 +6,10 @@
     text-align: center !important;
 }
 
+#additionallink {
+    text-align: center;
+}
+
 body {
     background-color: purple;
     color: blue;
@@ -183,9 +187,7 @@ abbr {
     font-variant: all-small-caps;
 }
 
-.additionallink {
-    text-align: center;
-}
+
 
 figcaption {
     background-color: #222;
