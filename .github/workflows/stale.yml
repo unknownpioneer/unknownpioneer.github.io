@@ -21,7 +21,7 @@ jobs:
     - uses: actions/stale@v5
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'Stale issue message'
-        stale-pr-message: 'Stale pull request message'
+        stale-issue-message: 'Due to long inactivity of this issue, it has been closed temporarily.'
+        stale-pr-message: 'Due to long inactivity of this pull-request, it has been closed temporarily.'
         stale-issue-label: 'no-issue-activity'
         stale-pr-label: 'no-pr-activity'
