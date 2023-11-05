@@ -1,8 +1,8 @@
 #blog {
     text-align: center;
     align-items: center;
-    left: 50%;
-    right: 50%;
+    padding-left: 50%;
+    padding-right: 50%;
     line-height: normal;
 }
 
