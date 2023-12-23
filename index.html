@@ -2,13 +2,11 @@
 <html lang="zh-CN" translate="no">
 
 <head>
+    <meta charset="UTF-8">
     <title>BEUFK'S PRIVATE BLOG</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="keywords" content="blog,博客">
     <meta name='description' content='This page includes the using instruction and direction.'>
     <link type="text/css" rel="stylesheet" href="style.css">
-    <meta name="msvalidate.01" content="20C84CD54A75BC994CA000B8970A9F6C" />
-    <!--Needed!!!!-->
     <link rel="icon" href="image/ME.png" type="image/x-icon">
     <noscript>
         <meta http-equiv="Refresh" content="0; URL=403.html">
@@ -24,79 +22,70 @@
             color: black;
         }
     </style>
-
 </head>
 
-<body translate="no">
+<body>
     <script src="maintain.js"></script>
-    <script> //控制台输出贡献者名单
+    <script>
+        // 控制台输出贡献者名单
         const contributor = {
             "contri01": { "name": "BEUFK", "email": "scratchwiki@outlook.com" },
             "contri02": { "name": "q3dlaxpoaq", "email": "C_wz__@outlook.com" }
         }
         console.table(contributor)
     </script>
-    <script>//Merge with greeting part.
-
-        //参考教程：https://www.runoob.com/js/js-cookies.html
-        //https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
-
+    <script>
+        // 欢迎提示及设置用户名的cookie
         if (document.cookie.indexOf("username") >= 0) {
-            let username = document.cookie.split("=")[1]; //从cookie中获取用户名
+            let username = document.cookie.split("=")[1];
             document.write("<h2>Greeting, " + username + "</h2>")
-        }
-        else {
-            let username = ""
-            while (username == "") {
-                username = prompt("Welcome to access the blog, please provide your name here.", "Guest");
-            }//原来javascript也有while啊。。。
+        } else {
+            let username = prompt("Welcome to access the blog, please provide your name here.", "Guest");
             function writeCookie(cookieName, cookieValue) {
-                var expire = new Date((new Date()).getTime() + 240 * 60 * 60000);//有效期24*10小时
+                var expire = new Date((new Date()).getTime() + 240 * 60 * 60000);
                 expire = ";expires=" + expire.toGMTString();
-                //用escape()函数进行编码，它能将一些特殊符号使用十六进制表示，例如空格将会编码为“20%”，
-                //从而可以存储于cookie值中，而且使用此种方案还可以避免中文乱码的出现
                 document.cookie = cookieName + "=" + escape(cookieValue) + expire;
             }
             writeCookie("username", username)
             document.write("<h2>Greeting, " + username + "</h2>")
-
         }
     </script>
     <script>
+        // 检测用户设备类型并提示
         function isMobile() {
             const userAgent = navigator.userAgent;
             const regex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-            return regex.test(userAgent); //“|”表选择；“/i”表示“不区分大小写”；
+            return regex.test(userAgent);
         }
         if (isMobile()) {
             alert('We advise you to access the website via PC to get better experience.');
         }
-    </script> <!--表头-->
-    <div class="topnav">
-        <a href="record.html" title="日常记录">Blog</a>
-        <a href="acknowledgement.html" title="致谢">Acknowledgement</a>
-        <a href="personality.html" title="personality">Hobby</a>
-        <a href="download.html" title="CloudDisk">CloudDisk List</a>
-        <a href="https://q3dlaxpoaq.github.io/" target="_blank"
-            title="Warning, you're going to another page beyond this server. Users'discretion is advised.">See also</a>
-    </div><br>
-    <!--Begin.-->
-    <script>
-        var d = new Date();
-        var time = d.getHours();
-        if (time < 10) {
-            document.write("<h1>Good Morning.</h1>");
-        }
-        else if (time >= 10 && time < 20) {
-            document.write("<h1>Good Afternoon.</h1>");
-        }
-        else {
-            document.write("<h1>Have a good dream.</h1>");
-        }
     </script>
+    <header>
+        <nav>
+            <a href="record.html" title="日常记录">Blog</a>
+            <a href="acknowledgement.html" title="致谢">Acknowledgement</a>
+            <a href="personality.html" title="personality">Hobby</a>
+            <a href="download.html" title="CloudDisk">CloudDisk List</a>
+            <a href="https://q3dlaxpoaq.github.io/" target="_blank"
+                title="Warning, you're going to another page beyond this server. Users'discretion is advised.">See also</a>
+        </nav>
+        <h1>
+            <script>
+                var d = new Date();
+                var time = d.getHours();
+                if (time < 10) {
+                    document.write("Good Morning.");
+                } else if (time >= 10 && time < 20) {
+                    document.write("Good Afternoon.");
+                } else {
+                    document.write("Have a good dream.");
+                }
+            </script>
+        </h1>
+    </header>
     <dialog open id="myDialog">
-        <p id="dialogcontent" lang="zh-CN">⚠️download.html现在会播放音频了，请小心社死。
-        </p>
+        <p id="dialogcontent" lang="zh-CN">⚠️download.html现在会播放音频了，请小心社死。</p>
         <form method="dialog">
             <button onclick="document.getElementById('myDialog').close()">OK</button>
         </form>
