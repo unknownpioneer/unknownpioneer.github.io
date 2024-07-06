@@ -1,38 +1,30 @@
-#blog {
-    
-    text-align: center;
-    align-items: center;
-    padding-left: 50px !important;
-    padding-right: 50px !important;
-    line-height: normal;
+:root {
+    --primary-color: #270707;
+    --background-color: #FFFF99;
+    --header-color: #333;
+    --link-color: #007bff;
+    --border-color: #007e7e;
+    --scrollbar-color: blue;
+    --scrollbar-thumb-color: rgba(0, 0, 255, 0.8);
 }
 
-#centerneed {
-    text-align: center !important;
-}
-
-#additionallink {
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #FFFF99;
-    color: #270707;
-    /*margin-left: 20%;
-    margin-right: 20%;*/
-    padding: 10px 10px 10px 10px;
     font-family: TF2, 'Courier New', Courier, monospace;
     font-weight: bolder;
     line-height: 1.6em;
-    background-size: 100% 100%;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    padding: 10px;
 }
 
 h3 {
     color: red;
-}
-
-.back {
-    color: green;
 }
 
 p {
@@ -40,7 +32,7 @@ p {
 }
 
 h4 {
-    border-bottom: 1px solid #520404 
+    border-bottom: 1px solid var(--primary-color);
 }
 
 em {
@@ -54,37 +46,41 @@ h5 {
 
 a:link,
 a:visited {
-    color: black;
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 header {
     font-size: 20px;
     color: white;
-    height: 50%;
-    width: 120px;
+    background-color: var(--header-color);
     text-align: center;
-    padding-left: 15px;
-    --darkreader-inline-color: #e8e6e3;
+    padding: 20px;
 }
 
-@font-face {
-    font-family: TF2;
-    src: url(font/TF2secondary.ttf);
+#blog {
+    text-align: center;
+    padding: 0 50px;
+    line-height: normal;
+}
+
+#centerneed {
+    text-align: center;
+}
+
+#additionallink {
+    text-align: center;
 }
 
 .invest01 {
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid black;
     background-color: firebrick;
     padding: 25px;
     margin: 30px;
 }
 
 .screen {
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid black;
     background-color: green;
     padding: 25px;
     padding-left: 100px;
@@ -94,62 +90,36 @@ header {
     background-position: top left;
 }
 
-
 #link {
-    border-width: thin;
-    border-style: solid;
-    border-color: #007e7e;
+    border: thin solid var(--border-color);
     width: 200px;
     background-color: red;
 }
 
-/*fixed 2023-7-4*/
 #title {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin: 0 50px;
 }
 
-
-.header {
-    background-color: #F1F1F1;
-    text-align: center;
-    padding: 20px;
-    margin: 0px;
-}
-
-/* 导航栏容器 */
 .topnav {
     overflow: hidden;
     background-color: #CCCCFF;
-    /*border-radius: 30px; */
-    /*margin-left: 0%;
-    margin-right: 2%;
-    padding-left: 5px;
-    padding-right: 5px;*/
     height: 60px;
     text-align: left;
 }
 
-/* 导航栏链接 */
 .topnav a {
-    float: left;
     display: block;
-    color: #f2f2f2;
+    color: white;
     text-align: center;
     padding: 20px 20px;
     text-decoration: none;
-    margin: auto;
 }
 
-/* 链接 - 悬停时改变颜色 */
 .topnav a:hover {
     background-color: #ddd;
     color: black;
-
 }
 
-
-/*scrollbar*/
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -160,11 +130,11 @@ header {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: blue;
+    background-color: var(--scrollbar-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 255, 0.8);
+    background-color: var(--scrollbar-thumb-color);
     cursor: pointer;
 }
 
@@ -175,24 +145,18 @@ header {
     height: max-content;
     z-index: 99999;
     color: blue;
-
 }
-
 
 footer {
     background-color: blue;
     border: 1px solid black;
     color: black;
-    width: 100%;
     text-align: center;
 }
-
 
 abbr {
     font-variant: all-small-caps;
 }
-
-
 
 figcaption {
     background-color: #222;
@@ -203,14 +167,10 @@ figcaption {
 }
 
 figure {
-    border: thin #c0c0c0 solid;
+    border: thin solid #c0c0c0;
     display: flex;
     flex-flow: column;
     padding: 5px;
     max-width: 220px;
     margin: auto;
-}
-footer
-{
-    margin: 0%;
 }
