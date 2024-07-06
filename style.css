@@ -1,11 +1,13 @@
 :root {
-    --primary-color: #270707;
-    --background-color: #FFFF99;
-    --header-color: #333;
-    --link-color: #007bff;
-    --border-color: #007e7e;
-    --scrollbar-color: blue;
-    --scrollbar-thumb-color: rgba(0, 0, 255, 0.8);
+    --primary-color: #202124; /* Google的主色 */
+    --background-color: linear-gradient(to bottom, #f1f3f4, #140303); /* Google的背景色 */
+    --header-color: #202124; /* Google的头部颜色 */
+    --link-color: #1a0dab; /* Google的链接颜色 */
+    --border-color: #dadce0; /* Google的边框颜色 */
+    --scrollbar-color: #202124; /* Google的滚动条颜色 */
+    --scrollbar-thumb-color: #1a0dab; /* Google的滚动条滑块颜色 */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
 }
 
 * {
@@ -20,71 +22,96 @@ body {
     line-height: 1.6em;
     background-color: var(--background-color);
     color: var(--primary-color);
-    padding: 10px;
+    padding: 20px;
 }
 
 h3 {
     color: red;
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
 p {
     text-align: left;
+    font-size: 1em;
+    margin-bottom: 10px;
 }
 
 h4 {
     border-bottom: 1px solid var(--primary-color);
+    font-size: 1.2em;
+    margin-bottom: 10px;
 }
 
 em {
     color: red;
+    font-style: normal;
+    font-weight: bold;
 }
 
 h5 {
     font-weight: bolder;
     color: darkorange;
+    font-size: 1.1em;
+    margin-bottom: 10px;
 }
 
 a:link,
 a:visited {
     color: var(--link-color);
     text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 header {
-    font-size: 20px;
+    font-size: 1.5em;
     color: white;
     background-color: var(--header-color);
     text-align: center;
     padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 #blog {
     text-align: center;
-    padding: 0 50px;
-    line-height: normal;
+    padding: 20px;
+    line-height: 1.6em;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 #centerneed {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 #additionallink {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .invest01 {
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     background-color: firebrick;
-    padding: 25px;
-    margin: 30px;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 .screen {
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     background-color: green;
-    padding: 25px;
-    padding-left: 100px;
-    margin: 30px;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
     background-image: url(image/screenshotneeded.png);
     background-repeat: no-repeat;
     background-position: top left;
@@ -94,25 +121,32 @@ header {
     border: thin solid var(--border-color);
     width: 200px;
     background-color: red;
+    padding: 10px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 #title {
-    margin: 0 50px;
+    margin: 20px 0;
 }
 
 .topnav {
     overflow: hidden;
-    background-color: #CCCCFF;
+    background-color: #dadce0;
     height: 60px;
     text-align: left;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 .topnav a {
     display: block;
-    color: white;
+    color: var(--primary-color);
     text-align: center;
     padding: 20px 20px;
     text-decoration: none;
+    font-size: 1.1em;
 }
 
 .topnav a:hover {
@@ -125,7 +159,7 @@ header {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: black;
+    background-color: var(--background-color);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -139,23 +173,30 @@ header {
 }
 
 #myDialog {
-    background-color: black;
+    background-color: var(--background-color);
     position: fixed;
     width: max-content;
     height: max-content;
     z-index: 99999;
-    color: blue;
+    color: var(--primary-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 footer {
-    background-color: blue;
-    border: 1px solid black;
-    color: black;
+    background-color: var(--header-color);
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
     text-align: center;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 abbr {
     font-variant: all-small-caps;
+    font-weight: bold;
 }
 
 figcaption {
@@ -164,13 +205,17 @@ figcaption {
     font: italic smaller sans-serif;
     padding: 3px;
     text-align: center;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 figure {
-    border: thin solid #c0c0c0;
+    border: thin solid var(--border-color);
     display: flex;
     flex-flow: column;
     padding: 5px;
     max-width: 220px;
     margin: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
