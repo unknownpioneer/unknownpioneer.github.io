@@ -1,8 +1,8 @@
 :root {
     --primary-color: #202124; /* Google的主色 */
     --background-color: linear-gradient(to bottom, #f1f3f4, #140303); /* Google的背景色 */
-    --header-color: #202124; /* Google的头部颜色 */
-    --link-color: #1a0dab; /* Google的链接颜色 */
+    --header-color: #242020; /* Google的头部颜色 */
+    --link-color: #ab0d0d; /* Google的链接颜色 */
     --border-color: #dadce0; /* Google的边框颜色 */
     --scrollbar-color: #202124; /* Google的滚动条颜色 */
     --scrollbar-thumb-color: #1a0dab; /* Google的滚动条滑块颜色 */
