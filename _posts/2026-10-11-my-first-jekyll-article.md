@@ -6,6 +6,10 @@ author: "BEUFK"
 category: "Article"
 ---
 
+<figure>
+  <img src="{{ '/image/wallpaper_heavyvspyro_2650x1600.jpg' | relative_url }}" alt="soldier" />
+</figure>
+
 This is your first article in the new blog format. You can now write the actual content here without repeating the full HTML scaffolding every time.
 
 ## Getting started
