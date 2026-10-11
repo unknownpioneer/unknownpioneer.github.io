@@ -1,0 +1,11 @@
+title: BEUFK
+permalink: /blog/:slug.html
+markdown: kramdown
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: BEUFK

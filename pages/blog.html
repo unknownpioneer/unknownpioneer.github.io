@@ -39,7 +39,18 @@ title: Blog
         <h2>Blog index</h2>
         <p>The site’s writing is organized as a small personal library of articles and thoughts.</p>
 
-        <p>No posts are currently listed.</p>
+        {% if site.posts and site.posts.size > 0 %}
+          <ul class="post-list">
+            {% for post in site.posts %}
+              <li>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y/%m/%d" }}</time>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No posts are currently listed.</p>
+        {% endif %}
       </section>
     </main>
 
