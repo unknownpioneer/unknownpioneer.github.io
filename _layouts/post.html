@@ -1,0 +1,68 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title | default: site.title }} | BEUFK</title>
+    <link rel="icon" href="{{ '/image/ME.png' | relative_url }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}" />
+    <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand" aria-label="Site brand">
+          <img src="{{ '/image/ME.png' | relative_url }}" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Blog</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
+
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="{{ '/index.html' | relative_url }}">Home</a>
+          <a href="{{ '/pages/about.html' | relative_url }}">About</a>
+          <a href="{{ '/pages/blog.html' | relative_url }}">Blog</a>
+          <a href="{{ '/pages/downloads.html' | relative_url }}">Downloads</a>
+          <a href="{{ '/record.html' | relative_url }}">Archive</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <article class="article-card">
+        <header class="article-header">
+          <p class="eyebrow">{{ page.category | default: 'Article' }}</p>
+          <h2>{{ page.title }}</h2>
+          <p class="article-meta">
+            <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y/%m/%d' }}</time>
+            <span aria-hidden="true"> · </span>
+            <span>{{ page.author | default: 'BEUFK' }}</span>
+          </p>
+        </header>
+
+        <div class="article-body">
+          {{ content }}
+        </div>
+
+        <nav class="article-nav" aria-label="Article navigation">
+          <a href="{{ '/pages/blog.html' | relative_url }}">← Back to blog</a>
+        </nav>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> BEUFK</p>
+        <div class="footer-links">
+          <a href="mailto:scratchwiki@outlook.com">Email</a>
+          <a href="https://github.com/unknownpioneer" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://steamcommunity.com/id/BEUFK/" target="_blank" rel="noopener noreferrer">Steam</a>
+          <a href="https://space.bilibili.com/414768974" target="_blank" rel="noopener noreferrer">Bilibili</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
