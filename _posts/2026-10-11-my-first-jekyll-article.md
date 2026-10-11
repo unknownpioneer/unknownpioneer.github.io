@@ -2,6 +2,8 @@
 layout: post
 title: "My First Jekyll Article"
 date: 2026-10-11
+author: "BEUFK"
+category: "Article"
 ---
 
 This is your first article in the new blog format. You can now write the actual content here without repeating the full HTML scaffolding every time.
