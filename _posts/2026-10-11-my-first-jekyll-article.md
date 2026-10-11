@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "My First Jekyll Article"
+title: "Better Performance"
 date: 2026-10-11
-author: "BEUFK"
+author: "Administrator"
 category: "Article"
 ---
 
