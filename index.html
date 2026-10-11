@@ -1,135 +1,117 @@
 <!DOCTYPE html>
-<html lang="zh-CN" translate="no">
-
-<head>
-    <meta charset="UTF-8">
-    <title>BEUFK'S PRIVATE BLOG</title>
-    <meta name="keywords" content="blog,博客">
-    <meta name='description' content='This page includes the using instruction and direction.'>
-    <link type="text/css" rel="stylesheet" href="style.css">
-    <link rel="icon" href="image/ME.png" type="image/x-icon">
-    <noscript>
-        <meta http-equiv="Refresh" content="0; URL=403.html">
-    </noscript>
-    <style>
-        footer {
-            background-color: blue;
-            color: black;
-            text-align: center;
-        }
-
-        a:link {
-            color: black;
-        }
-    </style>
-</head>
-
-<body>
-    <script src="maintain.js"></script>
-    <script>
-        // 控制台输出贡献者名单
-        const contributor = {
-            "contri01": { "name": "BEUFK", "email": "scratchwiki@outlook.com" },
-            "contri02": { "name": "q3dlaxpoaq", "email": "C_wz__@outlook.com" }
-        }
-        console.table(contributor)
-    </script>
-    <script>
-        // 欢迎提示及设置用户名的cookie
-        if (document.cookie.indexOf("username") >= 0) {
-            let username = document.cookie.split("=")[1];
-            document.write("<h2>Greeting, " + username + "</h2>")
-        } else {
-            let username = prompt("Welcome to access the blog, please provide your name here.", "Guest");
-            function writeCookie(cookieName, cookieValue) {
-                var expire = new Date((new Date()).getTime() + 240 * 60 * 60000);
-                expire = ";expires=" + expire.toGMTString();
-                document.cookie = cookieName + "=" + escape(cookieValue) + expire;
-            }
-            writeCookie("username", username)
-            document.write("<h2>Greeting, " + username + "</h2>")
-        }
-    </script>
-    <script>
-        // 检测用户设备类型并提示
-        function isMobile() {
-            const userAgent = navigator.userAgent;
-            const regex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-            return regex.test(userAgent);
-        }
-        if (isMobile()) {
-            alert('We advise you to access the website via PC to get better experience.');
-        }
-    </script>
-    <header>
-        <nav>
-            <a href="record.html" title="日常记录">Blog</a>
-            <a href="acknowledgement.html" title="致谢">Acknowledgement</a>
-            <a href="personality.html" title="personality">Hobby</a>
-            <a href="download.html" title="CloudDisk">CloudDisk List</a>
-            <a href="https://q3dlaxpoaq.github.io/" target="_blank"
-                title="Warning, you're going to another page beyond this server. Users'discretion is advised.">See also</a>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BEUFK's Private Blog</title>
+    <meta
+      name="description"
+      content="A personal site for notes, acknowledgements, hobbies, and downloads."
+    />
+    <link rel="icon" href="image/ME.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/site.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand">
+          <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Personal Archive</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/downloads.html">Downloads</a>
+          <a href="record.html">Archive</a>
         </nav>
-        <h1>
-            <script>
-                var d = new Date();
-                var time = d.getHours();
-                if (time < 10) {
-                    document.write("Good Morning.");
-                } else if (time >= 10 && time < 20) {
-                    document.write("Good Afternoon.");
-                } else {
-                    document.write("Have a good dream.");
-                }
-            </script>
-        </h1>
+      </div>
     </header>
-    <dialog open id="myDialog">
-        <p id="dialogcontent" lang="zh-CN">⚠️download.html现在会播放音频了，请小心社死。</p>
-        <form method="dialog">
-            <button onclick="document.getElementById('myDialog').close()">OK</button>
-        </form>
-    </dialog>
-    <p>I'm here to talk with you, citizen. I'm the commander of this kingdom, and hereby I'm ASKING you to do the
-        following:<br>
-    </p>
-    <h3>Instruction</h3>
-    <p>The kingdom consists of 4 parts: <em>Blogging, Acknowledgement and Personal Preference.</em><br>Each part
-        undertakes different functions.</p>
-    <h4>Blogging</h4>
-    <p>Providing that you're interested in spying other's daily life, the Blogging must be the place for which you are
-        looking. On weekends the section will be updated.<br>Mainly It's talking about the serious or otherwise
-        entertaining matters occur around me.</p>
-    <h4>Acknowledgement</h4>
-    <p>Literal Meaning.</p>
-    <h4>Personal Preference</h4>
-    <p>May update in the future.</p>
-    <footer>
-        <h6>该页面由BEUFK创建并进行更新维护。</h6>
-        <h6>电子邮箱地址：<a href="mailto:scratchwiki@outlook.com">scratchwiki@outlook.com</a></h6>
-        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" id="centerneed"><a
-                property="dct:title" rel="cc:attributionURL" href="https://unknownpioneer.github.io"
-                target="_blank">unknwonpioneer.github.io
-                and all
-                images/resources under this domain</a> by <a rel="cc:attributionURL dct:creator"
-                property="cc:attributionName" href="https://github.com/unknownpioneer" target="_blank">BEUFK</a> is
-            licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank"
-                rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
-        <p id="additionallink">See also: &nbsp;<a href="https://github.com/unknownpioneer" title="Github"
-                target="_blank"><img src="../image/github.png" alt="the logo of the github" width=30
-                    height=30></a>&nbsp;<a href="https://steamcommunity.com/id/BEUFK/" title="Steam"
-                target="_blank"><img src="../image/steam.png" alt="steam icon" width="30" height="30"></a>&nbsp;<a
-                href="https://space.bilibili.com/414768974" title="Bilibili" target="_blank"><img
-                    src="../image/bilibili.png" width="30" height="30"></a></p>
-    </footer>
-</body>
 
+    <main class="container">
+      <section class="hero card">
+        <div class="hero-copy">
+          <p class="eyebrow">Welcome</p>
+          <h2>Building a clearer home for my thoughts and files.</h2>
+          <p>
+            This site is organized around four main areas: <strong>Blog</strong>,
+            <strong>Acknowledgement</strong>, <strong>Hobbies</strong>, and
+            <strong>Downloads</strong>.
+          </p>
+          <div class="cta-row">
+            <a class="button primary" href="pages/blog.html">Read Blog</a>
+            <a class="button secondary" href="pages/about.html">Learn More</a>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="status-pill">Site status: Active</div>
+          <ul>
+            <li>Blog posts and notes</li>
+            <li>Media and downloadable files</li>
+            <li>Personal profile and credits</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card spotlight">
+        <div class="section-title-row">
+          <p class="eyebrow">Overview</p>
+          <h3>Current site structure</h3>
+        </div>
+        <div class="grid three-up">
+          <article>
+            <h4>Blog</h4>
+            <p>Personal writing, reflections, and article pages.</p>
+            <a href="pages/blog.html">Open blog index</a>
+          </article>
+          <article>
+            <h4>About</h4>
+            <p>Profile, acknowledgement, and relationship to the site.</p>
+            <a href="pages/about.html">Visit about page</a>
+          </article>
+          <article>
+            <h4>Downloads</h4>
+            <p>Files, media, and links collected in one place.</p>
+            <a href="pages/downloads.html">Browse downloads</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="card content-grid">
+        <div class="section-title-row">
+          <p class="eyebrow">Site map</p>
+          <h3>Built for easier upkeep</h3>
+        </div>
+        <div class="info-list">
+          <div>
+            <strong>Root pages</strong>
+            <p>Landing page and legacy single-page references</p>
+          </div>
+          <div>
+            <strong>Pages folder</strong>
+            <p>Organized sections for about, blog, and downloads</p>
+          </div>
+          <div>
+            <strong>Assets folder</strong>
+            <p>Styles and scripts kept separate from content</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© BEUFK · Built for clarity and maintenance</p>
+        <div class="footer-links">
+          <a href="https://github.com/unknownpioneer" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://steamcommunity.com/id/BEUFK/" target="_blank" rel="noreferrer">Steam</a>
+          <a href="https://space.bilibili.com/414768974" target="_blank" rel="noreferrer">Bilibili</a>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,282 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg, #f1f3f4 0%, #140303 100%);
+  color: #202124;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.site-header {
+  background: #242020;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.nav-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.top-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.top-nav a,
+.footer-links a,
+.card a {
+  color: #ab0d0d;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.top-nav a {
+  color: #f4f4f4;
+}
+
+.top-nav a:hover,
+.footer-links a:hover,
+.card a:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 2rem 0 3rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hero h2 {
+  margin: 0.25rem 0 0.75rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.hero p {
+  margin: 0;
+}
+
+.cta-row {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  font-weight: 700;
+}
+
+.button.primary {
+  background: #ab0d0d;
+  color: white;
+}
+
+.button.secondary {
+  background: transparent;
+  border-color: #ab0d0d;
+  color: #ab0d0d;
+}
+
+.hero-panel {
+  border-left: 5px solid #ab0d0d;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+
+.status-pill {
+  display: inline-block;
+  background: #dfe7ff;
+  color: #1a0dab;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.hero-panel ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.section-title-row {
+  margin-bottom: 1rem;
+}
+
+.section-title-row h3 {
+  margin: 0.15rem 0 0;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.grid.three-up {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid article {
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.grid h4 {
+  margin-top: 0;
+}
+
+.info-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.info-list > div {
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  background: #fff;
+  padding: 1rem;
+}
+
+.page-main {
+  padding-top: 2.5rem;
+}
+
+.page-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  padding: 1.8rem;
+}
+
+.page-card h2 {
+  margin-top: 0;
+}
+
+.meta-list,
+.link-list,
+.download-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.meta-list li,
+.link-list li,
+.download-list li {
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+}
+
+.link-list li:last-child,
+.download-list li:last-child,
+.meta-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.site-footer {
+  background: #242020;
+  color: #fff;
+  padding: 1.2rem 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .hero,
+  .grid.three-up,
+  .info-list {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-wrap,
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-nav {
+    justify-content: flex-start;
+  }
+}
