@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const body = document.body;
-  const message = document.querySelector(".status-pill");
-
-  if (window.matchMedia("(max-width: 760px)").matches && message) {
-    message.textContent = "Site status: Mobile-friendly";
+  const yearNode = document.getElementById("year");
+  if (yearNode) {
+    yearNode.textContent = new Date().getFullYear();
   }
 
   const usernameCookie = document.cookie
@@ -11,14 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     .map((entry) => entry.trim())
     .find((entry) => entry.startsWith("username="));
 
-  if (usernameCookie && body.dataset.greeting !== "enabled") {
+  if (usernameCookie) {
     const username = decodeURIComponent(usernameCookie.split("=")[1]);
-    const welcome = document.createElement("div");
-    welcome.className = "status-pill";
-    welcome.textContent = `Welcome back, ${username}`;
     const heroPanel = document.querySelector(".hero-panel");
-    if (heroPanel) {
-      heroPanel.prepend(welcome);
+    if (heroPanel && !heroPanel.querySelector(".welcome-tag")) {
+      const badge = document.createElement("div");
+      badge.className = "status-pill welcome-tag";
+      badge.textContent = `Welcome back, ${username}`;
+      heroPanel.prepend(badge);
     }
   }
 });

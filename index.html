@@ -6,7 +6,7 @@
     <title>BEUFK's Private Blog</title>
     <meta
       name="description"
-      content="A personal site for notes, acknowledgements, hobbies, and downloads."
+      content="The reorganized personal website for notes, blog posts, hobbies, and downloads."
     />
     <link rel="icon" href="image/ME.png" type="image/x-icon" />
     <link rel="stylesheet" href="assets/css/site.css" />
@@ -15,13 +15,14 @@
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
-        <div class="brand">
+        <div class="brand" aria-label="Site brand">
           <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
           <div>
-            <p class="eyebrow">Personal Archive</p>
+            <p class="eyebrow">Personal archive</p>
             <h1>BEUFK</h1>
           </div>
         </div>
+
         <nav class="top-nav" aria-label="Main navigation">
           <a href="index.html">Home</a>
           <a href="pages/about.html">About</a>
@@ -32,72 +33,78 @@
       </div>
     </header>
 
-    <main class="container">
+    <main class="container page-main">
       <section class="hero card">
         <div class="hero-copy">
           <p class="eyebrow">Welcome</p>
-          <h2>Building a clearer home for my thoughts and files.</h2>
+          <h2>A cleaner home for the site’s ideas, notes, and media.</h2>
           <p>
-            This site is organized around four main areas: <strong>Blog</strong>,
-            <strong>Acknowledgement</strong>, <strong>Hobbies</strong>, and
-            <strong>Downloads</strong>.
+            The site is now organized around a simple structure: <strong>About</strong>,
+            <strong>Blog</strong>, <strong>Downloads</strong>, and a small archive of older pages.
           </p>
           <div class="cta-row">
-            <a class="button primary" href="pages/blog.html">Read Blog</a>
-            <a class="button secondary" href="pages/about.html">Learn More</a>
+            <a class="button primary" href="pages/blog.html">Open Blog</a>
+            <a class="button secondary" href="pages/about.html">About Me</a>
           </div>
         </div>
-        <div class="hero-panel">
+
+        <aside class="hero-panel" aria-label="Site overview">
           <div class="status-pill">Site status: Active</div>
           <ul>
-            <li>Blog posts and notes</li>
-            <li>Media and downloadable files</li>
-            <li>Personal profile and credits</li>
+            <li>Personal writing and notes</li>
+            <li>Download and media library</li>
+            <li>Profile, credits, and references</li>
           </ul>
-        </div>
+        </aside>
       </section>
 
-      <section class="card spotlight">
-        <div class="section-title-row">
+      <section class="card">
+        <div class="section-heading">
           <p class="eyebrow">Overview</p>
-          <h3>Current site structure</h3>
+          <h3>Section map</h3>
         </div>
+
         <div class="grid three-up">
-          <article>
-            <h4>Blog</h4>
-            <p>Personal writing, reflections, and article pages.</p>
-            <a href="pages/blog.html">Open blog index</a>
-          </article>
-          <article>
+          <article class="mini-card">
             <h4>About</h4>
-            <p>Profile, acknowledgement, and relationship to the site.</p>
+            <p>Profile, background, and acknowledgement.</p>
             <a href="pages/about.html">Visit about page</a>
           </article>
-          <article>
+
+          <article class="mini-card">
+            <h4>Blog</h4>
+            <p>Reflections, thoughts, and article index.</p>
+            <a href="pages/blog.html">Read the blog</a>
+          </article>
+
+          <article class="mini-card">
             <h4>Downloads</h4>
-            <p>Files, media, and links collected in one place.</p>
+            <p>Files, music, notes, and other resources.</p>
             <a href="pages/downloads.html">Browse downloads</a>
           </article>
         </div>
       </section>
 
-      <section class="card content-grid">
-        <div class="section-title-row">
-          <p class="eyebrow">Site map</p>
-          <h3>Built for easier upkeep</h3>
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Why this structure</p>
+          <h3>Built for easier maintenance</h3>
         </div>
-        <div class="info-list">
-          <div>
+
+        <div class="info-grid">
+          <div class="info-box">
             <strong>Root pages</strong>
-            <p>Landing page and legacy single-page references</p>
+            <p>Clean landing page and legacy references without clustering every file together.</p>
           </div>
-          <div>
+
+          <div class="info-box">
             <strong>Pages folder</strong>
-            <p>Organized sections for about, blog, and downloads</p>
+            <p>Content sections live together and are easier to update.</p>
           </div>
-          <div>
+
+          <div class="info-box">
             <strong>Assets folder</strong>
-            <p>Styles and scripts kept separate from content</p>
+            <p>CSS and JS are separate from page content and media.</p>
           </div>
         </div>
       </section>
@@ -105,7 +112,7 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© BEUFK · Built for clarity and maintenance</p>
+        <p>© <span id="year"></span> BEUFK · Built for clarity.</p>
         <div class="footer-links">
           <a href="https://github.com/unknownpioneer" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://steamcommunity.com/id/BEUFK/" target="_blank" rel="noreferrer">Steam</a>
