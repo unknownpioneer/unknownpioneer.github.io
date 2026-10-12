@@ -59,6 +59,35 @@
   }
 
   /**
+   * The instant the current weekly window closes -- that same day at
+   * WINDOW_END_HOUR in UTC+offset -- so the maintenance page can count down to it.
+   * Only meaningful while isMaintenanceWindow() is true.
+   *
+   * @param {Date} date
+   * @param {number} [utcOffsetHours] offset to evaluate in; defaults to UTC+8
+   * @returns {Date}
+   */
+  function weeklyWindowEnd(date, utcOffsetHours) {
+    var offset = utcOffsetHours === undefined ? WINDOW_UTC_OFFSET : utcOffsetHours;
+    var tzMs = date.getTimezoneOffset() * 60000;
+
+    // Re-base so local getters report UTC+offset wall time, take that day's
+    // closing hour as a wall-clock Date, then shift back to a real instant.
+    var wall = new Date(date.getTime() + tzMs + offset * 3600000);
+    var endWall = new Date(
+      wall.getFullYear(),
+      wall.getMonth(),
+      wall.getDate(),
+      WINDOW_END_HOUR,
+      0,
+      0,
+      0
+    );
+
+    return new Date(endWall.getTime() - tzMs - offset * 3600000);
+  }
+
+  /**
    * True when the manual switch is on and has not expired yet.
    * Expiry needs no scheduler: it is simply compared against the clock on load.
    *
@@ -104,6 +133,7 @@
       isMaintenanceWindow: isMaintenanceWindow,
       isOverrideActive: isOverrideActive,
       shouldShowMaintenance: shouldShowMaintenance,
+      weeklyWindowEnd: weeklyWindowEnd,
       WINDOW_WEEKDAY: WINDOW_WEEKDAY,
       WINDOW_START_HOUR: WINDOW_START_HOUR,
       WINDOW_END_HOUR: WINDOW_END_HOUR,
@@ -120,9 +150,11 @@
     return;
   }
 
-  if (!shouldShowMaintenance(global.SITE_MAINTENANCE, new Date())) {
+  var now = new Date();
+  if (!shouldShowMaintenance(global.SITE_MAINTENANCE, now)) {
     return;
   }
+  var overrideOn = isOverrideActive(global.SITE_MAINTENANCE, now);
 
   // Resolve the maintenance page against the site root, so this single file works
   // from the root, from /pages/ and /blog/, and if the site ever moves to a subpath.
@@ -137,5 +169,20 @@
     base = self.src.replace(/assets\/js\/maintenance\.js.*$/, "");
   }
 
-  window.location.replace(base + MAINTENANCE_PAGE);
+  // Tell the maintenance page why it is being shown and when the site should be
+  // back, so it can render an accurate countdown. Display-only: the page accepts
+  // only a fixed set of reason values and escapes everything it renders.
+  var until = "";
+  if (overrideOn) {
+    until = (global.SITE_MAINTENANCE && global.SITE_MAINTENANCE.until) || "";
+  } else {
+    until = weeklyWindowEnd(now).toISOString();
+  }
+
+  var query =
+    "?reason=" +
+    (overrideOn ? "override" : "weekly") +
+    (until ? "&until=" + encodeURIComponent(until) : "");
+
+  window.location.replace(base + MAINTENANCE_PAGE + query);
 })(typeof globalThis !== "undefined" ? globalThis : this);
