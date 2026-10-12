@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintenance admin | BEUFK</title>
+    <!-- Unlisted tool: no index, and intentionally NOT guarded by maintenance.js,
+         so an admin can always reach it to switch the site back on. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="image/ME.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/site.js" defer></script>
+    <script src="assets/js/admin.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand" aria-label="Site brand">
+          <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Administration</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
+
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/downloads.html">Downloads</a>
+          <a href="record.html">Archive</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Current state</p>
+          <h3>Maintenance switch</h3>
+        </div>
+
+        <p><span class="status-pill is-off" id="stateBadge">Add a token to read the switch</span></p>
+
+        <ul class="meta-list">
+          <li><strong>Scheduled window:</strong> <span id="scheduleText">--</span></li>
+          <li><strong>Override ends:</strong> <span id="stateUntil">--</span></li>
+          <li><strong>Switched on by:</strong> <span id="stateBy">--</span></li>
+          <li><strong>Last updated:</strong> <span id="stateUpdated">--</span></li>
+          <li><strong>Message:</strong> <span id="stateMessage">--</span></li>
+        </ul>
+
+        <div class="admin-actions">
+          <button class="button secondary" type="button" id="stateRefresh">Reload from GitHub</button>
+          <button class="button ghost" type="button" id="stateToggleRaw">Show raw file</button>
+        </div>
+
+        <div id="stateRawWrap" hidden>
+          <pre class="admin-out" id="stateRaw"></pre>
+        </div>
+        <div class="admin-out" id="stateError" hidden></div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Access</p>
+          <h3>GitHub token</h3>
+        </div>
+
+        <p class="admin-note">
+          Authorization is enforced by GitHub, not by this page. Create a fine-grained personal
+          access token scoped to <strong>unknownpioneer/unknownpioneer.github.io</strong> with
+          <strong>Contents: Read and write</strong>, then paste it below. It is kept only in this
+          browser's localStorage, is sent only to api.github.com, and is never written into the
+          site or the repository.
+        </p>
+
+        <div class="admin-form">
+          <div class="admin-field">
+            <label for="tokenInput">Personal access token</label>
+            <input
+              id="tokenInput"
+              type="password"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="github_pat_..."
+            />
+          </div>
+        </div>
+
+        <div class="admin-actions">
+          <button class="button primary" type="button" id="tokenCheck">Check access</button>
+          <button class="button secondary" type="button" id="tokenSave">Save token</button>
+          <button class="button ghost" type="button" id="tokenClear">Forget token</button>
+        </div>
+
+        <div class="admin-out" id="tokenOut" hidden></div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Control</p>
+          <h3>Switch maintenance on or off</h3>
+        </div>
+
+        <div class="admin-form">
+          <div class="admin-field">
+            <label for="durationSelect">Duration until it switches back off</label>
+            <select id="durationSelect">
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="60" selected>1 hour</option>
+              <option value="120">2 hours</option>
+              <option value="240">4 hours</option>
+              <option value="480">8 hours</option>
+              <option value="custom">Custom&hellip;</option>
+            </select>
+          </div>
+
+          <div class="admin-field" id="customMinutesWrap" hidden>
+            <label for="customMinutes">Custom duration (minutes)</label>
+            <input id="customMinutes" type="number" min="1" step="1" value="90" />
+          </div>
+
+          <div class="admin-field">
+            <label for="messageInput">Message on the maintenance page (optional)</label>
+            <input
+              id="messageInput"
+              type="text"
+              maxlength="200"
+              placeholder="Upgrading something, back shortly."
+            />
+          </div>
+
+          <div class="admin-field">
+            <label for="byInput">Your name (recorded in the commit and shown to visitors)</label>
+            <input id="byInput" type="text" maxlength="60" placeholder="unknownpioneer" />
+          </div>
+        </div>
+
+        <p class="admin-note">
+          The site comes back automatically at <strong id="untilPreview">--</strong>
+        </p>
+
+        <div class="admin-actions">
+          <button class="button primary" type="button" id="enableBtn">Enable maintenance</button>
+          <button class="button secondary" type="button" id="disableBtn">End maintenance now</button>
+        </div>
+
+        <div class="admin-out" id="actionOut" hidden></div>
+
+        <details class="admin-details">
+          <summary>Preview the file that will be committed</summary>
+          <pre class="admin-out" id="previewOut"></pre>
+        </details>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> BEUFK · Maintenance admin</p>
+        <div class="footer-links">
+          <a href="index.html">Back to the site</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
