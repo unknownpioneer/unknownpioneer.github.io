@@ -644,6 +644,100 @@ button.button {
   display: none !important;
 }
 
+/* Maintenance page (nope.html) */
+.maintenance-card {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.maintenance-card .status-pill {
+  margin-bottom: 0.9rem;
+}
+
+.maintenance-title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.maintenance-lead {
+  margin: 0 auto;
+  max-width: 46ch;
+  color: #3c4043;
+}
+
+.maintenance-countdown {
+  display: grid;
+  gap: 0.15rem;
+  max-width: 320px;
+  margin: 1.4rem auto;
+  padding: 1.1rem 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.maintenance-countdown-value {
+  color: #ab0d0d;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.maintenance-countdown-label {
+  color: #5f6368;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.maintenance-detail {
+  margin: 0 auto;
+  max-width: 46ch;
+  color: #3c4043;
+  font-style: italic;
+}
+
+.maintenance-meta {
+  list-style: none;
+  max-width: 460px;
+  margin: 1.6rem auto 0;
+  padding: 0;
+  text-align: left;
+}
+
+.maintenance-meta li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.maintenance-meta li:last-child {
+  border-bottom: none;
+}
+
+.maintenance-meta span {
+  color: #5f6368;
+  font-size: 0.9rem;
+}
+
+.maintenance-card .cta-row {
+  justify-content: center;
+  margin-top: 1.6rem;
+}
+
+.maintenance-note {
+  margin: 1.6rem 0 0;
+  color: #80868b;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 760px) {
   .nav-wrap,
   .footer-inner {

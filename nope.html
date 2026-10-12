@@ -1,49 +1,170 @@
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>503 Server Unavailable</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temporarily unavailable | BEUFK</title>
+    <!-- Visitors land here during maintenance; keep it out of search results. -->
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="image/ME.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+  </head>
+  <body>
     <script>
-        console.warn("Server is currently inactive. Please try again later.")
+      console.warn("Server is currently inactive. Please try again later.");
     </script>
-    <h1 align="center">503 Server Unavailable</h1>
-    <p align="center">The server is currently under maintenance. Please come back later.<br>If you have interest in
-        learning about detailed information, you can <a href="mailto:scratchwiki@outlook.com">email the owner</a>.</p>
-    <p align="center">Scheduled maintenance: every Thursday, 08:00-09:00 (UTC+8). The site returns at 09:00.</p>
-    <p align="center" id="override-detail" hidden></p>
-    <h2 align="center">Reason: The owner of this website want to have a break for a while.</h2>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand" aria-label="Site brand">
+          <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Temporarily unavailable</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="card maintenance-card">
+        <span class="status-pill is-on" id="statusPill">503 &middot; Maintenance</span>
+
+        <h2 class="maintenance-title">The site is taking a short break</h2>
+        <p class="maintenance-lead">
+          Nothing is broken, and nothing has been lost. The site comes back on its own
+          &mdash; please check again in a little while.
+        </p>
+
+        <div class="maintenance-countdown" id="countdownBox" hidden>
+          <span class="maintenance-countdown-value" id="countdownValue">--:--</span>
+          <span class="maintenance-countdown-label" id="countdownLabel">until the site returns</span>
+        </div>
+
+        <p class="maintenance-detail" id="overrideDetail" hidden></p>
+
+        <ul class="maintenance-meta">
+          <li>
+            <span>Reason</span>
+            <strong id="reasonText">Scheduled maintenance window</strong>
+          </li>
+          <li>
+            <span>Expected back</span>
+            <strong id="returnText">Unknown</strong>
+          </li>
+          <li>
+            <span>Recurring window</span>
+            <strong>Thursdays, 08:00&ndash;09:00 (UTC+8)</strong>
+          </li>
+        </ul>
+
+        <div class="cta-row">
+          <a class="button primary" href="index.html">Try the site again</a>
+          <a class="button secondary" href="mailto:scratchwiki@outlook.com">Email the owner</a>
+        </div>
+
+        <p class="maintenance-note">
+          Reason: the owner of this website wants to have a break for a while.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> BEUFK &middot; Maintenance</p>
+        <div class="footer-links">
+          <a href="mailto:scratchwiki@outlook.com">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/site.js" defer></script>
     <script src="assets/js/maintenance-state.js"></script>
     <script>
-        // Show the detail of a manual override, if one is active.
-        (function () {
-            var state = window.SITE_MAINTENANCE;
-            if (!state || state.active !== true) {
-                return;
-            }
-            var parts = [];
-            if (state.message) {
-                parts.push(state.message);
-            }
-            var until = state.until ? new Date(state.until) : null;
-            if (until && !isNaN(until.getTime())) {
-                parts.push("Expected back: " + until.toLocaleString() + ".");
-            }
-            if (state.by) {
-                parts.push("Maintenance started by " + state.by + ".");
-            }
-            if (!parts.length) {
-                return;
-            }
-            var node = document.getElementById("override-detail");
-            node.textContent = parts.join(" ");
-            node.hidden = false;
-        })();
-    </script>
-</body>
+      // Renders the countdown and the saved message. Everything dynamic goes in via
+      // textContent, and only a fixed set of reason values is accepted, so a crafted
+      // link cannot inject markup or text into this page.
+      (function () {
+        "use strict";
 
+        var state = window.SITE_MAINTENANCE || {};
+        var params = new URLSearchParams(window.location.search);
+
+        var carriedReason = params.get("reason");
+        var untilParam = params.get("until");
+        var until = untilParam ? Date.parse(untilParam) : NaN;
+
+        // Opened directly rather than reached via the redirect, so fall back to the
+        // switch file for both the reason and the end time.
+        var isOverride;
+        if (carriedReason || untilParam) {
+          isOverride = carriedReason === "override";
+        } else {
+          isOverride = state.active === true;
+          if (isNaN(until) && state.active === true && state.until) {
+            until = Date.parse(state.until);
+          }
+        }
+
+        var reasonText = document.getElementById("reasonText");
+        var returnText = document.getElementById("returnText");
+        var detail = document.getElementById("overrideDetail");
+        var box = document.getElementById("countdownBox");
+        var value = document.getElementById("countdownValue");
+        var label = document.getElementById("countdownLabel");
+
+        reasonText.textContent = isOverride
+          ? "Manual maintenance"
+          : "Scheduled maintenance window";
+
+        if (state.active === true) {
+          var lines = [];
+          if (state.message) {
+            lines.push(state.message);
+          }
+          if (state.by) {
+            lines.push("Started by " + state.by + ".");
+          }
+          if (lines.length) {
+            detail.textContent = lines.join(" ");
+            detail.hidden = false;
+          }
+        }
+
+        if (!isNaN(until)) {
+          returnText.textContent = new Date(until).toLocaleString();
+        }
+
+        function formatDuration(ms) {
+          var total = Math.max(0, Math.round(ms / 1000));
+          var hours = Math.floor(total / 3600);
+          var minutes = Math.floor((total % 3600) / 60);
+          var seconds = total % 60;
+          var pad = function (n) {
+            return (n < 10 ? "0" : "") + n;
+          };
+          if (hours > 0) {
+            return hours + " h " + pad(minutes) + " min";
+          }
+          return pad(minutes) + ":" + pad(seconds);
+        }
+
+        function tick() {
+          var left = until - Date.now();
+          if (left <= 0) {
+            value.textContent = "00:00";
+            label.textContent = "should be back by now";
+            return;
+          }
+          box.hidden = false;
+          value.textContent = formatDuration(left);
+        }
+
+        if (!isNaN(until)) {
+          tick();
+          setInterval(tick, 1000);
+        }
+      })();
+    </script>
+  </body>
 </html>
