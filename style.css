@@ -172,18 +172,6 @@ header {
     cursor: pointer;
 }
 
-#myDialog {
-    background-color: var(--background-color);
-    position: fixed;
-    width: max-content;
-    height: max-content;
-    z-index: 99999;
-    color: var(--primary-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-}
-
 footer {
     background-color: var(--header-color);
     border: 1px solid var(--border-color);
@@ -218,4 +206,34 @@ figure {
     margin: auto;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+}
+
+/* Rendered only when JavaScript is disabled, via <noscript>. Collapsible without
+   any script, so it never traps a reader who cannot dismiss it. */
+.js-notice {
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    z-index: 99999;
+    width: min(560px, calc(100vw - 2rem));
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--header-color);
+    color: #fff;
+    box-shadow: var(--box-shadow);
+    text-align: left;
+}
+
+.js-notice summary {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.js-notice p {
+    margin: 0.6rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
 }

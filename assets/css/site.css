@@ -738,6 +738,36 @@ button.button {
   font-size: 0.85rem;
 }
 
+/* Rendered only when JavaScript is disabled, via <noscript>. Collapsible without
+   any script, so it never traps a reader who cannot dismiss it. */
+.js-notice {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  z-index: 99999;
+  width: min(560px, calc(100vw - 2rem));
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  background: #242020;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  text-align: left;
+}
+
+.js-notice summary {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.js-notice p {
+  margin: 0.6rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 760px) {
   .nav-wrap,
   .footer-inner {
