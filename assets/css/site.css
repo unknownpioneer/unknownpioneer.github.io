@@ -71,7 +71,8 @@ img {
 .footer-links a,
 .mini-card a,
 .link-list a,
-.download-list a {
+.download-list a,
+.record-list a {
   color: #ab0d0d;
   text-decoration: none;
   font-weight: 700;
@@ -85,7 +86,8 @@ img {
 .footer-links a:hover,
 .mini-card a:hover,
 .link-list a:hover,
-.download-list a:hover {
+.download-list a:hover,
+.record-list a:hover {
   text-decoration: underline;
 }
 
@@ -421,6 +423,80 @@ img {
   color: #5f6368;
   white-space: nowrap;
   font-size: 0.93rem;
+}
+
+.record-list {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px solid #e6e6e6;
+}
+
+.record-entry {
+  position: relative;
+  padding-bottom: 1.4rem;
+}
+
+.record-entry:last-child {
+  padding-bottom: 0;
+}
+
+.record-entry::before {
+  content: "";
+  position: absolute;
+  left: -1.85rem;
+  top: 0.55rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #ab0d0d;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.record-date {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #5f6368;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.record-body p {
+  margin: 0 0 0.55rem;
+}
+
+.record-body p:last-child,
+.record-body ul:last-child {
+  margin-bottom: 0;
+}
+
+.record-body ul {
+  list-style: none;
+  margin: 0 0 0.55rem;
+  padding: 0;
+}
+
+.record-body ul li {
+  margin-bottom: 0.55rem;
+}
+
+.record-body ul li:last-child {
+  margin-bottom: 0;
+}
+
+.record-tag {
+  display: inline-block;
+  margin-right: 0.45rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #e7edff;
+  color: #1a0dab;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: 1px;
 }
 
 @media (max-width: 760px) {
