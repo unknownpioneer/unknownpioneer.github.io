@@ -11,9 +11,9 @@
  *   updated when this file was last written
  */
 window.SITE_MAINTENANCE = {
-  active: true,
-  until: "2026-10-19T13:35:06.525Z",
-  message: "The website is currently undergoing a series of testing.",
+  active: false,
+  until: null,
+  message: "",
   by: "admin",
-  updated: "2026-10-12T14:55:06.525Z"
+  updated: "2026-10-12T14:57:27.125Z"
 };
