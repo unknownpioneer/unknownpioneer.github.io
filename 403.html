@@ -1,50 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript is switched off | BEUFK</title>
+    <link rel="icon" href="image/ME.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/maintenance-state.js"></script>
+    <script src="assets/js/maintenance.js"></script>
+    <script src="assets/js/site.js" defer></script>
+  </head>
+  <body>
+    <noscript>
+      <div class="js-notice">
+        <details open>
+          <summary>JavaScript is switched off</summary>
+          <p>
+            Everything here still reads fine without it. Only the extras &mdash; the maintenance
+            countdown and the admin page &mdash; need JavaScript.
+          </p>
+        </details>
+      </div>
+    </noscript>
 
-<head>
-    <meta charset="utf-8">
-    <title>Access Denied</title>
-    <link rel="icon" href="../image/ME.png" type="image/x-icon">
-    <link type="text/css" rel="stylesheet" href="../style.css">
-</head>
-
-<body align="center">
     <script>
-        window.location.href = "index.html"
+      // Anyone with JavaScript on does not need this explainer, so send them home.
+      window.location.href = "index.html";
     </script>
-    <h1 align="center">Error: Access Denied</h1>
-    <p>It seems that the Javascript is disabled on your browser. Please enable it in your setting.</p>
-    <h3>Why do you do that?</h3>
-    <p>See <a href="blog/article_enable_javascript.html" title="announcement">the article</a> for more information.</p>
-    <h3>How do I enable it?</h3>
-    <img src="image/reset.jpg" alt="how to enable the js" width=60% height=40%>
-    <p>You should click the <q>Reset Permission</q>, and enter your target URL.<br>
-        See also: <a
-            href="https://support.microsoft.com/en-us/topic/how-to-enable-javascript-in-windows-88d27b37-6484-7fc0-17df-872f65168279">How
-            to enable JavaScript in Windows
-        </a></p>
-    <footer>
-        <h6>该页面由BEUFK创建并进行更新维护。</h6>
-        <h6>电子邮箱地址：<a href="mailto:scratchwiki@outlook.com">scratchwiki@outlook.com</a></h6>
-        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title"
-                rel="cc:attributionURL noopener noreferrer" href="https://unknownpioneer.github.io" target="_blank">unknwonpioneer.github.io
-                and all
-                images/resources under this domain</a> by <a rel="cc:attributionURL dct:creator noopener noreferrer"
-                property="cc:attributionName" href="https://github.com/unknownpioneer" target="_blank">BEUFK</a> is
-            licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank"
-                rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
-        <p id="additionallink">See also: &nbsp;<a href="https://www1.szu.edu.cn/" title="深圳大学内部网" target="_blank" rel="noopener noreferrer" lang="zh-CN">深圳大学内部网</a>&nbsp;<a href="https://github.com/unknownpioneer" title="Github" rel="noopener noreferrer" target="_blank"><img
-                    src="image/github.png" alt="the logo of the github" width=30 height=30></a>&nbsp;<a
-                href="https://steamcommunity.com/id/BEUFK/" title="Steam" rel="noopener noreferrer" target="_blank"><img src="image/steam.png"
-                    alt="steam icon" width="30" height="30"></a>&nbsp;<a href="https://space.bilibili.com/414768974"
-                title="Bilibili" rel="noopener noreferrer" target="_blank"><img src="image/bilibili.png" width="30" height="30"></a></p>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand" aria-label="Site brand">
+          <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">JavaScript</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
+
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/downloads.html">Downloads</a>
+          <a href="record.html">Archive</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="page-card">
+        <p class="eyebrow">No JavaScript, no problem</p>
+        <h2>JavaScript is switched off</h2>
+        <p>
+          It seems that JavaScript is disabled in your browser. That is perfectly fine here &mdash;
+          nothing on this site needs it just to be read.
+        </p>
+
+        <h3>What does need it?</h3>
+        <ul>
+          <li>the countdown on the maintenance page;</li>
+          <li>the maintenance admin tool.</li>
+        </ul>
+        <p>
+          See <a href="blog/article_enable_javascript.html" title="announcement">the article</a> for
+          more information.
+        </p>
+
+        <h3>How do I enable it?</h3>
+        <img src="image/reset.jpg" alt="Where to reset the permission for this site" />
+        <p>
+          You should click the <q>Reset Permission</q>, and enter your target URL.<br />
+          See also:
+          <a
+            href="https://support.microsoft.com/en-us/topic/how-to-enable-javascript-in-windows-88d27b37-6484-7fc0-17df-872f65168279"
+            >How to enable JavaScript in Windows</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> BEUFK</p>
+        <div class="footer-links">
+          <a href="https://www1.szu.edu.cn/" target="_blank" rel="noopener noreferrer" lang="zh-CN">深圳大学内部网</a>
+          <a href="mailto:scratchwiki@outlook.com">Email</a>
+          <a href="https://github.com/unknownpioneer" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://steamcommunity.com/id/BEUFK/" target="_blank" rel="noopener noreferrer">Steam</a>
+          <a href="https://space.bilibili.com/414768974" target="_blank" rel="noopener noreferrer">Bilibili</a>
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="license noopener noreferrer"
+            >CC BY-NC-SA 4.0</a
+          >
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
+</html>
