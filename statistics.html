@@ -5,9 +5,6 @@
     <meta charset="utf-8">
     <title>Statistics</title>
     <link rel="icon" href="image/ME.png" type="image/x-icon">
-    <noscript>
-        <meta http-equiv="Refresh" content="0; URL=403.html">
-    </noscript>
     <link type="text/css" rel="stylesheet" href="style.css">
     <script src="assets/js/maintenance-state.js"></script>
     <script src="assets/js/maintenance.js"></script>
@@ -27,6 +24,17 @@
 </head>
 
 <body>
+  <noscript>
+    <div class="js-notice">
+      <details open>
+        <summary>JavaScript is switched off</summary>
+        <p>
+          Everything here still reads fine without it. Only the extras &mdash; the maintenance
+          countdown and the admin page &mdash; need JavaScript.
+        </p>
+      </details>
+    </div>
+  </noscript>
 
     <script>if (document.cookie.indexOf("username=config") < 0) {
             alert("Error: Only config can access this page.")
