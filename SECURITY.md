@@ -66,6 +66,10 @@ Storage is deliberately minimal:
   Ticking the opt-in lengthens that window, so leave it off on a shared or
   untrusted machine and press **Forget token** when you are finished.
 - Prefer short token expiries and revoke tokens when they are no longer needed.
+- Anything that terminates TLS on the machine you administer from — a local proxy
+  or accelerator, a VPN client, a corporate middlebox — can read the token in
+  transit. Confining the token to `api.github.com` does not protect it from
+  software running locally.
 - `frame-ancestors` cannot be applied on GitHub Pages (it is ignored in a meta
   policy), so `admin.js` refuses to run whenever the page is embedded in a frame.
   That blocks clickjacking the maintenance toggle.
