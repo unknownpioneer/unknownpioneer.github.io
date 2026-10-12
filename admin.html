@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Must appear before any resource is fetched or it has no effect. GitHub
+         Pages cannot send response headers, so a meta policy is the only option.
+         frame-ancestors is ignored in meta CSP; admin.js refuses to run framed. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://api.github.com; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
     <title>Maintenance admin | BEUFK</title>
     <!-- Unlisted tool: no index, and intentionally NOT guarded by maintenance.js,
          so an admin can always reach it to switch the site back on. -->
@@ -70,9 +78,11 @@
         <p class="admin-note">
           Authorization is enforced by GitHub, not by this page. Create a fine-grained personal
           access token scoped to <strong>unknownpioneer/unknownpioneer.github.io</strong> with
-          <strong>Contents: Read and write</strong>, then paste it below. It is kept only in this
-          browser's localStorage, is sent only to api.github.com, and is never written into the
-          site or the repository.
+          <strong>Contents: Read and write</strong>, then paste it below. It is held in this tab's
+          <code>sessionStorage</code> — or in this device's <code>localStorage</code> only if you
+          tick the box below, and even then for at most 12 hours. It is sent only to
+          api.github.com, is never written into the site or the repository, and is cleared from the
+          page as soon as it is submitted.
         </p>
 
         <div class="admin-form">
@@ -82,9 +92,20 @@
               id="tokenInput"
               type="password"
               autocomplete="off"
+              autocapitalize="off"
+              autocorrect="off"
               spellcheck="false"
+              maxlength="300"
               placeholder="github_pat_..."
             />
+          </div>
+
+          <div class="admin-check">
+            <input id="tokenKeep" type="checkbox" />
+            <label for="tokenKeep">
+              Keep this token on this device (uses <code>localStorage</code>; it is discarded
+              automatically after 12 hours). Leave this off to keep it only for this tab.
+            </label>
           </div>
         </div>
 

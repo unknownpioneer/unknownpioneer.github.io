@@ -543,6 +543,33 @@ img {
   margin-top: 1rem;
 }
 
+.admin-check {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.admin-check input[type="checkbox"] {
+  width: auto;
+  flex: 0 0 auto;
+  margin-top: 0.3rem;
+}
+
+.admin-check label {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #3c4043;
+}
+
+.admin-check code,
+.admin-note code {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.85em;
+  background: #f1f3f4;
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+}
+
 button.button {
   font: inherit;
   cursor: pointer;

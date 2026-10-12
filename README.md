@@ -79,11 +79,17 @@ itself.
 1. Create a **fine-grained personal access token** scoped to this repository only,
    with **Contents: Read and write**.
 2. Open `/admin.html`, paste the token, and press **Check access**. The token is
-   kept in that browser's `localStorage`, is sent only to `api.github.com`, and is
-   never written into the repository.
+   held in that tab's `sessionStorage` — or in the device's `localStorage` only if
+   you tick the opt-in box, and then for at most 12 hours. It is sent only to
+   `api.github.com` and is never written into the repository.
 3. Choose a duration, optionally add a message and your name, then press
    **Enable maintenance**. The page commits `assets/js/maintenance-state.js`
    straight through the GitHub Contents API; **End maintenance now** reverses it.
+
+The page carries a strict `Content-Security-Policy` limiting it to same-origin
+assets and `api.github.com`, refuses to run inside a frame, validates the token's
+shape before storing it, and strips control characters out of the message and name
+fields. See [SECURITY.md](SECURITY.md) for what that does and does not buy you.
 
 The tool commits to `main`, so the maintenance guard must be deployed there for the
 switch to have any effect.
