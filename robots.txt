@@ -5,4 +5,5 @@ Disallow: /.vscode/
 Disallow: /.github/workflows/
 Disallow: .css$
 Disallow: .md$
+Disallow: /admin.html
 

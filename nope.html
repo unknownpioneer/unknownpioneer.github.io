@@ -12,9 +12,38 @@
         console.warn("Server is currently inactive. Please try again later.")
     </script>
     <h1 align="center">503 Server Unavailable</h1>
-    <p align="center">The server is currently under maintainence. Please come back later.<br>If you have interest in
-        learning about detailed information, you can <a href="mailto:scratchwiki@outlook.com">email the owner</a>.
+    <p align="center">The server is currently under maintenance. Please come back later.<br>If you have interest in
+        learning about detailed information, you can <a href="mailto:scratchwiki@outlook.com">email the owner</a>.</p>
+    <p align="center">Scheduled maintenance: every Thursday, 08:00-09:00 (UTC+8). The site returns at 09:00.</p>
+    <p align="center" id="override-detail" hidden></p>
     <h2 align="center">Reason: The owner of this website want to have a break for a while.</h2>
+    <script src="assets/js/maintenance-state.js"></script>
+    <script>
+        // Show the detail of a manual override, if one is active.
+        (function () {
+            var state = window.SITE_MAINTENANCE;
+            if (!state || state.active !== true) {
+                return;
+            }
+            var parts = [];
+            if (state.message) {
+                parts.push(state.message);
+            }
+            var until = state.until ? new Date(state.until) : null;
+            if (until && !isNaN(until.getTime())) {
+                parts.push("Expected back: " + until.toLocaleString() + ".");
+            }
+            if (state.by) {
+                parts.push("Maintenance started by " + state.by + ".");
+            }
+            if (!parts.length) {
+                return;
+            }
+            var node = document.getElementById("override-detail");
+            node.textContent = parts.join(" ");
+            node.hidden = false;
+        })();
+    </script>
 </body>
 
 </html>

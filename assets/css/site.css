@@ -499,6 +499,124 @@ img {
   vertical-align: 1px;
 }
 
+/* Maintenance admin tool (admin.html) */
+.admin-form {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.admin-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.admin-field label {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  outline: 2px solid #ab0d0d;
+  outline-offset: 1px;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+button.button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.button.ghost {
+  background: transparent;
+  border-color: #5f6368;
+  color: #3c4043;
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.admin-note {
+  margin: 0.8rem 0 0;
+  color: #5f6368;
+  font-size: 0.92rem;
+}
+
+.admin-out {
+  margin: 1rem 0 0;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #202124;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.admin-out.is-ok {
+  border-color: #1e7a34;
+  background: #f2fbf4;
+  color: #145c26;
+}
+
+.admin-out.is-error {
+  border-color: #ab0d0d;
+  background: #fdf2f2;
+  color: #ab0d0d;
+}
+
+.admin-details {
+  margin-top: 1.2rem;
+}
+
+.admin-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #ab0d0d;
+}
+
+.status-pill.is-on {
+  background: #fdecec;
+  color: #ab0d0d;
+}
+
+.status-pill.is-off {
+  background: #e8f5e9;
+  color: #1e7a34;
+}
+
+/* An author rule such as .admin-field { display: grid } outranks the user-agent
+   [hidden] rule, so make sure [hidden] keeps winning. */
+[hidden] {
+  display: none !important;
+}
+
 @media (max-width: 760px) {
   .nav-wrap,
   .footer-inner {
