@@ -11,9 +11,9 @@
  *   updated when this file was last written
  */
 window.SITE_MAINTENANCE = {
-  active: false,
-  until: null,
+  active: true,
+  until: "2026-10-12T15:43:22.445Z",
   message: "",
-  by: "",
-  updated: null
+  by: "unknownpioneer",
+  updated: "2026-10-12T14:43:22.444Z"
 };
