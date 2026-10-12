@@ -3,8 +3,10 @@
  *
  * Access control is GitHub's, not this page's. The user supplies a fine-grained
  * personal access token that must grant "Contents: Read and write" on this
- * repository. The token is kept in this browser's localStorage only, is sent to
- * api.github.com and nowhere else, and is never written into the repository.
+ * repository. The token is held in sessionStorage for the life of the tab, and in
+ * localStorage only if the admin explicitly opts in (and even then for no longer
+ * than MAX_TOKEN_AGE_MS). It is sent only to api.github.com, never written into the
+ * repository, and never left sitting in the DOM longer than it takes to submit it.
  *
  * This page deliberately does NOT load assets/js/maintenance.js, and that guard
  * exempts admin.html, so an admin can always reach the tool to switch the site
@@ -20,6 +22,10 @@
   var STATE_PATH = "assets/js/maintenance-state.js";
   var API = "https://api.github.com";
   var TOKEN_KEY = "beufk_admin_token";
+  var TOKEN_STAMP_KEY = "beufk_admin_token_stamp";
+  // An opted-in token on disk is discarded after this long, so a forgotten one
+  // does not linger in the browser indefinitely.
+  var MAX_TOKEN_AGE_MS = 12 * 3600 * 1000;
 
   // Keep byte-identical to the header of assets/js/maintenance-state.js: the
   // whole file is rewritten on every switch, so this text is what lands in it.
@@ -70,24 +76,99 @@
   }
 
   // ---------------------------------------------------------------- token
-  function getToken() {
+  // Storage policy: sessionStorage always (dies with the tab), localStorage only
+  // on explicit opt-in and never beyond MAX_TOKEN_AGE_MS.
+  function readStore(store, key) {
     try {
-      return localStorage.getItem(TOKEN_KEY) || "";
+      return store.getItem(key) || "";
     } catch (e) {
       return "";
     }
   }
 
-  function storeToken(value) {
+  function writeStore(store, key, value) {
     try {
       if (value) {
-        localStorage.setItem(TOKEN_KEY, value);
+        store.setItem(key, value);
       } else {
-        localStorage.removeItem(TOKEN_KEY);
+        store.removeItem(key);
       }
     } catch (e) {
-      /* storage unavailable (private mode): the token just will not persist */
+      /* storage unavailable (private mode): the token simply will not persist */
     }
+  }
+
+  function clearStoredToken() {
+    writeStore(sessionStorage, TOKEN_KEY, "");
+    writeStore(localStorage, TOKEN_KEY, "");
+    writeStore(localStorage, TOKEN_STAMP_KEY, "");
+  }
+
+  function getToken() {
+    var session = readStore(sessionStorage, TOKEN_KEY);
+    if (session) {
+      return session;
+    }
+
+    var persistent = readStore(localStorage, TOKEN_KEY);
+    if (!persistent) {
+      return "";
+    }
+
+    var stamp = parseInt(readStore(localStorage, TOKEN_STAMP_KEY), 10);
+    if (!isNaN(stamp) && Date.now() - stamp < MAX_TOKEN_AGE_MS) {
+      return persistent;
+    }
+
+    // Expired: drop it rather than leave a stale credential on disk.
+    writeStore(localStorage, TOKEN_KEY, "");
+    writeStore(localStorage, TOKEN_STAMP_KEY, "");
+    return "";
+  }
+
+  function storeToken(value, keepOnDevice) {
+    if (!value) {
+      clearStoredToken();
+      return;
+    }
+    writeStore(sessionStorage, TOKEN_KEY, value);
+    if (keepOnDevice) {
+      writeStore(localStorage, TOKEN_KEY, value);
+      writeStore(localStorage, TOKEN_STAMP_KEY, String(Date.now()));
+    } else {
+      writeStore(localStorage, TOKEN_KEY, "");
+      writeStore(localStorage, TOKEN_STAMP_KEY, "");
+    }
+  }
+
+  /**
+   * Returns "" when the value looks like a GitHub token, otherwise a message
+   * explaining why it does not. These are GitHub's current prefixes; add new ones
+   * here if another format appears.
+   */
+  function tokenProblem(value) {
+    if (!value) {
+      return "Enter a token first.";
+    }
+    if (value.length < 20 || !/^(github_pat_|ghp_|gho_|ghu_|ghs_)[A-Za-z0-9_]+$/.test(value)) {
+      return (
+        "That does not look like a GitHub token. Expected a github_pat_ fine-grained " +
+        "token (or ghp_/gho_/ghu_/ghs_). Nothing was saved."
+      );
+    }
+    return "";
+  }
+
+  /**
+   * Strips control characters and the Unicode line separators that would break the
+   * line-oriented format of the switch file, collapses whitespace, caps the length.
+   */
+  function cleanText(value, maxLength) {
+    return String(value == null ? "" : value)
+      .replace(/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, maxLength);
   }
 
   // ------------------------------------------------------------ github api
@@ -304,7 +385,7 @@
 
   function currentFormState(isActive) {
     var now = new Date().toISOString();
-    var by = $("byInput").value.trim() || "admin";
+    var by = cleanText($("byInput").value, 60) || "admin";
     if (!isActive) {
       return { active: false, until: null, message: "", by: by, updated: now };
     }
@@ -313,7 +394,7 @@
     return {
       active: true,
       until: until,
-      message: $("messageInput").value.trim(),
+      message: cleanText($("messageInput").value, 200),
       by: by,
       updated: now,
     };
@@ -386,7 +467,24 @@
   function checkToken() {
     var out = $("tokenOut");
     clearOutput(out);
-    storeToken($("tokenInput").value.trim());
+
+    var typed = $("tokenInput").value.trim();
+    if (typed) {
+      var problem = tokenProblem(typed);
+      if (problem) {
+        setOutput(out, problem, "error");
+        return;
+      }
+      storeToken(typed, $("tokenKeep").checked);
+      // Do not leave the secret sitting in the DOM.
+      $("tokenInput").value = "";
+    }
+
+    if (!getToken()) {
+      setOutput(out, "No token is stored. Paste one above, then press 'Check access'.", "error");
+      return;
+    }
+
     withButtonsDisabled(true);
     setOutput(out, "Checking the token against api.github.com...");
 
@@ -429,23 +527,48 @@
 
   // ------------------------------------------------------------------- init
   function init() {
+    // GitHub Pages cannot send a frame-ancestors header and meta CSP ignores it,
+    // so refuse to operate inside a frame. This blocks clickjacking the toggle.
+    if (window.top !== window.self) {
+      document.body.textContent = "This administration page cannot be embedded in a frame.";
+      return;
+    }
+
     $("scheduleText").textContent =
       "Every " +
       WEEKDAY_NAMES[4] +
       ", 08:00-09:00 UTC+8 (always on, independent of this switch).";
 
-    $("tokenInput").value = getToken();
+    // Never prefill the field: that would place the secret in the DOM on every load.
     if (getToken()) {
-      setOutput($("tokenOut"), "A token is stored in this browser. Press 'Check access' to validate it.");
+      setOutput(
+        $("tokenOut"),
+        "A token is stored for this origin. Press 'Check access' to validate it."
+      );
     }
 
     $("tokenSave").addEventListener("click", function () {
-      storeToken($("tokenInput").value.trim());
-      setOutput($("tokenOut"), "Token saved in this browser's localStorage.", "ok");
+      var typed = $("tokenInput").value.trim();
+      var problem = tokenProblem(typed);
+      if (problem) {
+        setOutput($("tokenOut"), problem, "error");
+        return;
+      }
+      storeToken(typed, $("tokenKeep").checked);
+      $("tokenInput").value = "";
+      setOutput(
+        $("tokenOut"),
+        $("tokenKeep").checked
+          ? "Token saved on this device; it will be discarded automatically after " +
+              Math.round(MAX_TOKEN_AGE_MS / 3600000) +
+              " hours."
+          : "Token saved for this tab only; it is discarded when the tab closes.",
+        "ok"
+      );
     });
 
     $("tokenClear").addEventListener("click", function () {
-      storeToken("");
+      clearStoredToken();
       $("tokenInput").value = "";
       setOutput($("tokenOut"), "Token removed from this browser.", "ok");
       refreshStatus(false);
