@@ -15,5 +15,5 @@ window.SITE_MAINTENANCE = {
   until: null,
   message: "",
   by: "admin",
-  updated: "2026-10-12T14:57:27.125Z"
+  updated: "2026-10-12T15:01:18.396Z"
 };
