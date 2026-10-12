@@ -1,0 +1,17 @@
+# Local working directories that are not part of the published site, so that a
+# stray `git add .` cannot sweep them into the repository.
+_szu_review/
+
+# Never commit credentials. The admin tool keeps its token in the browser and
+# nothing writes one to disk, so these patterns are only a backstop.
+.env
+.env.*
+*.token
+*.pem
+*.key
+
+# Scratch output from tooling
+*.patch
+*.bundle
+*.orig
+*.rej
