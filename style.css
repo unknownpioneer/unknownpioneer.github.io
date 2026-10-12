@@ -172,18 +172,6 @@ header {
     cursor: pointer;
 }
 
-#myDialog {
-    background-color: var(--background-color);
-    position: fixed;
-    width: max-content;
-    height: max-content;
-    z-index: 99999;
-    color: var(--primary-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-}
-
 footer {
     background-color: var(--header-color);
     border: 1px solid var(--border-color);
