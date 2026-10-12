@@ -1,109 +1,167 @@
+---
+title: Archive
+---
 <!DOCTYPE html>
-<!-- 若要添加标题，请添加 h4。 -->
-<html lang="zh-CN">
+<!-- To add an entry, copy one <li class="record-entry"> block: a <time class="record-date">
+     followed by a <div class="record-body">. Put several same-day items in one entry as a nested <ul>. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archive | BEUFK</title>
+    <meta
+      name="description"
+      content="The daily record of BEUFK's site: new articles, announcements, and personal milestones."
+    />
+    <link rel="icon" href="image/ME.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script src="assets/js/site.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand" aria-label="Site brand">
+          <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Archive</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEUFK's Daily Record</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="icon" href="image/ME.png" type="image/x-icon">
-    <noscript>
-        <meta http-equiv="Refresh" content="0; URL=403.html">
-    </noscript>
-</head>
-
-<body translate="no">
-    <script src="maintain.js"></script>
-
-    <main>
-        <header>
-            <h1>Daily Record</h1>
-        </header>
-
-        <nav aria-label="Main navigation">
-            <a href="index.html">Go back to Home</a>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/downloads.html">Downloads</a>
+          <a href="record.html">Archive</a>
         </nav>
+      </div>
+    </header>
 
-        <section>
-            <header>
-                <h4><time datetime="2023-07-02">2023/07/02</time></h4>
-            </header>
-            <p><em>New article:</em> <a href="blog/article_new_feature.html" title="blog">The introduction of the CloudDisk.</a></p>
-        </section>
+    <main class="container page-main">
+      <section class="page-card">
+        <p class="eyebrow">Timeline</p>
+        <h2>Daily record</h2>
+        <p>A running log of new articles, site changes, and personal milestones, newest first.</p>
 
-        <section>
-            <header>
-                <h4><time datetime="2023-05-01">2023/05/01</time></h4>
-            </header>
-            <p><em>NEW ANNOUNCEMENT:</em> <a href="blog/article_enable_javascript.html" title="announcement">Newest Policy: Enable the JavaScript &amp; Localization Project</a></p>
-        </section>
+        {%- assign better_performance = site.posts | where: "title", "Better Performance" | first -%}
 
-        <section>
-            <header>
-                <h4><time datetime="2023-05-01">2023/05/01</time></h4>
-            </header>
-            <p><em>New article:</em> <a href="blog/article_javascript_come.html" title="blog">Javascript's coming up!</a></p>
-        </section>
+        <ol class="record-list">
+          <li class="record-entry">
+            <time class="record-date" datetime="2026-10-11">2026/10/11</time>
+            <div class="record-body">
+              <p>
+                <span class="record-tag">New article</span>
+                {% if better_performance %}<a href="{{ better_performance.url | relative_url }}">{{ better_performance.title }}</a>{% else %}Better Performance{% endif %}
+              </p>
+            </div>
+          </li>
 
-        <section>
-            <header>
-                <h4><time datetime="2023-04-30">2023/04/30</time></h4>
-            </header>
-            <p><em>New article:</em> <a href="blog/article_what_is_it.html" title="blog">Declaration</a></p>
-        </section>
+          <li class="record-entry">
+            <time class="record-date" datetime="2023-12-16">2023/12/16</time>
+            <div class="record-body">
+              <p>
+                <span class="record-tag">New article</span>
+                <a href="blog/article_actor_dead.html">Male Actor Found Dead In His Home</a>
+              </p>
+            </div>
+          </li>
 
-        <section>
-            <header>
-                <h4><time datetime="2023-04-30">2023/04/30</time></h4>
-            </header>
-            <p><em>New article:</em> <a href="blog/article_new_expectation.html" title="blog">Recent Change Log</a></p>
-        </section>
+          <li class="record-entry">
+            <time class="record-date" datetime="2023-08-31">2023/08/31</time>
+            <div class="record-body">
+              <p>
+                <span class="record-tag">New article</span>
+                <a href="blog/article_embark_new.html">Embarking On New Journey - 3-year struggling coming up</a>
+              </p>
+            </div>
+          </li>
 
-        <section>
-            <header>
-                <h4><time datetime="2023-04-22">2023/04/22</time></h4>
-            </header>
-            <p>体育考试已经结束，+70.</p>
-            <p><a href="http://jyj.gz.gov.cn/yw/jyyw/content/post_8927399.html" title="广州体育中考今日开考！稳中取胜，广州学子向前冲！">更多信息，请点击这里。</a></p>
-        </section>
+          <li class="record-entry">
+            <time class="record-date" datetime="2023-07-02">2023/07/02</time>
+            <div class="record-body">
+              <p>
+                <span class="record-tag">New article</span>
+                <a href="blog/article_new_feature.html">The introduction of the CloudDisk.</a>
+              </p>
+            </div>
+          </li>
 
-        <section>
-            <header>
-                <h4><time datetime="2022-10-01">2022/10/1</time></h4>
-            </header>
-            <p><em>New article:</em> <a href="blog/article_review_orwell.html">Review: How do I think of the Orwell? (Brief Review)</a></p>
-        </section>
+          <li class="record-entry">
+            <time class="record-date" datetime="2023-05-01">2023/05/01</time>
+            <div class="record-body">
+              <ul>
+                <li>
+                  <span class="record-tag">Announcement</span>
+                  <a href="blog/article_enable_javascript.html">Newest Policy: Enable the JavaScript &amp; Localization Project</a>
+                </li>
+                <li>
+                  <span class="record-tag">New article</span>
+                  <a href="blog/article_javascript_come.html">Javascript's coming up!</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="record-entry">
+            <time class="record-date" datetime="2023-04-30">2023/04/30</time>
+            <div class="record-body">
+              <ul>
+                <li>
+                  <span class="record-tag">New article</span>
+                  <a href="blog/article_what_is_it.html">Declaration</a>
+                </li>
+                <li>
+                  <span class="record-tag">New article</span>
+                  <a href="blog/article_new_expectation.html">Recent Change Log</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="record-entry">
+            <time class="record-date" datetime="2023-04-22">2023/04/22</time>
+            <div class="record-body">
+              <p><span class="record-tag">Note</span> <span lang="zh-CN">体育考试已经结束，+70.</span></p>
+              <p lang="zh-CN">
+                <a
+                  href="http://jyj.gz.gov.cn/yw/jyyw/content/post_8927399.html"
+                  title="广州体育中考今日开考！稳中取胜，广州学子向前冲！"
+                  >更多信息，请点击这里。</a
+                >
+              </p>
+            </div>
+          </li>
+
+          <li class="record-entry">
+            <time class="record-date" datetime="2022-10-01">2022/10/01</time>
+            <div class="record-body">
+              <p>
+                <span class="record-tag">New article</span>
+                <a href="blog/article_review_orwell.html">Review: How do I think of the Orwell? (Brief Review)</a>
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
     </main>
 
-    <footer>
-        <h6>该页面由 BEUFK 创建并进行更新维护。</h6>
-        <h6>电子邮箱地址：<a href="mailto:scratchwiki@outlook.com">scratchwiki@outlook.com</a></h6>
-        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" id="centerneed">
-            <a property="dct:title" rel="cc:attributionURL" href="https://unknownpioneer.github.io" target="_blank">unknownpioneer.github.io and all images/resources under this domain</a>
-            by
-            <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/unknownpioneer" target="_blank">BEUFK</a>
-            is licensed under
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0
-                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt="CC icon">
-                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt="BY icon">
-                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt="NC icon">
-                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt="SA icon">
-            </a>
-        </p>
-        <p id="additionallink">
-            See also:&nbsp;
-            <a href="https://github.com/unknownpioneer" title="GitHub" target="_blank" rel="noopener noreferrer">
-                <img src="image/github.png" alt="GitHub" width="30" height="30">
-            </a>&nbsp;
-            <a href="https://steamcommunity.com/id/BEUFK/" title="Steam" target="_blank" rel="noopener noreferrer">
-                <img src="image/steam.png" alt="Steam" width="30" height="30">
-            </a>&nbsp;
-            <a href="https://space.bilibili.com/414768974" title="Bilibili" target="_blank" rel="noopener noreferrer">
-                <img src="image/bilibili.png" alt="Bilibili" width="30" height="30">
-            </a>
-        </p>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> BEUFK</p>
+        <div class="footer-links">
+          <a href="mailto:scratchwiki@outlook.com">Email</a>
+          <a href="https://github.com/unknownpioneer" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://steamcommunity.com/id/BEUFK/" target="_blank" rel="noopener noreferrer">Steam</a>
+          <a href="https://space.bilibili.com/414768974" target="_blank" rel="noopener noreferrer">Bilibili</a>
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="license noopener noreferrer"
+            >CC BY-NC-SA 4.0</a
+          >
+        </div>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>
