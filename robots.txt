@@ -3,7 +3,9 @@ Disallow: /image/
 Disallow: /font/
 Disallow: /.vscode/
 Disallow: /.github/workflows/
-Disallow: .css$
-Disallow: .md$
+Disallow: /*.css$
+Disallow: /*.md$
 Disallow: /admin.html
+
+Sitemap: https://unknownpioneer.github.io/sitemap.xml
 

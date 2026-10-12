@@ -18,14 +18,13 @@ the site.
 | `_posts/` | Markdown posts, rendered through `_layouts/post.html` |
 | `admin.html` + `assets/js/admin.js` | Maintenance admin tool (unlisted) |
 | `nope.html` | The maintenance page visitors are sent to |
-| `assets/css/site.css` | Current stylesheet |
+| `assets/css/site.css` | The stylesheet, used by every page |
 | `assets/js/` | `site.js`, plus the maintenance guard and switch |
-| `style.css` | Legacy stylesheet, still used by the older pages |
 | `image/`, `font/`, `disk/` | Media and downloadable files |
 | `403.html`, `acknowledgement.html`, `personality.html`, `statistics.html` | Older pages, not in the nav |
 
-Two stylesheets coexist. Pages in the nav and in `blog/` use `assets/css/site.css`;
-the older pages still use `style.css`. Migrating the remainder is ongoing.
+One stylesheet drives every page. The legacy `style.css` was retired once the last
+four pages moved onto the shared design.
 
 `sitemap.xml` is hand-maintained and its `lastmod` dates are stale.
 

@@ -12,19 +12,16 @@ category: "Announcement"
 
 ### About JavaScript
 
-Now we require users to enable JavaScript in their browser. Otherwise, they will be refused access to the website.
+*Updated 2026/10/12:* this section used to announce a hard requirement. That policy has been dropped. Visitors with JavaScript switched off now get a small notice instead of being turned away, and every page still reads without it.
 
-#### Why do we do that?
+Two things do need JavaScript, and only two:
 
-Because, undeniably, JavaScript plays an important role in website-building, and some incoming services require JavaScript. Some users may disable JavaScript for security reasons. But I'm fully confident that our website is safe enough to enable it. You can inspect the GitHub repository if you doubt its safety.
+- the countdown on the maintenance page;
+- the maintenance admin tool.
 
-#### When will you guys implement them?
+#### Why did we ask in the first place?
 
-Very soon.
-
-#### You mean... all the pages?
-
-Yes. All the pages, including but not limited to `index.html` and `record.html`. Further added blog articles will also have this requirement.
+Because, undeniably, JavaScript plays an important role in website-building, and some incoming services require it. Some users disable JavaScript for security reasons, which is a perfectly reasonable choice — the site now respects it. The GitHub repository is public if you want to inspect what the site actually runs.
 
 ### Localization Plan
 

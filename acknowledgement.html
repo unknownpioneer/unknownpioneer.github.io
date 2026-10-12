@@ -1,65 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-<head>
-    <title>致谢</title>
-    <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>致谢 | BEUFK</title>
+    <link rel="icon" href="image/ME.png" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/site.css" />
     <script src="assets/js/maintenance-state.js"></script>
     <script src="assets/js/maintenance.js"></script>
-    <!--必要的两行代码！！！！！-->
-    <link rel="icon" href="image/ME.png" type="image/x-icon">
+    <script src="assets/js/site.js" defer></script>
+  </head>
+  <body>
+    <noscript>
+      <div class="js-notice">
+        <details open>
+          <summary>JavaScript is switched off</summary>
+          <p>
+            Everything here still reads fine without it. Only the extras &mdash; the maintenance
+            countdown and the admin page &mdash; need JavaScript.
+          </p>
+        </details>
+      </div>
+    </noscript>
 
-</head>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <div class="brand" aria-label="Site brand">
+          <img src="image/ME.png" alt="BEUFK logo" class="brand-mark" />
+          <div>
+            <p class="eyebrow">Acknowledgement</p>
+            <h1>BEUFK</h1>
+          </div>
+        </div>
 
-<body class="success">
-  <noscript>
-    <div class="js-notice">
-      <details open>
-        <summary>JavaScript is switched off</summary>
-        <p>
-          Everything here still reads fine without it. Only the extras &mdash; the maintenance
-          countdown and the admin page &mdash; need JavaScript.
-        </p>
-      </details>
-    </div>
-  </noscript>
-    <img src="image/acknowledgement.png" width="100" height="100" alt="thank!">
-    <h1>致谢</h1>
-    <p>
-        在此，我向以下人士（或软件、硬件）致以最诚挚的感谢：
-    </p>
-    <ul>
-        <li>Team Fortress Wiki: <a href="https://wiki.teamfortress.com" title="teamfortress wiki">Here</a>.</li>
-        <li>Team Fortress 2 Official website: <a href="https://www.teamfortress.com/artwork.php"
-                title="artwork in tf2">here</a>.</li>
-        <li>Github: Providing website platform.</li>
-        <li>Everyone who support me.</li>
-    </ul>
-    <footer>
-        <h6>该页面由BEUFK创建并进行更新维护。</h6>
-        <h6>电子邮箱地址：<a href="mailto:scratchwiki@outlook.com">scratchwiki@outlook.com</a></h6>
-        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" id="centerneed"><a property="dct:title"
-                rel="cc:attributionURL noopener noreferrer" href="https://unknownpioneer.github.io" target="_blank">unknwonpioneer.github.io
-                and all
-                images/resources under this domain</a> by <a rel="cc:attributionURL dct:creator noopener noreferrer"
-                property="cc:attributionName" href="https://github.com/unknownpioneer" target="_blank">BEUFK</a> is
-            licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank"
-                rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img
-                    style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"
-                    src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
-        <p id="additionallink">See also: &nbsp;<a href="https://www1.szu.edu.cn/" title="深圳大学内部网" target="_blank" rel="noopener noreferrer" lang="zh-CN">深圳大学内部网</a>&nbsp;<a href="https://github.com/unknownpioneer" title="Github"
-                rel="noopener noreferrer" target="_blank"><img src="../image/github.png" alt="the logo of the github" width=30 height=30></a>&nbsp;<a
-                href="https://steamcommunity.com/id/BEUFK/" title="Steam" rel="noopener noreferrer" target="_blank"><img src="../image/steam.png"
-                    alt="steam icon" width="30" height="30"></a>&nbsp;<a href="https://space.bilibili.com/414768974"
-                title="Bilibili" rel="noopener noreferrer" target="_blank"><img src="../image/bilibili.png" width="30" height="30"></a></p>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="pages/about.html">About</a>
+          <a href="pages/blog.html">Blog</a>
+          <a href="pages/downloads.html">Downloads</a>
+          <a href="record.html">Archive</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="page-card">
+        <img src="image/acknowledgement.png" alt="thank!" width="100" height="100" />
+        <h2>致谢</h2>
+        <p>在此，我向以下人士（或软件、硬件）致以最诚挚的感谢：</p>
+        <ul class="link-list">
+          <li>Team Fortress Wiki: <a href="https://wiki.teamfortress.com" title="teamfortress wiki">Here</a>.</li>
+          <li>
+            Team Fortress 2 Official website:
+            <a href="https://www.teamfortress.com/artwork.php" title="artwork in tf2">here</a>.
+          </li>
+          <li>Github: Providing website platform.</li>
+          <li>Everyone who support me.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> BEUFK</p>
+        <div class="footer-links">
+          <a href="https://www1.szu.edu.cn/" target="_blank" rel="noopener noreferrer" lang="zh-CN">深圳大学内部网</a>
+          <a href="mailto:scratchwiki@outlook.com">Email</a>
+          <a href="https://github.com/unknownpioneer" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://steamcommunity.com/id/BEUFK/" target="_blank" rel="noopener noreferrer">Steam</a>
+          <a href="https://space.bilibili.com/414768974" target="_blank" rel="noopener noreferrer">Bilibili</a>
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="license noopener noreferrer"
+            >CC BY-NC-SA 4.0</a
+          >
+        </div>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>
