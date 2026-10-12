@@ -12,8 +12,8 @@
  */
 window.SITE_MAINTENANCE = {
   active: true,
-  until: "2026-10-12T15:43:22.445Z",
-  message: "",
-  by: "unknownpioneer",
-  updated: "2026-10-12T14:43:22.444Z"
+  until: "2026-10-19T13:35:06.525Z",
+  message: "The website is currently undergoing a series of testing.",
+  by: "admin",
+  updated: "2026-10-12T14:55:06.525Z"
 };
