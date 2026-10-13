@@ -42,8 +42,10 @@ appearance of access control.
 Tokens are supplied by each admin individually and sent only to `api.github.com`.
 They are never written into the repository. `admin.html` loads no third-party
 scripts and is served with a strict `Content-Security-Policy`
-(`default-src 'none'; script-src 'self'; connect-src https://api.github.com`), so
-even a compromised page has no route to send a token anywhere except GitHub.
+(`default-src 'none'; script-src 'self'; connect-src 'self'
+https://api.github.com`). The `'self'` entry exists for the read-only checks
+described below: it lets the page talk to its own static host, which has no endpoint
+that could receive a token, leaving GitHub as the only real destination.
 
 Storage is deliberately minimal:
 
@@ -56,6 +58,12 @@ Storage is deliberately minimal:
   rejected rather than saved.
 - The message and name fields are stripped of control characters and Unicode line
   separators before being written into the switch file.
+
+The tool also runs read-only checks: whether the maintenance guard and the
+maintenance page are reachable from the origin serving the tool, whether the served
+switch matches the branch, and the recent commit history for the switch file. Those
+only read — same-origin fetches of the site's own files, plus a read through the
+API. They do not widen what the tool can write, which is still the one switch file.
 
 ### Things to be aware of
 
