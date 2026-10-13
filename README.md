@@ -84,11 +84,17 @@ itself.
 3. Choose a duration, optionally add a message and your name, then press
    **Enable maintenance**. The page commits `assets/js/maintenance-state.js`
    straight through the GitHub Contents API; **End maintenance now** reverses it.
+4. Press **Run checks** for the read-only status panel: whether the guard and
+   `nope.html` are reachable, whether the served switch matches the branch yet, the
+   next weekly window, and the recent commits touching the switch. Enabling
+   maintenance is refused outright if `nope.html` is unreachable, since that would
+   send every visitor to a 404.
 
 The page carries a strict `Content-Security-Policy` limiting it to same-origin
 assets and `api.github.com`, refuses to run inside a frame, validates the token's
 shape before storing it, and strips control characters out of the message and name
-fields. See [SECURITY.md](SECURITY.md) for what that does and does not buy you.
+fields. The checks only read, so they widen nothing. See [SECURITY.md](SECURITY.md)
+for what that does and does not buy you.
 
 The tool commits to `main`, so the maintenance guard must be deployed there for the
 switch to have any effect.

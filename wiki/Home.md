@@ -141,9 +141,26 @@ have any effect.
 - **Forget token** wipes it from both stores.
 
 The page is additionally served with a strict `Content-Security-Policy`
-(`default-src 'none'; connect-src https://api.github.com`), a `no-referrer` policy, and
-refuses to run inside a frame. See [SECURITY.md](https://github.com/unknownpioneer/unknownpioneer.github.io/blob/main/SECURITY.md)
+(`default-src 'none'; connect-src 'self' https://api.github.com`), a `no-referrer`
+policy, and refuses to run inside a frame. See
+[SECURITY.md](https://github.com/unknownpioneer/unknownpioneer.github.io/blob/main/SECURITY.md)
 for the full model and its limits.
+
+### Read-only checks
+
+Below the controls is a panel that reads without writing anything:
+
+- whether the maintenance guard and `nope.html` are **reachable** from the origin
+  serving the tool — enabling maintenance is **refused** when `nope.html` is missing,
+  since that would send every visitor to a 404;
+- whether the switch served to visitors **matches the branch**, which answers "has my
+  change gone live yet?" instead of guessing at the propagation delay;
+- the **next weekly window**, computed in UTC+8 and shown in your own time zone;
+- the **recent commits** touching the switch file, which is the audit trail.
+
+The tool also cross-checks the window constants against the guard it actually
+fetches, so the copy in this page drifting out of step with `maintenance.js` is
+reported rather than silently believed.
 
 ## The JavaScript policy
 

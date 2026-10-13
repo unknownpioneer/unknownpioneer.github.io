@@ -27,6 +27,12 @@
   // does not linger in the browser indefinitely.
   var MAX_TOKEN_AGE_MS = 12 * 3600 * 1000;
 
+  // The weekly window lives in assets/js/maintenance.js. It is repeated here only so
+  // the status panel can work out the next occurrence; runChecks() fetches the
+  // deployed guard and compares the two, so drift is reported rather than silently
+  // misleading.
+  var WINDOW = { weekday: 4, startHour: 8, endHour: 9, utcOffset: 8 };
+
   // Keep byte-identical to the header of assets/js/maintenance-state.js: the
   // whole file is rewritten on every switch, so this text is what lands in it.
   var FILE_HEADER = [
@@ -418,9 +424,312 @@
     $("previewOut").hidden = false;
   }
 
+  // ------------------------------------------------------- read-only checks
+  // Every check below only reads: the guard and the maintenance page are fetched
+  // same-origin, and the audit trail is a read from the GitHub API. None of it
+  // widens what the tool can write.
+  function stamp(url) {
+    return url + (url.indexOf("?") < 0 ? "?" : "&") + "_=" + Date.now();
+  }
+
+  function fetchGuard() {
+    return fetch(stamp("assets/js/maintenance.js"), { cache: "no-store" }).then(function (res) {
+      if (!res.ok) {
+        throw new Error("HTTP " + res.status);
+      }
+      return res.text();
+    });
+  }
+
+  function headOk(path) {
+    return fetch(stamp(path), { method: "HEAD", cache: "no-store" }).then(
+      function (res) {
+        return res.ok;
+      },
+      function () {
+        return false;
+      }
+    );
+  }
+
+  function fetchLiveState() {
+    return fetch(stamp("assets/js/maintenance-state.js"), { cache: "no-store" }).then(
+      function (res) {
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+        return res.text();
+      }
+    );
+  }
+
+  /**
+   * Pulls the window constants out of a copy of maintenance.js. Returns null when
+   * they cannot be found, rather than guessing.
+   */
+  function parseGuardWindow(source) {
+    function value(name) {
+      var match = new RegExp("WINDOW_" + name + "\\s*=\\s*(-?\\d+)").exec(source);
+      return match ? parseInt(match[1], 10) : null;
+    }
+    var weekday = value("WEEKDAY");
+    var start = value("START_HOUR");
+    var end = value("END_HOUR");
+    var offset = value("UTC_OFFSET");
+    if (weekday === null || start === null || end === null || offset === null) {
+      return null;
+    }
+    return { weekday: weekday, startHour: start, endHour: end, utcOffset: offset };
+  }
+
+  function pad2(n) {
+    return (n < 10 ? "0" : "") + n;
+  }
+
+  function describeWindow(win) {
+    return (
+      WEEKDAY_NAMES[win.weekday] +
+      "s, " +
+      pad2(win.startHour) +
+      ":00-" +
+      pad2(win.endHour) +
+      ":00 UTC+" +
+      win.utcOffset
+    );
+  }
+
+  /**
+   * The next instant the weekly window opens. Computed in the window's own offset
+   * using UTC arithmetic only, so the visitor's time zone and DST cannot shift it.
+   */
+  function nextWindowStart(now) {
+    var offsetMs = WINDOW.utcOffset * 3600000;
+    var wallMs = now.getTime() + offsetMs;
+    var wall = new Date(wallMs);
+    var delta = (WINDOW.weekday - wall.getUTCDay() + 7) % 7;
+    var startWallMs = Date.UTC(
+      wall.getUTCFullYear(),
+      wall.getUTCMonth(),
+      wall.getUTCDate() + delta,
+      WINDOW.startHour,
+      0,
+      0,
+      0
+    );
+    if (startWallMs <= wallMs) {
+      startWallMs += 7 * 86400000;
+    }
+    return new Date(startWallMs - offsetMs);
+  }
+
+  /** Names of the switch fields whose values differ between two copies of the file. */
+  function stateDifferences(liveText, repoText) {
+    var differing = [];
+    ["active", "until", "by", "message", "updated"].forEach(function (field) {
+      if (String(pickField(liveText, field)) !== String(pickField(repoText, field))) {
+        differing.push(field);
+      }
+    });
+    return differing;
+  }
+
+  /** Are the guard and the maintenance page reachable from wherever this is served? */
+  function runPreflight() {
+    return Promise.all([
+      fetchGuard().then(
+        function () {
+          return true;
+        },
+        function () {
+          return false;
+        }
+      ),
+      headOk("nope.html"),
+    ]).then(function (results) {
+      return { guardOk: results[0], pageOk: results[1] };
+    });
+  }
+
+  function runChecks() {
+    var guardNode = $("checkGuard");
+    var pageNode = $("checkPage");
+    var liveNode = $("checkLive");
+    var out = $("checksOut");
+
+    clearOutput(out);
+    guardNode.textContent = "checking...";
+    pageNode.textContent = "checking...";
+    liveNode.textContent = "checking...";
+    withButtonsDisabled(true);
+
+    var guardText = "";
+    var liveText = "";
+    var guardOk = false;
+    var pageOk = false;
+
+    return fetchGuard()
+      .then(
+        function (text) {
+          guardText = text;
+          guardOk = true;
+        },
+        function () {
+          guardOk = false;
+        }
+      )
+      .then(function () {
+        return headOk("nope.html");
+      })
+      .then(function (ok) {
+        pageOk = ok;
+      })
+      .then(function () {
+        return fetchLiveState().then(
+          function (text) {
+            liveText = text;
+          },
+          function () {
+            liveText = "";
+          }
+        );
+      })
+      .then(function () {
+        return readStateFile().then(
+          function (current) {
+            return current.text;
+          },
+          function () {
+            return "";
+          }
+        );
+      })
+      .then(function (repoText) {
+        guardNode.textContent = guardOk ? "reachable" : "NOT reachable";
+        pageNode.textContent = pageOk ? "reachable" : "NOT reachable";
+
+        var lines = [];
+        if (!guardOk) {
+          lines.push("The maintenance guard is not reachable from this origin, so enabling");
+          lines.push("maintenance would have no effect until it is deployed here.");
+        }
+        if (!pageOk) {
+          lines.push("nope.html is not reachable. Enabling maintenance would send every visitor");
+          lines.push("to a missing page, which is why the tool refuses to do it.");
+        }
+
+        if (liveText && repoText) {
+          var differing = stateDifferences(liveText, repoText);
+          if (differing.length) {
+            liveNode.textContent = "NOT live yet (differs: " + differing.join(", ") + ")";
+            lines.push("The switch served here does not match " + BRANCH + " yet, so a change made");
+            lines.push("now will take a few minutes to appear for visitors.");
+          } else {
+            liveNode.textContent = "live (matches " + BRANCH + ")";
+          }
+        } else if (!liveText) {
+          liveNode.textContent = "could not read the served switch";
+        } else {
+          liveNode.textContent = "could not read " + BRANCH + " to compare";
+        }
+
+        var deployed = parseGuardWindow(guardText);
+        if (deployed) {
+          var same =
+            deployed.weekday === WINDOW.weekday &&
+            deployed.startHour === WINDOW.startHour &&
+            deployed.endHour === WINDOW.endHour &&
+            deployed.utcOffset === WINDOW.utcOffset;
+          if (!same) {
+            lines.push("WARNING: the deployed guard uses a different weekly window from this page:");
+            lines.push("  deployed  " + describeWindow(deployed));
+            lines.push("  this page " + describeWindow(WINDOW));
+          }
+        } else if (guardOk) {
+          lines.push("Could not read the window constants from the deployed guard, so they were");
+          lines.push("not cross-checked against this page.");
+        }
+
+        if (lines.length) {
+          setOutput(out, lines.join("\n"), pageOk && guardOk ? "ok" : "error");
+        } else {
+          setOutput(
+            out,
+            "All checks passed: the guard and the maintenance page are both reachable, and the " +
+              "switch matches " +
+              BRANCH +
+              ".",
+            "ok"
+          );
+        }
+
+        return loadAudit();
+      })
+      .catch(function (error) {
+        setOutput(out, "Checks failed: " + String(error.message || error), "error");
+      })
+      .then(function () {
+        withButtonsDisabled(false);
+      });
+  }
+
+  /** Read-only: the most recent commits that touched the switch file. */
+  function loadAudit() {
+    var list = $("auditList");
+    var out = $("auditOut");
+    clearOutput(out);
+
+    return api(
+      "GET",
+      "/repos/" +
+        OWNER +
+        "/" +
+        REPO +
+        "/commits?path=" +
+        encodeURIComponent(STATE_PATH) +
+        "&per_page=5"
+    )
+      .then(function (result) {
+        if (!result.ok) {
+          throw new Error(describeError(result));
+        }
+        var commits = result.data || [];
+        list.textContent = "";
+        if (!commits.length) {
+          var empty = document.createElement("li");
+          empty.textContent = "No commits touch this file yet.";
+          list.appendChild(empty);
+          return;
+        }
+        // Built with textContent throughout: commit messages are not trusted markup.
+        commits.forEach(function (entry) {
+          var item = document.createElement("li");
+          var title = document.createElement("strong");
+          title.textContent =
+            entry.commit && entry.commit.message
+              ? entry.commit.message.split("\n")[0]
+              : "(no message)";
+          var meta = document.createElement("div");
+          meta.className = "admin-note";
+          var date = entry.commit && entry.commit.author ? entry.commit.author.date : "";
+          var who = entry.author && entry.author.login ? entry.author.login : "unknown";
+          meta.textContent =
+            (entry.sha || "").slice(0, 7) +
+            " by " +
+            who +
+            (date ? " - " + new Date(date).toLocaleString() : "");
+          item.appendChild(title);
+          item.appendChild(meta);
+          list.appendChild(item);
+        });
+      })
+      .catch(function (error) {
+        setOutput(out, "Could not load the audit trail: " + String(error.message || error), "error");
+      });
+  }
+
   // -------------------------------------------------------------- behaviour
   function withButtonsDisabled(disabled) {
-    ["enableBtn", "disableBtn", "tokenCheck", "stateRefresh"].forEach(function (id) {
+    ["enableBtn", "disableBtn", "tokenCheck", "stateRefresh", "checksRun"].forEach(function (id) {
       $(id).disabled = disabled;
     });
   }
@@ -435,25 +744,49 @@
       ? "Enable maintenance mode until " + state.until + (state.by ? " (by " + state.by + ")" : "")
       : "End maintenance mode" + (state.by ? " (by " + state.by + ")" : "");
 
+    var notes = [];
+
+    // Pre-flight only when switching maintenance ON. Sending every visitor to a page
+    // that does not exist is the one failure worth refusing outright; a guard that is
+    // simply not deployed yet only deserves a warning, since an admin may be about to
+    // deploy it.
+    var ready = isActive
+      ? runPreflight().then(function (pre) {
+          if (!pre.pageOk) {
+            throw new Error(
+              "nope.html is not reachable from this origin, so visitors would be sent to a " +
+                "missing page. Nothing was committed."
+            );
+          }
+          if (!pre.guardOk) {
+            notes.push(
+              "Note: the maintenance guard is not reachable from this origin, so this may have " +
+                "no effect until it is deployed."
+            );
+          }
+        })
+      : Promise.resolve();
+
     setOutput(out, "Committing " + STATE_PATH + " to " + BRANCH + "...");
 
-    writeStateFile(state, commitMessage)
+    ready
+      .then(function () {
+        return writeStateFile(state, commitMessage);
+      })
       .then(function (data) {
         var sha = data.commit && data.commit.sha ? data.commit.sha.slice(0, 7) : "?";
-        setOutput(
-          out,
-          "Committed " +
-            sha +
-            " to " +
-            BRANCH +
-            ".\n" +
-            (isActive
-              ? "Maintenance is ON until " + formatInstant(state.until) + ".\n"
-              : "Maintenance is OFF.\n") +
-            "GitHub Pages rebuilds in about a minute, and browsers may hold the old\n" +
-            "file for a few more minutes, so allow ~10 minutes to reach everyone.",
-          "ok"
+        var lines = [];
+        lines.push("Committed " + sha + " to " + BRANCH + ".");
+        lines.push(
+          isActive
+            ? "Maintenance is ON until " + formatInstant(state.until) + "."
+            : "Maintenance is OFF."
         );
+        lines.push(
+          "GitHub Pages rebuilds in about a minute, and browsers may hold the old file a"
+        );
+        lines.push('little longer. Press "Run checks" to see when it goes live.');
+        setOutput(out, notes.concat(lines).join("\n"), "ok");
         return refreshStatus(false);
       })
       .catch(function (error) {
@@ -599,8 +932,19 @@
       runAction(false);
     });
 
+    $("checkWindow").textContent =
+      describeWindow(WINDOW) + " - next: " + nextWindowStart(new Date()).toLocaleString();
+    $("checkOrigin").textContent =
+      "Reachability checks run against " +
+      window.location.origin +
+      ", so they describe wherever this page is being served from.";
+    $("checksRun").addEventListener("click", function () {
+      runChecks();
+    });
+
     updatePreview();
     refreshStatus(false);
+    runChecks();
   }
 
   if (document.readyState === "loading") {

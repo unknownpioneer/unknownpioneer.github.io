@@ -8,7 +8,7 @@
          frame-ancestors is ignored in meta CSP; admin.js refuses to run framed. -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://api.github.com; base-uri 'none'; form-action 'none'"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' https://api.github.com; base-uri 'none'; form-action 'none'"
     />
     <meta name="referrer" content="no-referrer" />
     <title>Maintenance admin | BEUFK</title>
@@ -185,6 +185,41 @@
           <summary>Preview the file that will be committed</summary>
           <pre class="admin-out" id="previewOut"></pre>
         </details>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Read-only</p>
+          <h3>Site and deployment status</h3>
+        </div>
+
+        <ul class="meta-list">
+          <li><strong>Guard reachable:</strong> <span id="checkGuard">not checked</span></li>
+          <li><strong>Maintenance page:</strong> <span id="checkPage">not checked</span></li>
+          <li><strong>Switch live:</strong> <span id="checkLive">not checked</span></li>
+          <li><strong>Next weekly window:</strong> <span id="checkWindow">--</span></li>
+        </ul>
+
+        <p class="admin-note" id="checkOrigin">--</p>
+
+        <div class="admin-actions">
+          <button class="button secondary" type="button" id="checksRun">Run checks</button>
+        </div>
+
+        <div class="admin-out" id="checksOut" hidden></div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Audit trail</p>
+          <h3>Recent changes to the switch</h3>
+        </div>
+
+        <ul class="meta-list" id="auditList">
+          <li>Press <strong>Run checks</strong> to load the commit history.</li>
+        </ul>
+
+        <div class="admin-out" id="auditOut" hidden></div>
       </section>
     </main>
 
