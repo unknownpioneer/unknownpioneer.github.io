@@ -3,7 +3,7 @@ layout: post
 title: "Original Characters Setting"
 date: 2026-10-13
 author: "BEUFK"
-category: "Article"
+category: "Article/Character"
 ---
 
 ### Mason
