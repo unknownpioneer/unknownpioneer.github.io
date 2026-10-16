@@ -89,19 +89,19 @@ Control hosts (`baidu.com`, `qq.com`, `example.com`) were included throughout to
 
 ### Run A — six consecutive lookups
 
-```
-en.wikipedia.org   : 31.13.112.9  31.13.112.9  31.13.112.9  31.13.112.9  31.13.112.9  31.13.112.9
-zh.wikipedia.org   : 31.13.94.49  31.13.94.49  31.13.94.49  31.13.94.49  31.13.94.49  31.13.94.49
-wikipedia.org      : 31.13.94.49  31.13.94.49  31.13.94.49  31.13.94.49  31.13.94.49  31.13.94.49
-```
+| Hostname | Answers returned (all six identical) | Observed owner |
+| --- | --- | --- |
+| `en.wikipedia.org` | `31.13.112.9` ×6 | Meta (Facebook) |
+| `zh.wikipedia.org` | `31.13.94.49` ×6 | Meta (Facebook) |
+| `wikipedia.org` | `31.13.94.49` ×6 | Meta (Facebook) |
 
 ### Run B — four consecutive lookups, minutes later
 
-```
-wikipedia.org      : FAIL           31.13.68.169   31.13.68.169   31.13.68.169
-en.wikipedia.org   : 199.59.148.229 31.13.106.4    FAIL           FAIL
-zh.wikipedia.org   : 157.240.17.35  199.16.158.8   FAIL           199.59.148.229
-```
+| Hostname | Lookup 1 | Lookup 2 | Lookup 3 | Lookup 4 |
+| --- | --- | --- | --- | --- |
+| `wikipedia.org` | FAIL | `31.13.68.169` | `31.13.68.169` | `31.13.68.169` |
+| `en.wikipedia.org` | `199.59.148.229` | `31.13.106.4` | FAIL | FAIL |
+| `zh.wikipedia.org` | `157.240.17.35` | `199.16.158.8` | FAIL | `199.59.148.229` |
 
 The answer set is **not stable across runs** — the same hostname returns different forged addresses, and sometimes fails to resolve at all, within seconds of itself.
 

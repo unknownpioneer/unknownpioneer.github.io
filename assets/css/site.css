@@ -347,6 +347,22 @@ img {
   border-radius: 6px;
 }
 
+.article-body pre {
+  margin: 0 0 1.1rem;
+  padding: 0.85rem 1rem;
+  background: #f7f7f7;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.article-body pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
 .article-nav {
   margin-top: 1.4rem;
   padding-top: 1rem;
