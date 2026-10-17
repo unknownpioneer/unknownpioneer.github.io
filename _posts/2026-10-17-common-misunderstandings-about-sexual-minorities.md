@@ -159,7 +159,7 @@ gender recognition that does not require surgery. Same-sex couples sometimes use
 
 **Why this matters for students:** the absence of protection is not the absence of regulation. Rules
 about "public order and good morals" (公序良俗) in campus conduct codes can still be applied
-discretionarily — see the [SZU case study](szu-sexual-minority-friendliness-report.md).
+discretionarily.
 
 ---
 
