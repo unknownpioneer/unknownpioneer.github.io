@@ -264,8 +264,8 @@ Not a programme, just a gentle shape for six weeks:
 
 ## 14. Further reading
 
-- [Common misunderstandings about sexual minorities](_posts/common-misunderstandings-about-sexual-minorities.md) — the myth-busting companion
-- [A guide for LGBT college students in China](_posts/lgbt-college-guide-china-en.md) — practical campus survival
+- [Common misunderstandings about sexual minorities](common-misunderstandings-about-sexual-minorities.md) — the myth-busting companion
+- [A guide for LGBT college students in China](lgbt-college-guide-china-en.md) — practical campus survival
 - [RLE.wiki](https://rle.wiki/) · [MtF.wiki](https://mtf.wiki/) — Chinese-language community documentation
 
 *This is not therapy, medical advice or a diagnostic tool. If you are in crisis, contact a local
