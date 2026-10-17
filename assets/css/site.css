@@ -363,6 +363,35 @@ img {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 }
 
+.article-body table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid #dadce0;
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.article-body thead th {
+  background: #f7f7f7;
+  font-weight: 700;
+  border-bottom: 2px solid #c8c8c8;
+}
+
+.article-body tbody tr:nth-child(even) {
+  background: #fbfbfb;
+}
+
 .article-nav {
   margin-top: 1.4rem;
   padding-top: 1rem;
@@ -808,5 +837,10 @@ button.button {
 
   .article-gallery {
     grid-template-columns: 1fr;
+  }
+
+  .article-body th,
+  .article-body td {
+    padding: 0.45rem 0.5rem;
   }
 }
