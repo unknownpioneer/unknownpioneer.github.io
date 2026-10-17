@@ -6,6 +6,10 @@ author: "BEUFK"
 category: "Article"
 ---
 
+<figure>
+  <img src="{{ 'image/Exploring.webp' | relative_url }}" alt="Hunter holding a jacket embedded with Bi Flag" />
+</figure>
+
 ### A guide for anyone questioning their sexual orientation
 
 *For people who don't know yet — and for those who suspect something but aren't ready to name it.
