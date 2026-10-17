@@ -813,11 +813,187 @@ button.button {
   line-height: 1.5;
 }
 
+/* July seasonal popout (built by assets/js/site.js) */
+.july-popout {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 3vw, 2rem);
+}
+
+.july-popout-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 3, 3, 0.72);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.july-popout-card {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* Keyframes rather than transitions, so the greeting is fully visible even if
+   the browser never paints an intermediate frame. */
+.july-popout.is-open {
+  animation: july-popout-fade-in 0.3s ease both;
+}
+
+.july-popout.is-closing {
+  animation: july-popout-fade-out 0.28s ease both;
+}
+
+.july-popout.is-open .july-popout-card {
+  animation: july-popout-rise-in 0.38s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.july-popout.is-closing .july-popout-card {
+  animation: july-popout-rise-out 0.28s ease both;
+}
+
+@keyframes july-popout-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes july-popout-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes july-popout-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes july-popout-rise-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}
+
+/* Thin rainbow ribbon along the top edge, echoing the picture. */
+.july-popout-card::before {
+  content: "";
+  display: block;
+  height: 6px;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(
+    90deg,
+    #e53935,
+    #fb8c00,
+    #fdd835,
+    #43a047,
+    #1e88e5,
+    #8e24aa
+  );
+}
+
+.july-popout-figure {
+  margin: 0;
+  background: #f1f3f4;
+}
+
+.july-popout-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 563;
+  object-fit: cover;
+}
+
+.july-popout-body {
+  padding: 1.1rem 1.5rem 1.4rem;
+  text-align: center;
+}
+
+.july-popout-title {
+  margin: 0;
+  color: #ab0d0d;
+  font-size: clamp(1.15rem, 3.4vw, 1.5rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.july-popout-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background: rgba(36, 32, 32, 0.6);
+  color: #fff;
+  font: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.july-popout-close:hover {
+  background: #ab0d0d;
+  transform: scale(1.06);
+}
+
+.july-popout-close:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .july-popout.is-open,
+  .july-popout.is-closing,
+  .july-popout.is-open .july-popout-card,
+  .july-popout.is-closing .july-popout-card {
+    animation-duration: 0.01ms;
+  }
+
+  .july-popout-close {
+    transition: none;
+  }
+}
+
 @media (max-width: 760px) {
   .nav-wrap,
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .july-popout-body {
+    padding: 1rem 1.1rem 1.2rem;
   }
 
   .hero,
