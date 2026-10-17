@@ -218,8 +218,6 @@ surveys.
 - WHO, [Gender incongruence and transgender health in the ICD](https://www.who.int/standards/classifications/frequently-asked-questions/gender-incongruence-and-transgender-health-in-the-icd)
 - [《精神障碍诊疗规范（2020年版）》](https://zh.wikisource.org/wiki/Page:%E7%B2%BE%E7%A5%9E%E9%9A%9C%E7%A2%8D%E8%AF%8A%E7%96%97%E8%A7%84%E8%8C%83%EF%BC%882020%E5%B9%B4%E7%89%88%EF%BC%89.pdf/391) — still using 性身份障碍 / 易性症
 - [RLE.wiki](https://rle.wiki/) and [MtF.wiki](https://mtf.wiki/) — Chinese community documentation
-- [SZU sexual-minority friendliness briefing](szu-sexual-minority-friendliness-report.md) — a worked example of how these myths appear in institutional practice
-- [A guide for LGBT college students in China](lgbt-college-guide-china-en.md) — the practical companion
 
 *Compiled from public sources. Contested points are marked as such; where the evidence is genuinely
 unsettled, this document says so rather than picking the tidier answer.*
