@@ -1,12 +1,10 @@
 ---
 layout: post
 title: "Wikimedia Accessibility in SZU"
-date: 2026-10-13
+date: 2026-10-16
 author: "BEUFK"
 category: "Article"
 ---
-
-# Wikipedia / Wikimedia Network Accessibility Report
 
 **Date of test:** 2026-10-16, 22:55–23:12 (UTC+08:00)
 
@@ -66,13 +64,7 @@ This split does not correspond to any coherent "block Wikipedia, allow Wikimedia
 
 ## 3. Methodology
 
-The instruction was to "ping" these services. **ICMP ping is the wrong instrument** for web accessibility:
-
-- Many hosts deprioritise or drop ICMP even when HTTPS works perfectly.
-- A successful ping says nothing about whether TLS or HTTP will succeed.
-- A failed ping does not distinguish DNS failure from routing failure from filtering.
-
-So the test was staged in four layers, each of which isolates a different failure mode:
+The test was staged in four layers, each of which isolates a different failure mode:
 
 1. **DNS resolution** — `System.Net.Dns.GetHostAddresses()`, repeated 4–6× per host to detect answer instability.
 2. **TCP connect** — asynchronous `TcpClient.BeginConnect()` on port 443, 10-second deadline, all hosts in parallel.
