@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美国政治研究索引 · A Research Index for American Politics</title>
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#1B1B1B; --muted:#6E6A63; --faint:#9A948A;
+    --navy:#1F3864; --navy-soft:#2C4A7C; --gold:#A9812C;
+    --line:#E4DFD4; --card:#FFFFFF; --shadow:0 1px 2px rgba(27,27,27,.05),0 8px 24px rgba(27,27,27,.04);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:Georgia,"Songti SC","Noto Serif SC","Source Han Serif SC",serif}
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:72px 0 40px; border-bottom:1px solid var(--line)}
+  .kicker{
+    font-size:11px; letter-spacing:.28em; color:var(--gold); text-transform:uppercase;
+    margin-bottom:18px; font-weight:600;
+  }
+  h1{
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;
+    font-size:clamp(34px,4.6vw,54px); line-height:1.15; margin:0 0 16px;
+    color:var(--navy); letter-spacing:.02em;
+  }
+  .lede{max-width:640px; color:var(--muted); font-size:16.5px; margin:0 0 28px}
+  .lede b{color:var(--ink); font-weight:600}
+
+  .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  .search{
+    flex:1 1 320px; display:flex; align-items:center; gap:10px;
+    background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:11px 14px; box-shadow:var(--shadow);
+  }
+  .search svg{flex:none; opacity:.5}
+  .search input{
+    border:0; outline:0; background:transparent; width:100%;
+    font:inherit; font-size:15px; color:var(--ink);
+  }
+  .search input::placeholder{color:var(--faint)}
+  .hint{font-size:12.5px; color:var(--faint)}
+  kbd{
+    font-family:inherit; font-size:11px; border:1px solid var(--line); border-bottom-width:2px;
+    border-radius:4px; padding:1px 5px; background:#fff; color:var(--muted);
+  }
+
+  /* ---------- chips ---------- */
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px}
+  .chip{
+    font-size:13px; padding:6px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--line); background:transparent; color:var(--muted);
+    transition:.18s; font-family:inherit;
+  }
+  .chip:hover{border-color:#C9C1B2; color:var(--ink)}
+  .chip.on{background:var(--navy); border-color:var(--navy); color:#fff}
+
+  /* ---------- sticky nav ---------- */
+  nav.toc{
+    position:sticky; top:0; z-index:20; background:rgba(251,250,247,.92);
+    backdrop-filter:saturate(140%) blur(8px); border-bottom:1px solid var(--line);
+  }
+  nav.toc .inner{display:flex; gap:22px; overflow-x:auto; padding:12px 0; font-size:13.5px}
+  nav.toc a{color:var(--muted); white-space:nowrap; border-bottom:1px solid transparent; padding-bottom:2px}
+  nav.toc a:hover{color:var(--navy); border-color:var(--navy)}
+  nav.toc .num{color:var(--faint); font-size:11px; margin-right:5px; letter-spacing:.06em}
+
+  /* ---------- sections ---------- */
+  main{padding:8px 0 60px}
+  .section{padding:52px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:72px}
+  .section:last-of-type{border-bottom:0}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:8px}
+  .sec-num{font-size:12px; letter-spacing:.2em; color:var(--gold); font-weight:600}
+  h2{
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;
+    font-size:clamp(22px,2.4vw,28px); color:var(--navy); margin:0; font-weight:600;
+  }
+  .sec-note{color:var(--muted); font-size:14.5px; margin:0 0 26px; max-width:720px}
+
+  .grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .card{
+    display:block; background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:18px 18px 15px; box-shadow:var(--shadow);
+    transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    position:relative;
+  }
+  .card:hover{transform:translateY(-2px); border-color:#CFC7B7; box-shadow:0 2px 4px rgba(27,27,27,.06),0 14px 30px rgba(27,27,27,.07)}
+  .card-top{display:flex; align-items:center; gap:8px; margin-bottom:7px}
+  .card h3{
+    font-size:15.5px; margin:0; font-weight:600; letter-spacing:.01em;
+    color:var(--navy); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .badge{
+    flex:none; font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:3px;
+    background:#F2EEE4; color:#7A6A45; border:1px solid #E7DFCC;
+  }
+  .badge.gov{background:#EAF0F7; color:#2C4A7C; border-color:#D8E3F1}
+  .badge.data{background:#EDF3EC; color:#3F6B45; border-color:#D9E7D7}
+  .badge.media{background:#F7EDEA; color:#8A4B36; border-color:#EFDCD6}
+  .badge.acad{background:#F1EEF7; color:#5A4A7E; border-color:#E3DCF0}
+  .card p{margin:0; color:var(--muted); font-size:13.6px; line-height:1.6}
+  .card .url{
+    margin-top:10px; font-size:11.5px; color:var(--faint); font-family:ui-monospace,Consolas,monospace;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .arrow{margin-left:auto; color:#C6BFB0; font-size:14px; transition:.16s}
+  .card:hover .arrow{color:var(--gold); transform:translate(1px,-1px)}
+  .count{font-size:12.5px; color:var(--faint); margin-left:auto}
+  .empty{display:none; padding:30px 0; color:var(--faint); font-size:14px}
+
+  /* ---------- path ---------- */
+  .path{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); counter-reset:step}
+  .step{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:20px; position:relative}
+  .step::before{
+    counter-increment:step; content:"0" counter(step);
+    font-family:Georgia,serif; font-size:26px; color:#E3DCCB; position:absolute; top:10px; right:16px;
+  }
+  .step h4{margin:0 0 6px; font-size:14.5px; color:var(--navy)}
+  .step p{margin:0; font-size:13.4px; color:var(--muted)}
+  .step a{color:var(--navy-soft); border-bottom:1px solid #D5DCE8}
+
+  /* ---------- terms ---------- */
+  .terms{display:grid; gap:0 34px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .term{padding:13px 0; border-bottom:1px dashed var(--line)}
+  .term dt{font-weight:600; font-size:14.5px; color:var(--ink)}
+  .term dt span{font-weight:400; color:var(--faint); font-size:12px; margin-left:6px; letter-spacing:.02em}
+  .term dd{margin:2px 0 0; font-size:13.4px; color:var(--muted)}
+
+  footer{border-top:1px solid var(--line); padding:36px 0 60px; color:var(--faint); font-size:13px}
+  footer .row{display:flex; gap:24px; flex-wrap:wrap; justify-content:space-between}
+  footer a{border-bottom:1px solid var(--line)}
+  footer a:hover{color:var(--navy)}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px}
+    header.hero{padding:48px 0 30px}
+    .section{padding:38px 0 6px}
+    .grid{grid-template-columns:1fr}
+  }
+  @media print{
+    nav.toc,.toolbar,.chips{display:none}
+    .card{break-inside:avoid; box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Research Index · 2026</div>
+    <h1>美国政治研究索引</h1>
+    <p class="lede">
+      一份面向中文读者的资料地图：从<b>建国文献与宪法文本</b>出发，沿<b>三权机构、选举与民调、数据档案、智库研究</b>逐层展开，
+      每条都给出可直连的官方或学术入口。
+    </p>
+    <div class="toolbar">
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="q" type="search" autocomplete="off" placeholder="搜索机构、数据库或主题：最高法院、FEC、选举人团……">
+      </label>
+      <span class="hint">按 <kbd>/</kbd> 聚焦 · 结果 <b id="count">0</b> 条</span>
+    </div>
+    <div class="chips">
+      <button class="chip on" data-cat="all">全部</button>
+      <button class="chip" data-cat="docs">原典</button>
+      <button class="chip" data-cat="gov">政府</button>
+      <button class="chip" data-cat="courts">司法</button>
+      <button class="chip" data-cat="elect">选举</button>
+      <button class="chip" data-cat="data">数据</button>
+      <button class="chip" data-cat="think">智库</button>
+      <button class="chip" data-cat="media">媒体</button>
+      <button class="chip" data-cat="cn">中文与学术</button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap inner">
+    <a href="#docs"><span class="num">01</span>原典与宪法</a>
+    <a href="#gov"><span class="num">02</span>联邦政府</a>
+    <a href="#courts"><span class="num">03</span>司法与判例</a>
+    <a href="#elect"><span class="num">04</span>选举与民调</a>
+    <a href="#data"><span class="num">05</span>数据与经济</a>
+    <a href="#think"><span class="num">06</span>智库与研究</a>
+    <a href="#media"><span class="num">07</span>媒体与核查</a>
+    <a href="#cn"><span class="num">08</span>中文与学术</a>
+    <a href="#path"><span class="num">09</span>研究路径</a>
+    <a href="#terms"><span class="num">10</span>概念速查</a>
+    <a href="#local"><span class="num">11</span>本地文献</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="section" id="docs">
+    <div class="sec-head"><span class="sec-num">01</span><h2>原典与宪法文本</h2></div>
+    <p class="sec-note">研究的起点是文本本身。下列站点提供原件影像、官方转录本与逐条注释，可互为校勘。</p>
+    <div class="grid">
+      <a class="card" data-cat="docs" href="https://www.archives.gov/founding-docs" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>建国文献 · 国家档案馆</h3><span class="arrow">↗</span></div>
+        <p>《独立宣言》《宪法》《权利法案》的原件高清影像与官方转录本，附制宪者小传。</p>
+        <div class="url">archives.gov/founding-docs</div>
+      </a>
+      <a class="card" data-cat="docs" href="https://constitution.congress.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>宪法注释版</h3><span class="arrow">↗</span></div>
+        <p>国会图书馆逐条逐款注释宪法，串联相关判例、历史背景与学术争议，检索体验极佳。</p>
+        <div class="url">constitution.congress.gov</div>
+      </a>
+      <a class="card" data-cat="docs" href="https://avalon.law.yale.edu/subject_menus/fed.asp" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>《联邦党人文集》</h3><span class="arrow">↗</span></div>
+        <p>汉密尔顿、麦迪逊、杰伊为批准宪法所写的85篇政论，耶鲁 Avalon 项目全文。</p>
+        <div class="url">avalon.law.yale.edu</div>
+      </a>
+      <a class="card" data-cat="docs" href="https://www.law.cornell.edu" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>康奈尔法律信息研究所 LII</h3><span class="arrow">↗</span></div>
+        <p>宪法、联邦法典、判例与法律词典的免费全文库，引用格式规范。</p>
+        <div class="url">law.cornell.edu</div>
+      </a>
+      <a class="card" data-cat="docs" href="https://www.govinfo.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>GovInfo</h3><span class="arrow">↗</span></div>
+        <p>公法、联邦公报、国会记录、预算文件等政府出版物的权威 PDF 与结构化数据。</p>
+        <div class="url">govinfo.gov</div>
+      </a>
+      <a class="card" data-cat="docs" href="https://www.federalregister.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>联邦公报</h3><span class="arrow">↗</span></div>
+        <p>行政法规、总统文件、机构通告的每日发布，可按机构、主题与生效日期检索。</p>
+        <div class="url">federalregister.gov</div>
+      </a>
+      <a class="card" data-cat="docs" href="https://www.presidency.ucsb.edu" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>The American Presidency Project</h3><span class="arrow">↗</span></div>
+        <p>总统演说、文告、行政命令、记者会与选举数据的完整档案，可全文检索。</p>
+        <div class="url">presidency.ucsb.edu</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="gov">
+    <div class="sec-head"><span class="sec-num">02</span><h2>联邦政府：立法与行政</h2></div>
+    <p class="sec-note">跟踪一部法案从提案到签署的全过程，是理解美国政治最有效的训练。</p>
+    <div class="grid">
+      <a class="card" data-cat="gov" href="https://www.congress.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>Congress.gov</h3><span class="arrow">↗</span></div>
+        <p>法案文本与进程、表决记录、委员会听证、议员资料，附开放 API。</p>
+        <div class="url">congress.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.senate.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>参议院</h3><span class="arrow">↗</span></div>
+        <p>议事日程、委员会、提名确认与弹劾审理程序的第一手材料。</p>
+        <div class="url">senate.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.house.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>众议院</h3><span class="arrow">↗</span></div>
+        <p>众议院议事、委员会、议员名录与选区信息入口。</p>
+        <div class="url">house.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.whitehouse.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>白宫</h3><span class="arrow">↗</span></div>
+        <p>总统行政办公室的新闻稿、政策文件、行政命令与任命公告。</p>
+        <div class="url">whitehouse.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://crsreports.congress.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>国会研究服务处 CRS</h3><span class="arrow">↗</span></div>
+        <p>国会智库的专题报告，几乎覆盖所有政策领域，是英文研究最省力的入口。</p>
+        <div class="url">crsreports.congress.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.cbo.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>国会预算办公室 CBO</h3><span class="arrow">↗</span></div>
+        <p>联邦预算、赤字与立法成本的独立估算，评估法案财政影响的标准来源。</p>
+        <div class="url">cbo.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.gao.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>政府问责局 GAO</h3><span class="arrow">↗</span></div>
+        <p>对联邦项目绩效与支出的审计评估报告，是监督政府运作的实证材料。</p>
+        <div class="url">gao.gov</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.fec.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>联邦选举委员会 FEC</h3><span class="arrow">↗</span></div>
+        <p>竞选资金申报、独立支出与执法记录，研究金钱与政治的基础数据源。</p>
+        <div class="url">fec.gov</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="courts">
+    <div class="sec-head"><span class="sec-num">03</span><h2>司法与判例</h2></div>
+    <p class="sec-note">美国政治的大量规则由法院写成。读判决书，比读评论更接近制度运行的真实逻辑。</p>
+    <div class="grid">
+      <a class="card" data-cat="courts" href="https://www.supremecourt.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>最高法院</h3><span class="arrow">↗</span></div>
+        <p>判决书全文、庭审日程、口头辩论录音与庭期规则。</p>
+        <div class="url">supremecourt.gov</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.oyez.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>Oyez</h3><span class="arrow">↗</span></div>
+        <p>最高法院案件摘要与辩论音频，按议题、法官与年代检索，适合教学。</p>
+        <div class="url">oyez.org</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.scotusblog.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>SCOTUSblog</h3><span class="arrow">↗</span></div>
+        <p>最高法院案件追踪、判决分析与提名过程报道，专业度高于一般媒体。</p>
+        <div class="url">scotusblog.com</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.courtlistener.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>CourtListener</h3><span class="arrow">↗</span></div>
+        <p>联邦与州判例全文检索、法官数据库与口头辩论音频（Free Law Project）。</p>
+        <div class="url">courtlistener.com</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.uscourts.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>联邦法院系统</h3><span class="arrow">↗</span></div>
+        <p>法院结构、程序规则、司法统计与破产、陪审制度说明。</p>
+        <div class="url">uscourts.gov</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://case.law" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>Caselaw Access Project</h3><span class="arrow">↗</span></div>
+        <p>哈佛法学院整理的美国历史判例全文库，覆盖三百余年，可批量下载。</p>
+        <div class="url">case.law</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="elect">
+    <div class="sec-head"><span class="sec-num">04</span><h2>选举、民调与国会投票</h2></div>
+    <p class="sec-note">选举研究的关键是数据而非评论：结果数据、民调档案与议员投票记录三者互为验证。</p>
+    <div class="grid">
+      <a class="card" data-cat="elect" href="https://ballotpedia.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">参考</span><h3>Ballotpedia</h3><span class="arrow">↗</span></div>
+        <p>选举、公投、州议会与候选人资料的百科式整理，覆盖地方层级。</p>
+        <div class="url">ballotpedia.org</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.270towin.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>270toWin</h3><span class="arrow">↗</span></div>
+        <p>选举人团地图、历史结果与情景推演，理解“赢者通吃”的直观工具。</p>
+        <div class="url">270towin.com</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.realclearpolitics.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>RealClearPolitics</h3><span class="arrow">↗</span></div>
+        <p>民调聚合与选举地图，兼收不同立场的评论，便于对照阅读。</p>
+        <div class="url">realclearpolitics.com</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.opensecrets.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>OpenSecrets</h3><span class="arrow">↗</span></div>
+        <p>竞选资金、游说与利益集团数据的整理与可视化，源自 FEC 原始申报。</p>
+        <div class="url">opensecrets.org</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://voteview.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>Voteview</h3><span class="arrow">↗</span></div>
+        <p>国会表决记录与议员意识形态测度（DW-NOMINATE），可下载全量数据。</p>
+        <div class="url">voteview.com</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://electionstudies.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>ANES 全国选举研究</h3><span class="arrow">↗</span></div>
+        <p>1948年以来的选举调查数据，研究投票行为与政治态度的经典数据源。</p>
+        <div class="url">electionstudies.org</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://electionlab.mit.edu" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>MIT Election Lab</h3><span class="arrow">↗</span></div>
+        <p>选举结果与选举管理数据，含各州投票方式、 turnout 与选区层级数据。</p>
+        <div class="url">electionlab.mit.edu</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://ropercenter.cornell.edu" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>Roper Center</h3><span class="arrow">↗</span></div>
+        <p>民调数据档案，可检索数十年前的历史问卷原题与结果。</p>
+        <div class="url">ropercenter.cornell.edu</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="data">
+    <div class="sec-head"><span class="sec-num">05</span><h2>数据与经济</h2></div>
+    <p class="sec-note">政策辩论最终落在数字上。这些站点提供可复核的官方统计与时间序列。</p>
+    <div class="grid">
+      <a class="card" data-cat="data" href="https://www.census.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>人口普查局</h3><span class="arrow">↗</span></div>
+        <p>人口、族裔、收入与选区人口数据，是分配众议员席位与绘制选区的底数。</p>
+        <div class="url">census.gov</div>
+      </a>
+      <a class="card" data-cat="data" href="https://fred.stlouisfed.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>FRED 经济数据</h3><span class="arrow">↗</span></div>
+        <p>美联储圣路易斯分行维护的八十余万条经济时间序列，可直接作图与下载。</p>
+        <div class="url">fred.stlouisfed.org</div>
+      </a>
+      <a class="card" data-cat="data" href="https://www.bls.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>劳工统计局 BLS</h3><span class="arrow">↗</span></div>
+        <p>就业、失业率、通胀与工资数据，选举年最常被引用的指标来源。</p>
+        <div class="url">bls.gov</div>
+      </a>
+      <a class="card" data-cat="data" href="https://www.pewresearch.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>Pew Research Center</h3><span class="arrow">↗</span></div>
+        <p>公众舆论、宗教、媒体使用与人口趋势的长期调查，方法说明透明。</p>
+        <div class="url">pewresearch.org</div>
+      </a>
+      <a class="card" data-cat="data" href="https://news.gallup.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>Gallup</h3><span class="arrow">↗</span></div>
+        <p>总统支持率、党派认同等长期追踪数据，可回溯数十年趋势。</p>
+        <div class="url">news.gallup.com</div>
+      </a>
+      <a class="card" data-cat="data" href="https://www.icpsr.umich.edu" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>ICPSR</h3><span class="arrow">↗</span></div>
+        <p>密歇根大学的社会科学数据档案，含大量美国政治调查与国会研究数据。</p>
+        <div class="url">icpsr.umich.edu</div>
+      </a>
+      <a class="card" data-cat="data" href="https://data.gov" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>Data.gov</h3><span class="arrow">↗</span></div>
+        <p>联邦开放数据门户，按机构与主题索引数十万个数据集。</p>
+        <div class="url">data.gov</div>
+      </a>
+      <a class="card" data-cat="data" href="https://usafacts.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>USAFacts</h3><span class="arrow">↗</span></div>
+        <p>把政府统计数据整理成图表与年度报告，适合快速建立数量感。</p>
+        <div class="url">usafacts.org</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="think">
+    <div class="sec-head"><span class="sec-num">06</span><h2>智库与研究机构</h2></div>
+    <p class="sec-note">智库是政策话语的生产现场。读同一议题上不同立场机构的两份报告，比读一篇综述更有用。</p>
+    <div class="grid">
+      <a class="card" data-cat="think" href="https://www.brookings.edu" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">中间偏左</span><h3>Brookings</h3><span class="arrow">↗</span></div>
+        <p>规模最大的综合性智库，治理、经济、外交与城市政策研究齐备。</p>
+        <div class="url">brookings.edu</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.aei.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">保守</span><h3>美国企业研究所 AEI</h3><span class="arrow">↗</span></div>
+        <p>保守派重镇，经济、国防与福利改革研究，政策方案具体。</p>
+        <div class="url">aei.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.cato.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">自由至上</span><h3>Cato Institute</h3><span class="arrow">↗</span></div>
+        <p>自由至上主义立场，擅长宪法、联邦制与刑事司法议题的分析。</p>
+        <div class="url">cato.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.heritage.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">保守</span><h3>传统基金会</h3><span class="arrow">↗</span></div>
+        <p>影响力极大的保守派智库，其政策手册常被新政府直接采用。</p>
+        <div class="url">heritage.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.csis.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">中间</span><h3>CSIS 战略与国际研究中心</h3><span class="arrow">↗</span></div>
+        <p>跨党派安全与外交研究，项目制运作，报告更新频繁。</p>
+        <div class="url">csis.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://carnegieendowment.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">中间</span><h3>卡内基国际和平基金会</h3><span class="arrow">↗</span></div>
+        <p>全球布局的国际事务智库，美国外交与民主制度研究并重。</p>
+        <div class="url">carnegieendowment.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.rand.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">中间</span><h3>RAND</h3><span class="arrow">↗</span></div>
+        <p>以定量方法见长，国防、卫生、教育与司法政策评估质量稳定。</p>
+        <div class="url">rand.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.urban.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">中间偏左</span><h3>Urban Institute</h3><span class="arrow">↗</span></div>
+        <p>社会福利、税收与住房政策的微观数据模拟，方法透明度高。</p>
+        <div class="url">urban.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.brennancenter.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">中间偏左</span><h3>布伦南司法中心</h3><span class="arrow">↗</span></div>
+        <p>投票权、选举管理与司法改革研究，兼有诉讼与政策倡导。</p>
+        <div class="url">brennancenter.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://fedsoc.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">保守</span><h3>联邦主义者协会</h3><span class="arrow">↗</span></div>
+        <p>保守派法律人网络，其年会与文本主义、原旨主义法学论述值得对照阅读。</p>
+        <div class="url">fedsoc.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.apsanet.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>美国政治学会 APSA</h3><span class="arrow">↗</span></div>
+        <p>政治学界的行业协会，提供期刊、会议与教学资源索引。</p>
+        <div class="url">apsanet.org</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="media">
+    <div class="sec-head"><span class="sec-num">07</span><h2>媒体与事实核查</h2></div>
+    <p class="sec-note">把新闻当作线索而非结论：追到它引用的原始文件，再回到上面的机构与数据站。</p>
+    <div class="grid">
+      <a class="card" data-cat="media" href="https://www.c-span.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>C-SPAN</h3><span class="arrow">↗</span></div>
+        <p>国会辩论、听证与竞选活动的全程录像，可作为一手记录引用。</p>
+        <div class="url">c-span.org</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.npr.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>NPR</h3><span class="arrow">↗</span></div>
+        <p>公共广播的深度报道与访谈，政策议题的解释性报道较强。</p>
+        <div class="url">npr.org</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.pbs.org/newshour" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>PBS NewsHour</h3><span class="arrow">↗</span></div>
+        <p>电视新闻的文本化存档，访谈与选举夜数据页面实用。</p>
+        <div class="url">pbs.org/newshour</div>
+      </a>
+      <a class="card" data-cat="media" href="https://apnews.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>Associated Press</h3><span class="arrow">↗</span></div>
+        <p>通讯社的即时报道与计票数据，被各大媒体广泛转载。</p>
+        <div class="url">apnews.com</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.reuters.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>Reuters</h3><span class="arrow">↗</span></div>
+        <p>国际通讯社的美国政治报道，风格克制，适合做事实基线。</p>
+        <div class="url">reuters.com</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.politifact.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">核查</span><h3>PolitiFact</h3><span class="arrow">↗</span></div>
+        <p>对政治人物言论逐条核查并给出真伪评级，附原始出处。</p>
+        <div class="url">politifact.com</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.factcheck.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">核查</span><h3>FactCheck.org</h3><span class="arrow">↗</span></div>
+        <p>宾夕法尼亚大学运营的事实核查项目，长于政策声明与广告核查。</p>
+        <div class="url">factcheck.org</div>
+      </a>
+      <a class="card" data-cat="media" href="https://thehill.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>The Hill</h3><span class="arrow">↗</span></div>
+        <p>专注国会动态的日报，法案进度与议员表态的日常记录。</p>
+        <div class="url">thehill.com</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="cn">
+    <div class="sec-head"><span class="sec-num">08</span><h2>中文文献与学术检索</h2></div>
+    <p class="sec-note">中文研究可先看中文期刊的综述与争鸣，再用英文原始文献核对事实与数据。</p>
+    <div class="grid">
+      <a class="card" data-cat="cn" href="https://www.cnki.net" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>中国知网 CNKI</h3><span class="arrow">↗</span></div>
+        <p>中文期刊、学位论文与会议论文的主库，检索“美国政治”“比较政治”等主题。</p>
+        <div class="url">cnki.net</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://www.ncpssd.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>国家哲学社会科学文献中心</h3><span class="arrow">↗</span></div>
+        <p>免费开放的中文社科文献平台，可补 CNKI 之外的期刊与报告。</p>
+        <div class="url">ncpssd.org</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://www.jstor.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>JSTOR</h3><span class="arrow">↗</span></div>
+        <p>政治学与历史学核心期刊的过刊库，多数高校已订阅。</p>
+        <div class="url">jstor.org</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://scholar.google.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>Google Scholar</h3><span class="arrow">↗</span></div>
+        <p>跨库学术检索，可按被引次数定位领域内的关键论文。</p>
+        <div class="url">scholar.google.com</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://papers.ssrn.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>SSRN</h3><span class="arrow">↗</span></div>
+        <p>法学与政治学的预印本平台，可读到尚未正式发表的最新工作论文。</p>
+        <div class="url">papers.ssrn.com</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="path">
+    <div class="sec-head"><span class="sec-num">09</span><h2>研究路径：四步入门</h2></div>
+    <p class="sec-note">如果不知从何开始，可按下面的顺序走一遍；每一步都对应上面已经列出的资源。</p>
+    <div class="path">
+      <div class="step">
+        <h4>读原典</h4>
+        <p>先通读《宪法》七条与《权利法案》十条，再读《联邦党人文集》第10、51、78篇。用<a href="#docs">宪法注释版</a>逐条对照。</p>
+      </div>
+      <div class="step">
+        <h4>跟一部法案</h4>
+        <p>在 <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a> 选一部争议法案，记录委员会、修正案、表决与总统签署的每个节点。</p>
+      </div>
+      <div class="step">
+        <h4>查一次选举</h4>
+        <p>用 <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC</a> 看资金，用 <a href="https://electionlab.mit.edu" target="_blank" rel="noopener">MIT Election Lab</a> 看结果，用 <a href="https://electionstudies.org" target="_blank" rel="noopener">ANES</a> 看选民。</p>
+      </div>
+      <div class="step">
+        <h4>读一份研究</h4>
+        <p>先读一份 <a href="https://crsreports.congress.gov" target="_blank" rel="noopener">CRS 报告</a>建立框架，再对照两家立场不同的智库与一篇同行评议论文。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="terms">
+    <div class="sec-head"><span class="sec-num">10</span><h2>核心概念速查</h2></div>
+    <p class="sec-note">十二个高频术语，括号内为英文原词，便于在英文文献中检索。</p>
+    <dl class="terms">
+      <div class="term"><dt>联邦制 <span>Federalism</span></dt><dd>联邦与州各有宪法赋予的权力，并非中央授权地方的单向关系。</dd></div>
+      <div class="term"><dt>三权分立 <span>Separation of Powers</span></dt><dd>立法、行政、司法分属国会、总统与法院，人员与职权相互分离。</dd></div>
+      <div class="term"><dt>制衡 <span>Checks and Balances</span></dt><dd>否决权、弹劾、条约批准、司法审查等跨机构制约机制的总称。</dd></div>
+      <div class="term"><dt>司法审查 <span>Judicial Review</span></dt><dd>法院有权判定立法与行政行为违宪，确立于1803年马伯里诉麦迪逊案。</dd></div>
+      <div class="term"><dt>选举人团 <span>Electoral College</span></dt><dd>由各州选举人投票选出总统，席位等于该州参众议员人数之和。</dd></div>
+      <div class="term"><dt>冗长辩论 <span>Filibuster</span></dt><dd>参议院以持续发言阻止表决，终结辩论通常需六十票。</dd></div>
+      <div class="term"><dt>行政命令 <span>Executive Order</span></dt><dd>总统对联邦机构的书面指令，不得违背宪法与国会立法。</dd></div>
+      <div class="term"><dt>联邦优先 <span>Preemption</span></dt><dd>联邦法律在冲突范围内优先于州法，源自宪法第六条最高法律条款。</dd></div>
+      <div class="term"><dt>遵循先例 <span>Stare Decisis</span></dt><dd>法院一般受自身及上级法院既有判决约束，以维持法律的可预期性。</dd></div>
+      <div class="term"><dt>政治行动委员会 <span>PAC / Super PAC</span></dt><dd>为竞选筹资的组织；超级政治行动委员会可无限额接受捐款但不得直接捐给候选人。</dd></div>
+      <div class="term"><dt>持续决议 <span>Continuing Resolution</span></dt><dd>拨款法案未通过时，以临时决议维持政府运转，否则政府部分停摆。</dd></div>
+      <div class="term"><dt>独立机构 <span>Independent Agencies</span></dt><dd>如美联储、SEC、FCC，隶属行政但受法定任期与两党构成约束。</dd></div>
+    </dl>
+  </section>
+
+  <section class="section" id="local">
+    <div class="sec-head"><span class="sec-num">11</span><h2>本地文献</h2></div>
+    <p class="sec-note">文件存放在站点 <b>disk/</b> 目录下，点击即可下载；条文与译文均据美国国家档案馆转录本整理。</p>
+    <div class="grid">
+      <a class="card" data-cat="local" href="disk/%E7%8B%AC%E7%AB%8B%E5%AE%A3%E8%A8%80%C2%B7%E4%B8%AD%E8%8B%B1%E5%AF%B9%E7%85%A7.docx" download>
+        <div class="card-top"><span class="badge">DOCX</span><h3>独立宣言 · 中英对照</h3><span class="arrow">↓</span></div>
+        <p>全文逐段对照，附文献背景、编辑说明与56位签署人名单。</p>
+        <div class="url">disk/独立宣言·中英对照.docx</div>
+      </a>
+      <a class="card" data-cat="local" href="disk/%E7%BE%8E%E5%9B%BD%E5%AE%AA%E6%B3%95%C2%B7%E4%B8%AD%E8%8B%B1%E5%AF%B9%E7%85%A7.docx" download>
+        <div class="card-top"><span class="badge">DOCX</span><h3>美国宪法 · 中英对照</h3><span class="arrow">↓</span></div>
+        <p>七条正文、权利法案与第一至二十七条修正案，逐条逐款对照。</p>
+        <div class="url">disk/美国宪法·中英对照.docx</div>
+      </a>
+      <a class="card" data-cat="local" href="disk/%E6%9D%83%E5%88%A9%E6%B3%95%E6%A1%88%C2%B7%E4%B8%AD%E8%8B%B1%E5%AF%B9%E7%85%A7%EF%BC%88%E5%B0%8F%E5%86%8C%EF%BC%89.docx" download>
+        <div class="card-top"><span class="badge">DOCX</span><h3>权利法案 · 小册</h3><span class="arrow">↓</span></div>
+        <p>A5 便携本：十条修正案全文，附1789年提出的原十二条修正案。</p>
+        <div class="url">disk/权利法案·中英对照（小册）.docx</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="empty" id="empty">没有匹配的条目。试试更短的关键词，或点“全部”。</div>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <div style="color:var(--navy); font-weight:600; margin-bottom:6px">美国政治研究索引</div>
+      <div>链接均指向官方、学术或主流媒体站点；标注“官方”者为政府机构网站。</div>
+      <div>建议配合所在机构的图书馆数据库使用。更新于 2026年10月。</div>
+    </div>
+    <div style="text-align:right">
+      <div>本页为离线单文件，无外部依赖，可自行增删条目。</div>
+      <div>回到顶部：<a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Top</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+  var q = document.getElementById('q');
+  var count = document.getElementById('count');
+  var empty = document.getElementById('empty');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cat = 'all';
+
+  function apply(){
+    var t = (q.value || '').trim().toLowerCase();
+    var n = 0;
+    cards.forEach(function(c){
+      var okCat = (cat === 'all' || c.dataset.cat === cat);
+      var okText = !t || c.textContent.toLowerCase().indexOf(t) > -1;
+      var show = okCat && okText;
+      c.hidden = !show;
+      if (show) n++;
+    });
+    sections.forEach(function(s){
+      var any = Array.prototype.some.call(s.querySelectorAll('.card'), function(c){ return !c.hidden; });
+      s.hidden = !any;
+    });
+    count.textContent = n;
+    empty.style.display = n ? 'none' : 'block';
+  }
+
+  q.addEventListener('input', apply);
+  chips.forEach(function(ch){
+    ch.addEventListener('click', function(){
+      chips.forEach(function(x){ x.classList.remove('on'); });
+      ch.classList.add('on');
+      cat = ch.dataset.cat;
+      apply();
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement !== q){ e.preventDefault(); q.focus(); }
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
