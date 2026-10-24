@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英国政治研究索引 · A Research Index for UK Politics</title>
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#1B1B1B; --muted:#6E6A63; --faint:#9A948A;
+    --navy:#1F3864; --navy-soft:#2C4A7C; --gold:#A9812C;
+    --line:#E4DFD4; --card:#FFFFFF; --shadow:0 1px 2px rgba(27,27,27,.05),0 8px 24px rgba(27,27,27,.04);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:Georgia,"Songti SC","Noto Serif SC","Source Han Serif SC",serif}
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:72px 0 40px; border-bottom:1px solid var(--line)}
+  .kicker{
+    font-size:11px; letter-spacing:.28em; color:var(--gold); text-transform:uppercase;
+    margin-bottom:18px; font-weight:600;
+  }
+  h1{
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;
+    font-size:clamp(34px,4.6vw,54px); line-height:1.15; margin:0 0 16px;
+    color:var(--navy); letter-spacing:.02em;
+  }
+  .lede{max-width:640px; color:var(--muted); font-size:16.5px; margin:0 0 28px}
+  .lede b{color:var(--ink); font-weight:600}
+
+  .toolbar{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+  .search{
+    flex:1 1 320px; display:flex; align-items:center; gap:10px;
+    background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:11px 14px; box-shadow:var(--shadow);
+  }
+  .search svg{flex:none; opacity:.5}
+  .search input{
+    border:0; outline:0; background:transparent; width:100%;
+    font:inherit; font-size:15px; color:var(--ink);
+  }
+  .search input::placeholder{color:var(--faint)}
+  .hint{font-size:12.5px; color:var(--faint)}
+  kbd{
+    font-family:inherit; font-size:11px; border:1px solid var(--line); border-bottom-width:2px;
+    border-radius:4px; padding:1px 5px; background:#fff; color:var(--muted);
+  }
+
+  /* ---------- chips ---------- */
+  .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px}
+  .chip{
+    font-size:13px; padding:6px 13px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--line); background:transparent; color:var(--muted);
+    transition:.18s; font-family:inherit;
+  }
+  .chip:hover{border-color:#C9C1B2; color:var(--ink)}
+  .chip.on{background:var(--navy); border-color:var(--navy); color:#fff}
+
+  /* ---------- sticky nav ---------- */
+  nav.toc{
+    position:sticky; top:0; z-index:20; background:rgba(251,250,247,.92);
+    backdrop-filter:saturate(140%) blur(8px); border-bottom:1px solid var(--line);
+  }
+  nav.toc .inner{display:flex; gap:22px; overflow-x:auto; padding:12px 0; font-size:13.5px}
+  nav.toc a{color:var(--muted); white-space:nowrap; border-bottom:1px solid transparent; padding-bottom:2px}
+  nav.toc a:hover{color:var(--navy); border-color:var(--navy)}
+  nav.toc .num{color:var(--faint); font-size:11px; margin-right:5px; letter-spacing:.06em}
+
+  /* ---------- sections ---------- */
+  main{padding:8px 0 60px}
+  .section{padding:52px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:72px}
+  .section:last-of-type{border-bottom:0}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:8px}
+  .sec-num{font-size:12px; letter-spacing:.2em; color:var(--gold); font-weight:600}
+  h2{
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;
+    font-size:clamp(22px,2.4vw,28px); color:var(--navy); margin:0; font-weight:600;
+  }
+  .sec-note{color:var(--muted); font-size:14.5px; margin:0 0 26px; max-width:720px}
+
+  .grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .card{
+    display:block; background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:18px 18px 15px; box-shadow:var(--shadow);
+    transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    position:relative;
+  }
+  .card:hover{transform:translateY(-2px); border-color:#CFC7B7; box-shadow:0 2px 4px rgba(27,27,27,.06),0 14px 30px rgba(27,27,27,.07)}
+  .card-top{display:flex; align-items:center; gap:8px; margin-bottom:7px}
+  .card h3{
+    font-size:15.5px; margin:0; font-weight:600; letter-spacing:.01em;
+    color:var(--navy); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .badge{
+    flex:none; font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:3px;
+    background:#F2EEE4; color:#7A6A45; border:1px solid #E7DFCC;
+  }
+  .badge.gov{background:#EAF0F7; color:#2C4A7C; border-color:#D8E3F1}
+  .badge.data{background:#EDF3EC; color:#3F6B45; border-color:#D9E7D7}
+  .badge.media{background:#F7EDEA; color:#8A4B36; border-color:#EFDCD6}
+  .badge.acad{background:#F1EEF7; color:#5A4A7E; border-color:#E3DCF0}
+  .card p{margin:0; color:var(--muted); font-size:13.6px; line-height:1.6}
+  .card .url{
+    margin-top:10px; font-size:11.5px; color:var(--faint); font-family:ui-monospace,Consolas,monospace;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .arrow{margin-left:auto; color:#C6BFB0; font-size:14px; transition:.16s}
+  .card:hover .arrow{color:var(--gold); transform:translate(1px,-1px)}
+  .count{font-size:12.5px; color:var(--faint); margin-left:auto}
+  .empty{display:none; padding:30px 0; color:var(--faint); font-size:14px}
+
+  /* ---------- path ---------- */
+  .path{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); counter-reset:step}
+  .step{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:20px; position:relative}
+  .step::before{
+    counter-increment:step; content:"0" counter(step);
+    font-family:Georgia,serif; font-size:26px; color:#E3DCCB; position:absolute; top:10px; right:16px;
+  }
+  .step h4{margin:0 0 6px; font-size:14.5px; color:var(--navy)}
+  .step p{margin:0; font-size:13.4px; color:var(--muted)}
+  .step a{color:var(--navy-soft); border-bottom:1px solid #D5DCE8}
+
+  /* ---------- terms ---------- */
+  .terms{display:grid; gap:0 34px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .term{padding:13px 0; border-bottom:1px dashed var(--line)}
+  .term dt{font-weight:600; font-size:14.5px; color:var(--ink)}
+  .term dt span{font-weight:400; color:var(--faint); font-size:12px; margin-left:6px; letter-spacing:.02em}
+  .term dd{margin:2px 0 0; font-size:13.4px; color:var(--muted)}
+
+  footer{border-top:1px solid var(--line); padding:36px 0 60px; color:var(--faint); font-size:13px}
+  footer .row{display:flex; gap:24px; flex-wrap:wrap; justify-content:space-between}
+  footer a{border-bottom:1px solid var(--line)}
+  footer a:hover{color:var(--navy)}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px}
+    header.hero{padding:48px 0 30px}
+    .section{padding:38px 0 6px}
+    .grid{grid-template-columns:1fr}
+  }
+  @media print{
+    nav.toc,.toolbar,.chips{display:none}
+    .card{break-inside:avoid; box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Research Index · UK · 2026</div>
+    <h1>英国政治研究索引</h1>
+    <p class="lede">
+      一份面向中文读者的资料地图：从<b>大宪章与议会法</b>出发，沿<b>议会程序、白厅运作、司法审查、选举与民调</b>逐层展开，
+      每条都给出可直连的官方或学术入口。
+    </p>
+    <div class="toolbar">
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="q" type="search" autocomplete="off" placeholder="搜索机构、数据库或主题：Hansard、司法审查、权力下放……">
+      </label>
+      <span class="hint">按 <kbd>/</kbd> 聚焦 · 结果 <b id="count">0</b> 条</span>
+    </div>
+    <div class="chips">
+      <button class="chip on" data-cat="all">全部</button>
+      <button class="chip" data-cat="const">宪法</button>
+      <button class="chip" data-cat="parliament">议会</button>
+      <button class="chip" data-cat="gov">政府</button>
+      <button class="chip" data-cat="courts">司法</button>
+      <button class="chip" data-cat="elect">选举</button>
+      <button class="chip" data-cat="data">数据</button>
+      <button class="chip" data-cat="think">智库</button>
+      <button class="chip" data-cat="media">媒体</button>
+      <button class="chip" data-cat="cn">中文与学术</button>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap inner">
+    <a href="#const"><span class="num">01</span>宪法文献</a>
+    <a href="#parliament"><span class="num">02</span>议会</a>
+    <a href="#gov"><span class="num">03</span>政府</a>
+    <a href="#courts"><span class="num">04</span>司法</a>
+    <a href="#elect"><span class="num">05</span>选举民调</a>
+    <a href="#data"><span class="num">06</span>数据</a>
+    <a href="#think"><span class="num">07</span>智库</a>
+    <a href="#media"><span class="num">08</span>媒体</a>
+    <a href="#cn"><span class="num">09</span>中文</a>
+    <a href="#path"><span class="num">10</span>路径</a>
+    <a href="#terms"><span class="num">11</span>概念</a>
+    <a href="#local"><span class="num">12</span>文献</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="section" id="const">
+    <div class="sec-head"><span class="sec-num">01</span><h2>宪法与成文文献</h2></div>
+    <p class="sec-note">英国没有一部成文宪法，宪法秩序由大宪章、权利法案、议会法、人权法等文献层层叠加而成。读英国政治，先读这些文本的时间线。</p>
+    <div class="grid">
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>legislation.gov.uk</h3><span class="arrow">↗</span></div>
+        <p>官方立法数据库：议会法案、法定文书及其历次修正，可按时间线查看任一版本。</p>
+        <div class="url">www.legislation.gov.uk</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk/aep/Edw1cc1929/25/9" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">文献</span><h3>大宪章（1215／1297）</h3><span class="arrow">↗</span></div>
+        <p>现行法上仍有效的 1297 年确认版，附英文译文与历次修正；贵族特权如何变成后世的正当程序。</p>
+        <div class="url">www.legislation.gov.uk/aep/Edw1cc1929/25/9</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk/aep/WillandMarSess2/1/2" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">文献</span><h3>1689 年权利法案</h3><span class="arrow">↗</span></div>
+        <p>确立议会立法权、财政权与请愿权，限制王权的关键文本，现行法的一部分。</p>
+        <div class="url">www.legislation.gov.uk/aep/WillandMarSess2/1/2</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk/aep/Will3/12-13/2" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">文献</span><h3>1701 年王位继承法</h3><span class="arrow">↗</span></div>
+        <p>规定王位继承与法官任职保障，司法独立由此获得成文依据。</p>
+        <div class="url">www.legislation.gov.uk/aep/Will3/12-13/2</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk/ukpga/Geo5/1-2/13" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">文献</span><h3>1911 与 1949 年议会法</h3><span class="arrow">↗</span></div>
+        <p>把上议院的否决权削为延宕权，确立下议院在立法中的优先地位。</p>
+        <div class="url">www.legislation.gov.uk/ukpga/Geo5/1-2/13</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk/ukpga/1998/42" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">文献</span><h3>1998 年人权法</h3><span class="arrow">↗</span></div>
+        <p>把《欧洲人权公约》纳入英国法，法院可宣告立法“不相容”，是司法审查讨论的起点。</p>
+        <div class="url">www.legislation.gov.uk/ukpga/1998/42</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.legislation.gov.uk/ukpga/1998/46" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">文献</span><h3>1998 年苏格兰法</h3><span class="arrow">↗</span></div>
+        <p>权力下放的框架法：设立苏格兰议会并列举保留事项，理解联合王国裂变的必读文本。</p>
+        <div class="url">www.legislation.gov.uk/ukpga/1998/46</div>
+      </a>
+      <a class="card" data-cat="const" href="https://www.gov.uk/government/publications/cabinet-manual" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>内阁手册</h3><span class="arrow">↗</span></div>
+        <p>内阁办公室编，说明政府运作的宪法惯例：大臣责任、联合政府、议会解散等。</p>
+        <div class="url">www.gov.uk/government/publications/cabinet-manual</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="parliament">
+    <div class="sec-head"><span class="sec-num">02</span><h2>议会与立法</h2></div>
+    <p class="sec-note">西敏制的核心在程序。法案如何走完三读、委员会如何逐条审议、议员如何表决，都可以在线逐日追踪。</p>
+    <div class="grid">
+      <a class="card" data-cat="parliament" href="https://www.parliament.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>英国议会</h3><span class="arrow">↗</span></div>
+        <p>两院日程、表决、委员会与议员资料的总入口。</p>
+        <div class="url">www.parliament.uk</div>
+      </a>
+      <a class="card" data-cat="parliament" href="https://hansard.parliament.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>Hansard 逐字记录</h3><span class="arrow">↗</span></div>
+        <p>两院辩论的逐字稿，按日期、议员、议题检索，是引用议会发言的标准出处。</p>
+        <div class="url">hansard.parliament.uk</div>
+      </a>
+      <a class="card" data-cat="parliament" href="https://bills.parliament.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>法案追踪</h3><span class="arrow">↗</span></div>
+        <p>每部法案的当前阶段：一读、二读、委员会、报告、三读、御准，附修正案与表决。</p>
+        <div class="url">bills.parliament.uk</div>
+      </a>
+      <a class="card" data-cat="parliament" href="https://www.parliament.uk/about/how/laws/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>立法程序说明</h3><span class="arrow">↗</span></div>
+        <p>议会官网对“法案如何成为法律”的分步图解，适合入门。</p>
+        <div class="url">www.parliament.uk/about/how/laws</div>
+      </a>
+      <a class="card" data-cat="parliament" href="https://committees.parliament.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>委员会系统</h3><span class="arrow">↗</span></div>
+        <p>专责委员会与法案委员会的成员、证据与报告，是监督政府的主要场所。</p>
+        <div class="url">committees.parliament.uk</div>
+      </a>
+      <a class="card" data-cat="parliament" href="https://www.theyworkforyou.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">民间</span><h3>TheyWorkForYou</h3><span class="arrow">↗</span></div>
+        <p>mySociety 维护：按议员或议题检索发言、表决与出席记录，界面友好。</p>
+        <div class="url">www.theyworkforyou.com</div>
+      </a>
+      <a class="card" data-cat="parliament" href="https://commonslibrary.parliament.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>下议院图书馆</h3><span class="arrow">↗</span></div>
+        <p>研究简报与统计，议员与公众共用，是英文研究最省力的入口。</p>
+        <div class="url">commonslibrary.parliament.uk</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="gov">
+    <div class="sec-head"><span class="sec-num">03</span><h2>政府与公共服务</h2></div>
+    <p class="sec-note">英国的行政机器集中在 GOV.UK 一个域名之下；理解白厅，要从部门结构、预算与审计三条线入手。</p>
+    <div class="grid">
+      <a class="card" data-cat="gov" href="https://www.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>GOV.UK</h3><span class="arrow">↗</span></div>
+        <p>政府服务、政策文件、consultation 与统计的统一门户，按部门与主题索引。</p>
+        <div class="url">www.gov.uk</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.gov.uk/government/organisations/prime-ministers-office-10-downing-street" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>首相办公室（No.10）</h3><span class="arrow">↗</span></div>
+        <p>首相与内阁的新闻、任命与演说，含各届政府的政策优先事项。</p>
+        <div class="url">www.gov.uk/government/organisations/prime-ministers-office-10-downing-street</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.civilservice.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>公务员制度</h3><span class="arrow">↗</span></div>
+        <p>文官队伍的招聘、行为准则与改革方案；理解“政治中立”与“大臣责任”的搭配。</p>
+        <div class="url">www.civilservice.gov.uk</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.bankofengland.co.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>英格兰银行</h3><span class="arrow">↗</span></div>
+        <p>货币政策委员会的决定、通胀报告与金融稳定报告。</p>
+        <div class="url">www.bankofengland.co.uk</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.local.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>地方政府协会 LGA</h3><span class="arrow">↗</span></div>
+        <p>英格兰地方政府的联合组织，地方财政与公共服务的实务视角。</p>
+        <div class="url">www.local.gov.uk</div>
+      </a>
+      <a class="card" data-cat="gov" href="https://www.publicwhip.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">民间</span><h3>Public Whip</h3><span class="arrow">↗</span></div>
+        <p>议员表决记录与“反叛”统计：哪位议员在哪些议题上倒戈，一目了然。</p>
+        <div class="url">www.publicwhip.org.uk</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="courts">
+    <div class="sec-head"><span class="sec-num">04</span><h2>司法与法治</h2></div>
+    <p class="sec-note">英国法院不做合宪性审查，但可以审查行政行为的合法性、宣告立法与公约“不相容”。判例与制定法的关系，在这里最清楚。</p>
+    <div class="grid">
+      <a class="card" data-cat="courts" href="https://www.supremecourt.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>英国最高法院</h3><span class="arrow">↗</span></div>
+        <p>判决全文、庭审录像与新闻摘要；2019 年 Miller 案（休会案）即出于此。</p>
+        <div class="url">www.supremecourt.uk</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.judiciary.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>司法机构</h3><span class="arrow">↗</span></div>
+        <p>法院结构、法官任命与司法审查指引，含“如何申请司法审查”的实务说明。</p>
+        <div class="url">www.judiciary.uk</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.bailii.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>BAILII</h3><span class="arrow">↗</span></div>
+        <p>判例全文库，覆盖上议院、最高法院、上诉法院与部分下级法院。</p>
+        <div class="url">www.bailii.org</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.lawcom.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>法律委员会</h3><span class="arrow">↗</span></div>
+        <p>法定改革机构，报告与咨询文件是理解成文法如何被修订的好材料。</p>
+        <div class="url">www.lawcom.gov.uk</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.biicl.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>英国国际法与比较法研究所</h3><span class="arrow">↗</span></div>
+        <p>比较宪法与公法研究，出版物常被议会委员会引用。</p>
+        <div class="url">www.biicl.org</div>
+      </a>
+      <a class="card" data-cat="courts" href="https://www.echr.coe.int" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">国际</span><h3>欧洲人权法院</h3><span class="arrow">↗</span></div>
+        <p>斯特拉斯堡判例：英国案件（如 Hirst 案）如何影响国内法。</p>
+        <div class="url">www.echr.coe.int</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="elect">
+    <div class="sec-head"><span class="sec-num">05</span><h2>选举、政党与民调</h2></div>
+    <p class="sec-note">英国选举研究的关键是数据而非评论：结果、支出、民调方法与选民调查，四者互相校验。</p>
+    <div class="grid">
+      <a class="card" data-cat="elect" href="https://www.electoralcommission.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>选举委员会</h3><span class="arrow">↗</span></div>
+        <p>选举管理、政党登记与竞选支出申报；政党财务的官方数据源。</p>
+        <div class="url">www.electoralcommission.org.uk</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.britishelectionstudy.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>英国选举研究 BES</h3><span class="arrow">↗</span></div>
+        <p>大型选举调查，覆盖投票行为、党派认同与竞选效果，数据可下载。</p>
+        <div class="url">www.britishelectionstudy.com</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.britishpollingcouncil.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">行业</span><h3>British Polling Council</h3><span class="arrow">↗</span></div>
+        <p>民调行业的透明度规则：成员必须公开样本、方法与加权。</p>
+        <div class="url">www.britishpollingcouncil.org</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://yougov.co.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">民调</span><h3>YouGov</h3><span class="arrow">↗</span></div>
+        <p>高频政治追踪民调，可按人口分组查看交叉表。</p>
+        <div class="url">yougov.co.uk</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.ipsos.com/en-uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">民调</span><h3>Ipsos UK</h3><span class="arrow">↗</span></div>
+        <p>政治与社会态度调查，含月度政治监测。</p>
+        <div class="url">www.ipsos.com/en-uk</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://whatukthinks.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge data">数据</span><h3>What UK Thinks</h3><span class="arrow">↗</span></div>
+        <p>民调聚合与议题追踪，附方法说明。</p>
+        <div class="url">whatukthinks.org</div>
+      </a>
+      <a class="card" data-cat="elect" href="https://www.electoral-reform.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">倡导</span><h3>选举改革协会</h3><span class="arrow">↗</span></div>
+        <p>长期主张比例代表制，报告覆盖投票制度与 turnout。</p>
+        <div class="url">www.electoral-reform.org.uk</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="data">
+    <div class="sec-head"><span class="sec-num">06</span><h2>数据与经济</h2></div>
+    <p class="sec-note">政策辩论最终落在数字上。英国的官方统计与财政预测相对集中，容易复核。</p>
+    <div class="grid">
+      <a class="card" data-cat="data" href="https://www.ons.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>国家统计局 ONS</h3><span class="arrow">↗</span></div>
+        <p>人口、就业、通胀与地方统计的主源；选区层面的数据也在其中。</p>
+        <div class="url">www.ons.gov.uk</div>
+      </a>
+      <a class="card" data-cat="data" href="https://obr.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>预算责任办公室 OBR</h3><span class="arrow">↗</span></div>
+        <p>对财政政策的独立预测与成本核算，是预算辩论的裁判。</p>
+        <div class="url">obr.uk</div>
+      </a>
+      <a class="card" data-cat="data" href="https://www.gov.uk/government/organisations/hm-treasury" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>英国财政部</h3><span class="arrow">↗</span></div>
+        <p>预算文件、财政规则与部门支出审查。</p>
+        <div class="url">www.gov.uk/government/organisations/hm-treasury</div>
+      </a>
+      <a class="card" data-cat="data" href="https://www.nao.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>国家审计署 NAO</h3><span class="arrow">↗</span></div>
+        <p>对公共资金使用效率的审计报告，监督政府的实证材料。</p>
+        <div class="url">www.nao.org.uk</div>
+      </a>
+      <a class="card" data-cat="data" href="https://www.data.gov.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge gov">官方</span><h3>data.gov.uk</h3><span class="arrow">↗</span></div>
+        <p>政府开放数据门户，按部门与主题索引数据集。</p>
+        <div class="url">www.data.gov.uk</div>
+      </a>
+      <a class="card" data-cat="data" href="https://ifs.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>英国财政研究所 IFS</h3><span class="arrow">↗</span></div>
+        <p>税收、福利与公共支出的微观模拟， election 期间的“赢家与输家”分析多出于此。</p>
+        <div class="url">ifs.org.uk</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="think">
+    <div class="sec-head"><span class="sec-num">07</span><h2>智库与研究机构</h2></div>
+    <p class="sec-note">英国智库规模小、与白厅距离近。同一议题读两家立场不同的报告，比读一篇综述更有用。</p>
+    <div class="grid">
+      <a class="card" data-cat="think" href="https://www.instituteforgovernment.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>政府研究所 IfG</h3><span class="arrow">↗</span></div>
+        <p>专注政府运作与公共部门改革，白厅内部视角最强。</p>
+        <div class="url">www.instituteforgovernment.org.uk</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.resolutionfoundation.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>决议基金会</h3><span class="arrow">↗</span></div>
+        <p>低收入群体与劳动力市场研究，生活水平议题的常用来源。</p>
+        <div class="url">www.resolutionfoundation.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.ippr.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>公共政策研究所 IPPR</h3><span class="arrow">↗</span></div>
+        <p>中左翼智库，覆盖宪政改革、气候与社会政策。</p>
+        <div class="url">www.ippr.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.policyexchange.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>政策交流 Policy Exchange</h3><span class="arrow">↗</span></div>
+        <p>中右翼智库，地方增长与公共部门改革。</p>
+        <div class="url">www.policyexchange.org.uk</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.smf.co.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>社会市场基金会</h3><span class="arrow">↗</span></div>
+        <p>中左翼，公共服务与福利设计。</p>
+        <div class="url">www.smf.co.uk</div>
+      </a>
+      <a class="card" data-cat="think" href="https://ifs.org.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>财政研究所 IFS</h3><span class="arrow">↗</span></div>
+        <p>税收与福利的实证分析，跨党派引用率最高。</p>
+        <div class="url">ifs.org.uk</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.chathamhouse.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>皇家国际事务研究所 Chatham House</h3><span class="arrow">↗</span></div>
+        <p>外交与安全政策，英国对外关系的长期视角。</p>
+        <div class="url">www.chathamhouse.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://rusi.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge">智库</span><h3>皇家联合军种研究院 RUSI</h3><span class="arrow">↗</span></div>
+        <p>国防与安全研究，国防预算与采购分析。</p>
+        <div class="url">rusi.org</div>
+      </a>
+      <a class="card" data-cat="think" href="https://ukandeu.ac.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>UK in a Changing Europe</h3><span class="arrow">↗</span></div>
+        <p>英欧关系与脱欧后果的学术研究网络，数据与解释并重。</p>
+        <div class="url">ukandeu.ac.uk</div>
+      </a>
+      <a class="card" data-cat="think" href="https://www.ucl.ac.uk/constitution-unit" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>宪法中心（UCL）</h3><span class="arrow">↗</span></div>
+        <p>议会、权力下放与选举制度的宪法研究，报告短小实用。</p>
+        <div class="url">www.ucl.ac.uk/constitution-unit</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="media">
+    <div class="sec-head"><span class="sec-num">08</span><h2>媒体与事实核查</h2></div>
+    <p class="sec-note">媒体是线索而非结论：追到它引用的文件，再回到议会记录、法院判决与统计口径。</p>
+    <div class="grid">
+      <a class="card" data-cat="media" href="https://www.bbc.co.uk/news/politics" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>BBC 政治</h3><span class="arrow">↗</span></div>
+        <p>公共广播的政治报道与选举夜数据，覆盖面最广。</p>
+        <div class="url">www.bbc.co.uk/news/politics</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.bbc.co.uk/iplayer/live/bbcparliament" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>BBC Parliament</h3><span class="arrow">↗</span></div>
+        <p>议会辩论与委员会听证的直播与回放。</p>
+        <div class="url">www.bbc.co.uk/iplayer/live/bbcparliament</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.theguardian.com/politics" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>《卫报》政治版</h3><span class="arrow">↗</span></div>
+        <p>议会与内阁报道，附大量原始文件链接。</p>
+        <div class="url">www.theguardian.com/politics</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.ft.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>《金融时报》</h3><span class="arrow">↗</span></div>
+        <p>财政、监管与商业政策，数据颗粒度细。</p>
+        <div class="url">www.ft.com</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.thetimes.co.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>《泰晤士报》</h3><span class="arrow">↗</span></div>
+        <p>议会与白厅消息的中右翼参照，常有一手简报。</p>
+        <div class="url">www.thetimes.co.uk</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.spectator.co.uk" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>《旁观者》</h3><span class="arrow">↗</span></div>
+        <p>保守派评论周刊，党内政治的观察窗口。</p>
+        <div class="url">www.spectator.co.uk</div>
+      </a>
+      <a class="card" data-cat="media" href="https://www.newstatesman.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">媒体</span><h3>《新政治家》</h3><span class="arrow">↗</span></div>
+        <p>中左翼评论，工党内部辩论的观察窗口。</p>
+        <div class="url">www.newstatesman.com</div>
+      </a>
+      <a class="card" data-cat="media" href="https://fullfact.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge media">核查</span><h3>Full Fact</h3><span class="arrow">↗</span></div>
+        <p>独立事实核查机构，逐条核对政客与媒体的说法并给出出处。</p>
+        <div class="url">fullfact.org</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="cn">
+    <div class="sec-head"><span class="sec-num">09</span><h2>中文与学术检索</h2></div>
+    <p class="sec-note">中文研究可先看期刊综述与争鸣，再用英文原始文献核对事实与数据。</p>
+    <div class="grid">
+      <a class="card" data-cat="cn" href="https://www.cnki.net" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>中国知网 CNKI</h3><span class="arrow">↗</span></div>
+        <p>中文期刊、学位论文主库；检索“英国政治”“西敏制”“权力下放”等主题。</p>
+        <div class="url">www.cnki.net</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://www.ncpssd.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>国家哲学社会科学文献中心</h3><span class="arrow">↗</span></div>
+        <p>免费开放的中文社科文献平台，可补 CNKI 之外的期刊与报告。</p>
+        <div class="url">www.ncpssd.org</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://www.jstor.org" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>JSTOR</h3><span class="arrow">↗</span></div>
+        <p>政治学与历史学核心期刊过刊库，多数高校已订阅。</p>
+        <div class="url">www.jstor.org</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://scholar.google.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>Google Scholar</h3><span class="arrow">↗</span></div>
+        <p>跨库检索，可按被引次数定位领域内的关键论文。</p>
+        <div class="url">scholar.google.com</div>
+      </a>
+      <a class="card" data-cat="cn" href="https://papers.ssrn.com" target="_blank" rel="noopener">
+        <div class="card-top"><span class="badge acad">学术</span><h3>SSRN</h3><span class="arrow">↗</span></div>
+        <p>法学与政治学预印本，可读到尚未正式发表的工作论文。</p>
+        <div class="url">papers.ssrn.com</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="path">
+    <div class="sec-head"><span class="sec-num">10</span><h2>研究路径：四步入门</h2></div>
+    <p class="sec-note">如果不知从何开始，可按下面的顺序走一遍；每一步都对应上面已经列出的资源。</p>
+    <div class="path">
+      <div class="step">
+        <h4>读文献</h4>
+        <p>先读 1689 年权利法案、1911 年议会法与 1998 年人权法，再读《内阁手册》的前三章。用 legislation.gov.uk 查看同一部法律的历次修正。</p>
+      </div>
+      <div class="step">
+        <h4>跟一部法案</h4>
+        <p>在 bills.parliament.uk 选一部争议法案，记录二读、委员会逐条审议、报告阶段与御准；配合 Hansard 读关键辩论。</p>
+      </div>
+      <div class="step">
+        <h4>查一次选举</h4>
+        <p>选举委员会看支出与结果，BES 看选民，YouGov／Ipsos 看民调方法与加权。</p>
+      </div>
+      <div class="step">
+        <h4>读一份研究</h4>
+        <p>先读一份下议院图书馆简报建立框架，再对照 IfG、IFS 与一篇同行评议论文。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="terms">
+    <div class="sec-head"><span class="sec-num">11</span><h2>核心概念速查</h2></div>
+    <p class="sec-note">十二个高频术语，括号内为英文原词，便于在英文文献中检索。</p>
+    <dl class="terms">
+      <div class="term"><dt>议会主权 <span>Parliamentary Sovereignty</span></dt><dd>议会可通过或废除任何法律，法院无权推翻；这是英国宪法的核心原则，也是脱欧争论的焦点。</dd></div>
+      <div class="term"><dt>不成文宪法 <span>Unwritten Constitution</span></dt><dd>宪法规则散见于制定法、判例与惯例，没有单一法典；其弹性与不确定性同样著名。</dd></div>
+      <div class="term"><dt>御准 <span>Royal Assent</span></dt><dd>法案经两院通过后由君主批准生效；自 1708 年起君主从未拒绝过御准。</dd></div>
+      <div class="term"><dt>三读 <span>Three Readings</span></dt><dd>法案在每院通常经过一读、二读、委员会、报告、三读；二读是原则辩论，委员会是逐条审议。</dd></div>
+      <div class="term"><dt>法定文书 <span>Statutory Instrument</span></dt><dd>大臣依授权立法制定的次级法规，数量远超议会法案，须经议会审议程序。</dd></div>
+      <div class="term"><dt>大臣责任制 <span>Ministerial Responsibility</span></dt><dd>大臣对部门行为向议会负责，个别责任指过失须辞职，集体责任指内阁对外一致。</dd></div>
+      <div class="term"><dt>司法审查 <span>Judicial Review</span></dt><dd>法院审查公共机构决定的合法性（越权、程序不当、不合理），但不审查立法本身。</dd></div>
+      <div class="term"><dt>权力下放 <span>Devolution</span></dt><dd>苏格兰、威尔士与北爱尔兰议会获得部分立法权；保留事项仍属西敏，形成“准联邦”结构。</dd></div>
+      <div class="term"><dt>西敏制 <span>Westminster Model</span></dt><dd>以议会为中心、行政来自议会多数、反对党影子内阁的政体模式，被多国仿效。</dd></div>
+      <div class="term"><dt>简单多数制 <span>First-Past-the-Post</span></dt><dd>选区得票最多者当选；利于两党制，常导致席位与得票率不成比例。</dd></div>
+      <div class="term"><dt>王室特权 <span>Royal Prerogative</span></dt><dd>君主名义下的行政权力（缔约、宣战、任命），实际由首相与内阁行使，受惯例与司法审查约束。</dd></div>
+      <div class="term"><dt>影子内阁 <span>Shadow Cabinet</span></dt><dd>反对党对应政府各部门的发言人团队，负责监督与备位。</dd></div>
+    </dl>
+  </section>
+
+  <section class="section" id="local">
+    <div class="sec-head"><span class="sec-num">12</span><h2>本地文献</h2></div>
+    <p class="sec-note">与本页同目录的中英对照文本，可直接打开；条文据英国官方法律数据库与维基文库校对本整理。</p>
+    <div class="grid">
+      <a class="card" data-cat="local" href="disk/英国宪制文献·中英对照.docx">
+        <div class="card-top"><span class="badge">DOCX</span><h3>英国宪制文献 · 中英对照</h3><span class="arrow">↓</span></div>
+        <p>大宪章、权利法案、王位继承法、两部议会法与人权法，六份文献逐条对照。</p>
+        <div class="url">英国宪制文献·中英对照.docx</div>
+      </a>
+      <a class="card" data-cat="local" href="usa-index.html">
+        <div class="card-top"><span class="badge">HTML</span><h3>对照页面：美国政治研究索引</h3><span class="arrow">↗</span></div>
+        <p>同一套版式的美国版索引，含 64 个入口与 9 份本地文献。</p>
+        <div class="url">usa-index.html</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="empty" id="empty">没有匹配的条目。试试更短的关键词，或点“全部”。</div>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <div style="color:var(--navy); font-weight:600; margin-bottom:6px">英国政治研究索引</div>
+      <div>链接均指向官方、学术或主流媒体站点；标注“官方”者为政府、议会或法院网站。</div>
+      <div>建议配合所在机构的图书馆数据库使用。更新于 2026年10月。</div>
+    </div>
+    <div style="text-align:right">
+      <div>本页为离线单文件，无外部依赖，可自行增删条目。</div>
+      <div>对照页面：<a href="usa-index.html">美国政治研究索引 →</a></div>
+      <div>回到顶部：<a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Top</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+  var q = document.getElementById('q');
+  var count = document.getElementById('count');
+  var empty = document.getElementById('empty');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cat = 'all';
+
+  function apply(){
+    var t = (q.value || '').trim().toLowerCase();
+    var n = 0;
+    cards.forEach(function(c){
+      var okCat = (cat === 'all' || c.dataset.cat === cat);
+      var okText = !t || c.textContent.toLowerCase().indexOf(t) > -1;
+      var show = okCat && okText;
+      c.hidden = !show;
+      if (show) n++;
+    });
+    sections.forEach(function(s){
+      var any = Array.prototype.some.call(s.querySelectorAll('.card'), function(c){ return !c.hidden; });
+      s.hidden = !any;
+    });
+    count.textContent = n;
+    empty.style.display = n ? 'none' : 'block';
+  }
+
+  q.addEventListener('input', apply);
+  chips.forEach(function(ch){
+    ch.addEventListener('click', function(){
+      chips.forEach(function(x){ x.classList.remove('on'); });
+      ch.classList.add('on');
+      cat = ch.dataset.cat;
+      apply();
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === '/' && document.activeElement !== q){ e.preventDefault(); q.focus(); }
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
